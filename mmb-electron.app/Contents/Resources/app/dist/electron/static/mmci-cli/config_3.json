@@ -1,0 +1,17 @@
+{
+  "dynare": "/Users/kk/Documents/0000-00_work/2021-03_dynare/dynareversion/5.1",
+  "rules": [
+    "CEE"
+  ],
+  "models": [
+    "G7_TAY93",
+    "US_ACELm",
+    "US_SW07"      
+  ],
+  "msr": false,
+  "usr": false,
+  "options": {
+    "gain": 0.01,
+    "horizon": 20
+  }
+}

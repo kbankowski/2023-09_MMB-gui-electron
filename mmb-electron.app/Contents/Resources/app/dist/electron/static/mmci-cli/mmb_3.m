@@ -1,4 +1,6 @@
 %% Figure 4
+projectPath = '/Users/kk/Documents/0000-00_work/2023-09_MMB-gui-electron';
+subProjectPath = 'mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/out';
 mmb('config_3.json','var');
 
 cd out
@@ -44,20 +46,23 @@ y_label_y="% Deviation";
 title_int="Interest";
 title_y="Output";
 
-figure(3);
+fig = figure(1);
 plot(time, int1,'-b', 'Linewidth', linewidth_curves),hold on
 plot(time, int2,'-r', 'Linewidth', linewidth_curves),hold on
 plot(time, int3,'-g', 'Linewidth', linewidth_curves),hold on
 plot(time,0.*int1,'-k','Linewidth', linewidth_zero),hold on
-%legend('G7\_TAY93, rule 1','G7\_TAY93, rule 2','')
+legend('G7\_TAY93','US\_ACELm','US\_SW07','','FontSize',fontSize_legend)
 hold off
 ax = gca;
 ax.FontSize = fontSize_numbers;
 title(title_int,'FontSize', fontSize_title)
 xlabel(x_label_name,'FontSize', fontSize_axis)
 ylabel(y_label_int,'FontSize', fontSize_axis)
+fileName = fullfile(projectPath, subProjectPath, "mmb_3_interest");
+exportgraphics(fig, sprintf('%s.png',fileName),'BackgroundColor','none');
+
 %ylim([-0.25 1.25])
-figure(4);
+fig = figure(2);
 plot(time, y1,'-b', 'Linewidth', linewidth_curves),hold on
 plot(time, y2,'-r', 'Linewidth', linewidth_curves),hold on
 plot(time, y3,'-g', 'Linewidth', linewidth_curves),hold on
@@ -69,5 +74,7 @@ ax.FontSize = fontSize_numbers;
 title(title_y,'FontSize', fontSize_title)
 xlabel(x_label_name,'FontSize', fontSize_axis)
 ylabel(y_label_y,'FontSize', fontSize_axis)
+fileName = fullfile(projectPath, subProjectPath, "mmb_3_outputGap");
+exportgraphics(fig, sprintf('%s.png',fileName),'BackgroundColor','none');
 %ylim([-0.4 0.1])
 %ylim(y_lim_value)
