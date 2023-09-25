@@ -1,0 +1,15 @@
+{
+  "dynare": "/usr/lib/dynare",
+  "rules": [
+    "CEE"
+  ],
+  "models": [
+    "EA_PV16"
+  ],
+  "msr": true,
+  "usr": false,
+  "options": {
+    "gain": 0.01,
+    "horizon": 20
+  }
+}
