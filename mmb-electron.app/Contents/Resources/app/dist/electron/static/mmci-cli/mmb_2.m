@@ -4,6 +4,8 @@ clc
 clear all
 
 %% Figure 3
+projectPath = '/Users/kk/Documents/0000-00_work/2023-09_MMB-gui-electron';
+subProjectPath = 'mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/out';
 mmb('config_2.json','var');
 
 cd out
@@ -46,7 +48,7 @@ linewidth_zero=1;
 title_int="Interest";
 title_ygap="Output Gap";
 
-figure(1);
+fig = figure(1);
 plot(time, int1,'-b', 'Linewidth', linewidth_curves),hold on
 plot(time, int2,'-r', 'Linewidth', linewidth_curves),hold on
 plot(time,0.*int1,'-k','Linewidth', linewidth_zero),hold on
@@ -57,7 +59,11 @@ ax.FontSize = fontSize_numbers;
 title(title_int,'FontSize', fontSize_title)
 xlabel(x_label_name,'FontSize', fontSize_axis)
 ylabel(y_label_int,'FontSize', fontSize_axis)
-figure(2);
+fileName = fullfile(projectPath, subProjectPath, "mmb_2_interest");
+exportgraphics(fig, sprintf('%s.png',fileName),'BackgroundColor','none');
+
+
+fig = figure(2);
 plot(time, ygap1,'-b', 'Linewidth', linewidth_curves),hold on
 plot(time, ygap2,'-r', 'Linewidth', linewidth_curves),hold on
 plot(time,0.*int1,'-k','Linewidth', linewidth_zero),hold on
@@ -69,4 +75,7 @@ title(title_ygap,'FontSize', fontSize_title)
 xlabel(x_label_name,'FontSize', fontSize_axis)
 ylabel(y_label_ygap,'FontSize', fontSize_axis)
 ylim([-0.2 0.02])
+fileName = fullfile(projectPath, subProjectPath, "mmb_2_outputGap");
+exportgraphics(fig, sprintf('%s.png',fileName),'BackgroundColor','none');
+
 %ylim(y_lim_value)

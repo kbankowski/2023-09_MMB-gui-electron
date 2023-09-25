@@ -7,14 +7,17 @@
 # Don't ignore specific file types and files
 !*.json
 !*.mod
+!*.m
+!*.png
 !.gitignore
 !.gitattributes
 !mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/docs/userguide.pdf
 
-# Don't ignore .m files (except those in folders starting with "+")
-!*.m
-
 # Ignore *.m files in folders starting with "+", even if nested
 **/+*/*.m
+**/out/error.json
 **/work/*/*.mod
 **/work/*/*.json
+mmb-electron.app/Contents/Resources/app/dist/electron/static/logo.png
+mmb-electron.app/Contents/Resources/app/node_modules/diagnostics/output.PNG
+mmb-electron.app/Contents/Resources/app/node_modules/winston-transport/coverage/lcov-report/sort-arrow-sprite.png
