@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+# But don't ignore directories, as we need to traverse them
+!*/
+
+# Don't ignore .m files
+!*.m
+!*.json
+!.gitignore
