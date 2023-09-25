@@ -12,6 +12,13 @@ cd out
 
 %read the two json files and then plot
 %read
+fname = 'G7_TAY93-Model.output.json'; 
+fid = fopen(fname); 
+raw = fread(fid,inf); 
+str = char(raw'); 
+fclose(fid); 
+val3 = jsondecode(str);
+
 fname = 'G7_TAY93-User.output.json'; 
 fid = fopen(fname); 
 raw = fread(fid,inf); 
@@ -33,6 +40,8 @@ int1=val1.data.IRF.interest_.interest;
 ygap1=val1.data.IRF.interest_.outputgap;
 int2=val2.data.IRF.interest_.interest;
 ygap2=val2.data.IRF.interest_.outputgap;
+int3=val3.data.IRF.interest_.interest;
+ygap3=val3.data.IRF.interest_.outputgap;
 
 %plot 
 time=0:20;
@@ -51,8 +60,9 @@ title_ygap="Output Gap";
 fig = figure(1);
 plot(time, int1,'-b', 'Linewidth', linewidth_curves),hold on
 plot(time, int2,'-r', 'Linewidth', linewidth_curves),hold on
+plot(time, int3,'--g', 'Linewidth', linewidth_curves),hold on
 plot(time,0.*int1,'-k','Linewidth', linewidth_zero),hold on
-%legend('G7\_TAY93, rule 1','G7\_TAY93, rule 2','')
+legend({'Rule: Taylor', 'Rule: User', 'Rule: Model'},'FontSize',fontSize_legend)
 hold off
 ax = gca;
 ax.FontSize = fontSize_numbers;
@@ -66,8 +76,9 @@ exportgraphics(fig, sprintf('%s.png',fileName),'BackgroundColor','none');
 fig = figure(2);
 plot(time, ygap1,'-b', 'Linewidth', linewidth_curves),hold on
 plot(time, ygap2,'-r', 'Linewidth', linewidth_curves),hold on
+plot(time, ygap3,'--g', 'Linewidth', linewidth_curves),hold on
 plot(time,0.*int1,'-k','Linewidth', linewidth_zero),hold on
-legend('Rule (1)','Rule (2)','','FontSize',fontSize_legend)
+legend({'Rule: Taylor', 'Rule: User', 'Rule: Model'},'FontSize',fontSize_legend)
 hold off
 ax = gca;
 ax.FontSize = fontSize_numbers;
