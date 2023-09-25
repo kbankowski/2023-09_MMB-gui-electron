@@ -4,10 +4,17 @@
 # But don't ignore directories, as we need to traverse them
 !*/
 
-# Don't ignore .m files
-!*.m
+# Don't ignore specific file types and files
 !*.json
 !*.mod
 !.gitignore
 !.gitattributes
 !mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/docs/userguide.pdf
+
+# Don't ignore .m files (except those in folders starting with "+")
+!*.m
+
+# Ignore *.m files in folders starting with "+", even if nested
+**/+*/*.m
+**/work/*/*.mod
+**/work/*/*.json
