@@ -9,3 +9,5 @@
 !*.json
 !*.mod
 !.gitignore
+!.gitattributes
+!mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/docs/userguide.pdf
