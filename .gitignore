@@ -7,4 +7,5 @@
 # Don't ignore .m files
 !*.m
 !*.json
+!*.mod
 !.gitignore
