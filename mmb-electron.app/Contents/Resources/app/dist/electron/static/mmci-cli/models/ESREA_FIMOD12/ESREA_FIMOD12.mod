@@ -63,6 +63,11 @@ varexo  epsiG, epsiA, epsii, epsing, epsik,
         fepsisc, fepsic, fepsiwg, fepsiIg, 
         fepsiconsum, fepsib, fepsitw;
 
+//**************************************************************************
+// Modelbase Shocks                                                      //*
+       interest_ fiscal_;                                                //*
+//**************************************************************************        
+
 parameters  betta, epsi, phi, alphaa, rhoi, phipie, kappaep, sg,
             varphip, sp, sigmac, xoui, kappaB, delta,
             gamma1, gamma2, markup, rhot, xi_b, phiy, h, rhoG,
