@@ -1,18 +1,19 @@
-//************************************************************
-// 
-// Fiscal Policy Simulation in a New Keynesian Model
-// with sticky prices, public employment, RoT consumers,
-// staggered wage setting and in period-matching as in
-// Blanchard and Gali (2008)
-// (Two Countries)
-//   
-// St�hler N. 
-// February 15, 2011
-//************************************************************
+//**************************************************************************
+// A New Comparative Approach to Macroeconomic Modeling and Policy Analysis
+//
+// Volker Wieland, Tobias Cwik, Gernot J. Mueller, Sebastian Schmidt and
+// Maik Wolters
+//
+// Working Paper, 2009
+//**************************************************************************
 
-//***********************************************************
-// Define variables, exogenous variables and parameters
-//**********************************************************
+// Model: US_SW07
+
+// Further references:
+// Smets, F., and R. Wouters. 2007. "Shocks and Frictions in US Business Cycles: A Bayesian DSGE-Approach."
+// American Economic Review 97(3), pp. 586-606.
+
+// Last edited: 10/08/26 by S. Schmidt
 
 var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt, 
         dDebttoGDP, dDeficit, dPrimDefRatio, dCgtoGDP, dtauct, dtaut, dwgt, dngt, dIgt,
