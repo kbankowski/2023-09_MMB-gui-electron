@@ -51,6 +51,11 @@ var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt,
         Employment, Unemployment, Consumption_f, Output_f,
         Inflation_f, Investment_f, Wage_f, ToT, Employment_f, dev_xt, dev_fxt, Unemployment_f; 
 
+//**************************************************************************
+// Modelbase Variables                                                   //*
+        interest inflation inflationq outputgap output fispol;           //*
+//**************************************************************************
+
 varexo  epsiG, epsiA, epsii, epsing, epsik, 
         epsisc, epsic, epsiwg, epsiIg, 
         epsiconsum, epsib, epsitw, epsisub, fepsisub,
