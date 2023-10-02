@@ -68,7 +68,20 @@ varexo  epsiG, epsiA, epsii, epsing, epsik,
        interest_ fiscal_;                                                //*
 //**************************************************************************        
 
-parameters  betta, epsi, phi, alphaa, rhoi, phipie, kappaep, sg,
+parameters
+//**************************************************************************
+// Modelbase Parameters                                                  //*
+                                                                         //*
+        cofintintb1 cofintintb2 cofintintb3 cofintintb4                  //*
+        cofintinf0 cofintinfb1 cofintinfb2 cofintinfb3 cofintinfb4       //*
+        cofintinff1 cofintinff2 cofintinff3 cofintinff4                  //*
+        cofintout cofintoutb1 cofintoutb2 cofintoutb3 cofintoutb4        //*
+        cofintoutf1 cofintoutf2 cofintoutf3 cofintoutf4                  //*
+        cofintoutp cofintoutpb1 cofintoutpb2 cofintoutpb3 cofintoutpb4   //*
+        cofintoutpf1 cofintoutpf2 cofintoutpf3 cofintoutpf4              //*
+        std_r_ std_r_quart coffispol                                     //*
+//**************************************************************************  
+            betta, epsi, phi, alphaa, rhoi, phipie, kappaep, sg,
             varphip, sp, sigmac, xoui, kappaB, delta,
             gamma1, gamma2, markup, rhot, xi_b, phiy, h, rhoG,
             kappav, kappaeg, varphig, rhon, rhow, wageprem, rhoA,
