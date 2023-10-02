@@ -6,7 +6,8 @@
   "models": [
     "G7_TAY93",
     "US_ACELm",
-    "US_SW07"      
+    "US_SW07",      
+    "ESREA_FIMOD12"      
   ],
   "msr": false,
   "usr": false,

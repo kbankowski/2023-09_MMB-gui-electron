@@ -28,6 +28,13 @@ str = char(raw');
 fclose(fid); 
 val3 = jsondecode(str);
 
+fname = 'ESREA_FIMOD12-CEE.output.json'; 
+fid = fopen(fname); 
+raw = fread(fid,inf); 
+str = char(raw'); 
+fclose(fid); 
+val4 = jsondecode(str);
+
 cd ..
 
 %get the variables from it
@@ -37,6 +44,8 @@ int2=val2.data.IRF.interest_.interest;
 y2=val2.data.IRF.interest_.output;
 int3=val3.data.IRF.interest_.interest;
 y3=val3.data.IRF.interest_.output;
+int4=val4.data.IRF.interest_.interest;
+y4=val4.data.IRF.interest_.output;
 
 %plot 
 time=0:20;
@@ -50,8 +59,9 @@ fig = figure(1);
 plot(time, int1,'-b', 'Linewidth', linewidth_curves),hold on
 plot(time, int2,'-r', 'Linewidth', linewidth_curves),hold on
 plot(time, int3,'-g', 'Linewidth', linewidth_curves),hold on
+plot(time, int4,':k', 'Linewidth', linewidth_curves),hold on
 plot(time,0.*int1,'-k','Linewidth', linewidth_zero),hold on
-legend('G7\_TAY93','US\_ACELm','US\_SW07','','FontSize',fontSize_legend)
+legend({'G7\_TAY93','US\_ACELm','US\_SW07','ESREA\_FIMOD12',''},'FontSize',fontSize_legend)
 hold off
 ax = gca;
 ax.FontSize = fontSize_numbers;
@@ -66,8 +76,9 @@ fig = figure(2);
 plot(time, y1,'-b', 'Linewidth', linewidth_curves),hold on
 plot(time, y2,'-r', 'Linewidth', linewidth_curves),hold on
 plot(time, y3,'-g', 'Linewidth', linewidth_curves),hold on
+plot(time, y4,':k', 'Linewidth', linewidth_curves),hold on
 plot(time,0.*int1,'-k','Linewidth', linewidth_zero),hold on
-legend('G7\_TAY93','US\_ACELm','US\_SW07','','FontSize',fontSize_legend)
+legend({'G7\_TAY93','US\_ACELm','US\_SW07','ESREA\_FIMOD12',''},'FontSize',fontSize_legend)
 hold off
 ax = gca;
 ax.FontSize = fontSize_numbers;
