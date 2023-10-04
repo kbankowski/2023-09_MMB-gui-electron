@@ -40,12 +40,16 @@ cd ..
 %get the variables from it
 int1=val1.data.IRF.interest_.interest;
 y1=val1.data.IRF.interest_.output;
+inf1=val1.data.IRF.interest_.inflation;
 int2=val2.data.IRF.interest_.interest;
 y2=val2.data.IRF.interest_.output;
+inf2=val2.data.IRF.interest_.inflation;
 int3=val3.data.IRF.interest_.interest;
 y3=val3.data.IRF.interest_.output;
+inf3=val3.data.IRF.interest_.inflation;
 int4=val4.data.IRF.interest_.interest;
 y4=val4.data.IRF.interest_.output;
+inf4=val4.data.IRF.interest_.inflation;
 
 %plot 
 time=0:20;
@@ -54,6 +58,7 @@ y_label_int="Percentage Point Deviation";
 y_label_y="% Deviation";
 title_int="Interest";
 title_y="Output";
+title_inf="Inflation";
 linewidth_curves=2;
 linewidth_zero=1;
 fontSize_legend=16;
@@ -95,3 +100,19 @@ fileName = fullfile(projectPath, subProjectPath, "mmb_3_outputGap");
 exportgraphics(fig, sprintf('%s.png',fileName),'BackgroundColor','none');
 %ylim([-0.4 0.1])
 %ylim(y_lim_value)
+
+fig = figure(3);
+plot(time, inf1,'-b', 'Linewidth', linewidth_curves),hold on
+plot(time, inf2,'-r', 'Linewidth', linewidth_curves),hold on
+plot(time, inf3,'-g', 'Linewidth', linewidth_curves),hold on
+plot(time, inf4,':k', 'Linewidth', linewidth_curves),hold on
+plot(time,0.*int1,'-k','Linewidth', linewidth_zero),hold on
+legend({'G7\_TAY93','US\_ACELm','US\_SW07','ESREA\_FIMOD12',''},'FontSize',fontSize_legend)
+hold off
+ax = gca;
+ax.FontSize = fontSize_numbers;
+title(title_inf,'FontSize', fontSize_title)
+xlabel(x_label_name,'FontSize', fontSize_axis)
+ylabel(y_label_y,'FontSize', fontSize_axis)
+fileName = fullfile(projectPath, subProjectPath, "mmb_3_Inflation");
+exportgraphics(fig, sprintf('%s.png',fileName),'BackgroundColor','none');
