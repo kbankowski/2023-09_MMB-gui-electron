@@ -716,12 +716,12 @@ model;
 //**************************************************************************
 // Definition of Modelbase Variables in Terms of Original Model Variables //*
 
-interest   = r*4;                                                        //*
-inflation  = pinf4;                                                 	 //*
-inflationq = 4*pinf;                                                 	 //*
-outputgap  = y-yf;                                                       //*
-output     = y;                                                          //*
-fispol     = eg;                                                         //*
+interest   = dRECBt*4/100;                                               //*
+inflation  = Inflation;                                                 	 //*
+inflationq = Inflation;                                                 	 //*
+outputgap  = Output;                                                       //*
+output     = Output;                                                          //*
+fispol     = dGt;                                                         //*
 //**************************************************************************
 
 //**************************************************************************
@@ -1683,6 +1683,12 @@ initval;
     fqCgt       = 0;
     qIgt        = 0;
     fqIgt        = 0;
+    interest = 0;
+    inflation = 0;
+    inflationq = 0;
+    outputgap = 0;
+    output = 0;
+    fispol = 0;
 end;
 
 // ######################################################################  
