@@ -49,19 +49,19 @@ var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt,
         fdTt, fdpBt, Cgobs, cpiinf, fcpiinf, dgdp, fdgdp,
         Consumption, Output, Inflation, Investment, Wage, ECB_Rate,
         Employment, Unemployment, Consumption_f, Output_f,
-        Inflation_f, Investment_f, Wage_f, ToT, Employment_f, dev_xt, dev_fxt, Unemployment_f; 
+        Inflation_f, Investment_f, Wage_f, ToT, Employment_f, dev_xt, dev_fxt, Unemployment_f 
 
 //**************************************************************************
 // Modelbase Variables                                                   //*
         interest inflation inflationq outputgap output fispol;           //*
 //**************************************************************************
 
-varexo  epsiG, epsiA, epsii, epsing, epsik, 
+varexo  epsiA, epsing, epsik, 
         epsisc, epsic, epsiwg, epsiIg, 
         epsiconsum, epsib, epsitw, epsisub, fepsisub,
         fepsiG, fepsiA, fepsing, fepsik, 
         fepsisc, fepsic, fepsiwg, fepsiIg, 
-        fepsiconsum, fepsib, fepsitw;
+        fepsiconsum, fepsib, fepsitw
 
 //**************************************************************************
 // Modelbase Shocks                                                      //*
@@ -721,7 +721,7 @@ inflation  = Inflation;                                                 	 //*
 inflationq = Inflation;                                                 	 //*
 outputgap  = Output;                                                       //*
 output     = Output;                                                          //*
-fispol     = dGt;                                                         //*
+fispol     = dCgt;                                                         //*
 //**************************************************************************
 
 //**************************************************************************
@@ -1172,7 +1172,7 @@ tausct-tauscs               = rhosc*(tausct(-1)-tauscs)            + xi_bsc*log(
 wgt-wgs                     = rhow*(wgt(-1)-wgs)                   + xi_pubw*log(Debt(-1)/Debt) + xi_ypubw*log(Ytot(-1)/Ytots) + psi_pubw*epsiwg + (1-psi_pubw)*epsiwg(-1);
 (Tt-steady_state(Tt))/Ytots = rhot*(Tt(-1)-steady_state(Tt))/Ytots + xi_b*log(Debt(-1)/Debts)   + xi_y*log(Ytot(-1)/Ytots);
 
-log(Cgt/Cgs) = rhoG*log(Cgt(-1)/Cgs)  - xi_bg*log(Debt(-1)/Debts)  - xi_ycg*log(Ytot(-1)/Ytots) + psi_cg*epsiG  + (1-psi_cg)*epsiG(-1);
+// log(Cgt/Cgs) = rhoG*log(Cgt(-1)/Cgs)  - xi_bg*log(Debt(-1)/Debts)  - xi_ycg*log(Ytot(-1)/Ytots) + psi_cg*epsiG  + (1-psi_cg)*epsiG(-1);
 log(Igt/Igs) = rhoIg*log(Igt(-1)/Igs) - xi_big*log(Debt(-1)/Debts) - xi_yig*log(Ytot(-1)/Ytots) + psi_ig*epsiIg + (1-psi_ig)*epsiIg(-1);
 log(ngt/ngs) = rhon*log(ngt(-1)/ngs)  - xi_bn*log(Debt(-1)/Debts)  - xi_yn*log(Ytot(-1)/Ytots)  + psi_n*epsing  + (1-psi_n)*epsing(-1);
 
@@ -1262,8 +1262,8 @@ cpiinf = piet; // *((1+tauct)/(1+tauct(-1)));
 fcpiinf = fpiet; // *((1+ftauct)/(1+ftauct(-1)));
 
 // Taylor rule (here: non-linear, but there are a million ways to define the rule...)
-RECBt/RECBs = (RECBt(-1)/RECBs)^rhoi*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))^phipie*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega))^phiy)^((1-rhoi))*exp(epsii);
-//RECBt/RECBs = (RECBt(-1)/RECBs)^rhoi*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))^phipie*((Ytot/Ytot(-1))^omega*(fYtot/fYtot(-1))^(1-omega))^phiy)^((1-rhoi))*exp(epsii);
+// RECBt/RECBs = (RECBt(-1)/RECBs)^rhoi*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))^phipie*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega))^phiy)^((1-rhoi))*exp(epsii);
+// RECBt/RECBs = (RECBt(-1)/RECBs)^rhoi*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))^phipie*((Ytot/Ytot(-1))^omega*(fYtot/fYtot(-1))^(1-omega))^phiy)^((1-rhoi))*exp(epsii);
 // RECBt/RECBs = (RECBt(-1)/RECBs)^rhoi*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))^phipie*((Ytot/Ytots)^omega*(fYtot/fYtots)^(1-omega))^phiy)^((1-rhoi))*exp(epsii);
 
 // ##############################################################################################  
@@ -1709,8 +1709,8 @@ steady;
 
 shocks;
 var epsiA  = 0;
-var epsii = (0.01/4)^2;
-var epsiG = 0*((0.01/omegaCg))^2;
+// var epsii = (0.01/4)^2;
+// var epsiG = 0*((0.01/omegaCg))^2;
 var epsiwg = 0;
 var epsing = 0*(0.01/(pBs^(1-omega-Psi)*(1-taus)*(wgs*ngtots)/Ytots))^2;
 var epsik = 0;
