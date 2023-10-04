@@ -54,6 +54,12 @@ y_label_int="Percentage Point Deviation";
 y_label_y="% Deviation";
 title_int="Interest";
 title_y="Output";
+linewidth_curves=2;
+linewidth_zero=1;
+fontSize_legend=16;
+fontSize_axis=18;
+fontSize_numbers=16;
+fontSize_title=20;
 
 fig = figure(1);
 plot(time, int1,'-b', 'Linewidth', linewidth_curves),hold on
