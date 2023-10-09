@@ -85,7 +85,6 @@ ax.FontSize = fontSize_numbers;
 title(title_ygap,'FontSize', fontSize_title)
 xlabel(x_label_name,'FontSize', fontSize_axis)
 ylabel(y_label_ygap,'FontSize', fontSize_axis)
-ylim([-0.2 0.02])
 fileName = fullfile(projectPath, subProjectPath, "mmb_2_outputGap");
 exportgraphics(fig, sprintf('%s.png',fileName),'BackgroundColor','none');
 
