@@ -1733,4 +1733,4 @@ var fepsib = 0;
 var fepsitw = 0;
 end;
 
-stoch_simul(order = 1, irf=20, nograph);
+// stoch_simul(order = 1, irf=20, nograph);
