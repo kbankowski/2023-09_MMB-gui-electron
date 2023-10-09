@@ -28,4 +28,4 @@ resSimValue2 = databank.fromArray( ...
 );
 
 %% comparing the results
-[resSimValue2.interest, resSimValue2.inflationq, resSimValue2.outputgap, resSimValue2.output]
+[resSimValue2.interest, resSimValue2.inflation, resSimValue2.outputgap, resSimValue2.output]
