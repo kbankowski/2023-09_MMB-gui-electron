@@ -43,8 +43,9 @@ val3 = jsondecode(str);
 
 cd ..
 
-int3=val3.data.IRF.interest_.interest;
-ygap3=val3.data.IRF.interest_.outputgap;
+for aSer = string(reshape(fieldnames(val3.data.IRF.interest_), 1, []))
+    mmbSim.(aSer) = Series(qq(0, 4), val3.data.IRF.interest_.(aSer));
+end
 
 %% comparing the results
-[resSimValue2.interest, resSimValue2.inflation, resSimValue2.outputgap, resSimValue2.output]
+plot([resSimValue2.interest, mmbSim.interest], legend(["simult_", "mmb"]))
