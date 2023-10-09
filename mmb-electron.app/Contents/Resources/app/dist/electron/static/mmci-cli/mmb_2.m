@@ -12,21 +12,21 @@ cd out
 
 %read the two json files and then plot
 %read
-fname = 'G7_TAY93-Model.output.json'; 
+fname = 'ESREA_FIMOD12-Model.output.json'; 
 fid = fopen(fname); 
 raw = fread(fid,inf); 
 str = char(raw'); 
 fclose(fid); 
 val3 = jsondecode(str);
 
-fname = 'G7_TAY93-User.output.json'; 
+fname = 'ESREA_FIMOD12-User.output.json'; 
 fid = fopen(fname); 
 raw = fread(fid,inf); 
 str = char(raw'); 
 fclose(fid); 
 val2 = jsondecode(str);
 
-fname = 'G7_TAY93-Taylor.output.json'; 
+fname = 'ESREA_FIMOD12-Taylor.output.json'; 
 fid = fopen(fname); 
 raw = fread(fid,inf); 
 str = char(raw'); 
