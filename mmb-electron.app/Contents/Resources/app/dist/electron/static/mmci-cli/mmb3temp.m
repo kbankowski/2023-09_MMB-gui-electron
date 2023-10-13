@@ -6,7 +6,7 @@ mmb('config_2.json','var');
 % the major advantage of this approach is that one can
 % explicitely see both ss values and shock-simulated values
 ex_ = databank.fromArray( ...
-    zeros(20, 25) ...
+    zeros(20, length(M_.exo_names)) ...
     , M_.exo_names ...
     , qq(1, 1) ...
 );
@@ -34,7 +34,7 @@ resSimValue2 = databank.fromArray( ...
 
 cd out
 
-fname = 'ESREA_FIMOD12-Model.output.json'; 
+fname = 'US_SW07-Model.output.json'; 
 fid = fopen(fname); 
 raw = fread(fid,inf); 
 str = char(raw'); 
@@ -48,4 +48,4 @@ for aSer = string(reshape(fieldnames(val3.data.IRF.interest_), 1, []))
 end
 
 %% comparing the results
-plot([resSimValue2.interest, mmbSim.interest], legend(["simult_", "mmb"]))
+[resSimValue2.interest, mmbSim.interest]
