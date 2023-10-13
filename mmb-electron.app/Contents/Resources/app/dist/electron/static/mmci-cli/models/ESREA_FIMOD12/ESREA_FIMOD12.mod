@@ -49,7 +49,8 @@ var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt,
         fdTt, fdpBt, Cgobs, cpiinf, fcpiinf, dgdp, fdgdp,
         Consumption, Output, Inflation, Investment, Wage, ECB_Rate,
         Employment, Unemployment, Consumption_f, Output_f,
-        Inflation_f, Investment_f, Wage_f, ToT, Employment_f, dev_xt, dev_fxt, Unemployment_f 
+        Inflation_f, Investment_f, Wage_f, ToT, Employment_f, dev_xt, dev_fxt, Unemployment_f,
+        eaInflationq,  eaOutputGap, eaInflation, eaOutput
 
 //**************************************************************************
 // Modelbase Variables                                                   //*
@@ -1358,7 +1359,6 @@ Output = (log(Ytot)-log(Ytots))*100;
 Inflation = (piet-pies)*400;
 Investment = (log(It)-log(Is))*100;
 Wage = (log(wpt)-log(wps))*100;
-ECB_Rate = (RECBt-RECBs)*10000;
 Employment = (log(ntot)-log(ntots))*100;
 dev_xt = (log(xt)-log(xs))*100;
 Unemployment = (utot-utots)*100;
@@ -1452,6 +1452,15 @@ At = rhoA*At(-1) + (1-rhoA)*As + epsiA;
 // ######################################################################
 // Foreign country
 // ######################################################################
+
+// ######################################################################
+// Union wide
+// ######################################################################
+ECB_Rate = (RECBt-RECBs)*10000;
+eaInflationq = ((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega));
+eaOutputGap = ((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega));
+eaInflation = ((1 + eaInflationq)^4) - 1;
+eaOutput = eaOutputGap;
 
 //consumption shock
 (fcont/fcons)-((fcont(-1)/fcons)^frhocon)*exp(fepsiconsum);
@@ -1689,6 +1698,10 @@ initval;
     outputgap = 0;
     output = 0;
     fispol = 0;
+    eaInflationq = 0;
+    eaOutputGap = 0;
+    eaInflation = 0;
+    eaOutput = 0;
 end;
 
 // ######################################################################  
