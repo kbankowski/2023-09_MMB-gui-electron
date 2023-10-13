@@ -718,10 +718,10 @@ model;
 // Definition of Modelbase Variables in Terms of Original Model Variables //*
 
 interest   = dRECBt*4;                                               //*
-inflation  = dmInflation;                                                 	 //*
+inflation  = eaInflation;                                                 	 //*
 inflationq = dmInflation;                                                 	 //*
-outputgap  = dmOutput;                                                       //*
-output     = dmOutput;                                                          //*
+outputgap  = eaOutputGap;                                                       //*
+output     = eaOutput;                                                          //*
 fispol     = dCgt;                                                         //*
 //**************************************************************************
 
