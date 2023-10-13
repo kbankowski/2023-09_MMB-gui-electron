@@ -716,7 +716,7 @@ model;
 //**************************************************************************
 // Definition of Modelbase Variables in Terms of Original Model Variables //*
 
-interest   = dRECBt*4/100;                                               //*
+interest   = dRECBt*4;                                               //*
 inflation  = Inflation;                                                 	 //*
 inflationq = Inflation;                                                 	 //*
 outputgap  = Output;                                                       //*
