@@ -50,7 +50,7 @@ var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt,
         Consumption, dmOutput, dmInflation, Investment, Wage, ECB_Rate,
         Employment, Unemployment, Consumption_f, Output_f,
         Inflation_f, Investment_f, Wage_f, ToT, Employment_f, dev_xt, dev_fxt, Unemployment_f,
-        eaInflationq,  eaOutputGap, eaInflation, eaOutput
+        eaOutputGap, eaOutput
 
 //**************************************************************************
 // Modelbase Variables                                                   //*
@@ -717,11 +717,11 @@ model;
 //**************************************************************************
 // Definition of Modelbase Variables in Terms of Original Model Variables //*
 
-interest   = dRECBt*4;                                               //*
-inflation  = eaInflation;                                                 	 //*
-inflationq = dmInflation;                                                 	 //*
-outputgap  = eaOutputGap;                                                       //*
-output     = eaOutput;                                                          //*
+interest   = 400*(RECBt - RECBs);                                            //*
+inflation  = inflation;                                                 	 //*
+inflationq = 400*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))-1);  //*
+outputgap  = 400*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega)-1)1462;                                                  //*
+output     = 400*log(Ytot^omega*fYtot^(1-omega));                          //*
 fispol     = dCgt;                                                         //*
 //**************************************************************************
 
@@ -1457,9 +1457,7 @@ At = rhoA*At(-1) + (1-rhoA)*As + epsiA;
 // Union wide
 // ######################################################################
 ECB_Rate = (RECBt-RECBs)*10000;
-eaInflationq = ((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega));
 eaOutputGap = ((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega));
-eaInflation = ((1 + eaInflationq)^4) - 1;
 eaOutput = eaOutputGap;
 
 //consumption shock
@@ -1696,11 +1694,9 @@ initval;
     inflation = 0;
     inflationq = 0;
     outputgap = 0;
-    output = 0;
+    output = 400*log(Ytots^omega*fYtots^(1-omega));
     fispol = 0;
-    eaInflationq = 0;
     eaOutputGap = 0;
-    eaInflation = 0;
     eaOutput = 0;
 end;
 
