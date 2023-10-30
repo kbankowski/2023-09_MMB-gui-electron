@@ -47,7 +47,7 @@ var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt,
         dpiet, dRt, dRECBt, RealInt, dRealInt, dfpiet, dpieAt, 
         dPrimDef, fdCrt, fdCt, fdnptot, dtausct, fdRt, dpieBt, 
         fdTt, fdpBt, Cgobs, cpiinf, fcpiinf, dgdp, fdgdp,
-        Consumption, dmOutput, dmInflation, Investment, Wage, ECB_Rate,
+        Consumption, dmOutput, dmInflation, Investment, Wage,
         Employment, Unemployment, Consumption_f, Output_f,
         Inflation_f, Investment_f, Wage_f, ToT, Employment_f, dev_xt, dev_fxt, Unemployment_f,
         
@@ -1451,11 +1451,6 @@ At = rhoA*At(-1) + (1-rhoA)*As + epsiA;
 // ######################################################################
 // Foreign country
 // ######################################################################
-
-// ######################################################################
-// Union wide
-// ######################################################################
-ECB_Rate = (RECBt-RECBs)*10000;
 
 //consumption shock
 (fcont/fcons)-((fcont(-1)/fcons)^frhocon)*exp(fepsiconsum);
