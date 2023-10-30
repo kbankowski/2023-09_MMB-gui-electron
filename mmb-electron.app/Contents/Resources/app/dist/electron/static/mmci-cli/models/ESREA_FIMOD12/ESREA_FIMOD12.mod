@@ -50,8 +50,7 @@ var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt,
         Consumption, dmOutput, dmInflation, Investment, Wage, ECB_Rate,
         Employment, Unemployment, Consumption_f, Output_f,
         Inflation_f, Investment_f, Wage_f, ToT, Employment_f, dev_xt, dev_fxt, Unemployment_f,
-        eaOutputGap, eaOutput
-
+        
 //**************************************************************************
 // Modelbase Variables                                                   //*
         interest inflation inflationq outputgap output fispol;           //*
@@ -718,10 +717,10 @@ model;
 // Definition of Modelbase Variables in Terms of Original Model Variables //*
 
 interest   = 400*(RECBt - RECBs);                                            //*
-inflation  = inflation;                                                 	 //*
+inflation  = 400*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))-1);  //*
 inflationq = 400*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))-1);  //*
-outputgap  = 400*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega)-1)1462;                                                  //*
-output     = 400*log(Ytot^omega*fYtot^(1-omega));                          //*
+outputgap  = 400*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega)-1);                                                  //*
+output     = 100*log(Ytot^omega*fYtot^(1-omega));                          //*
 fispol     = dCgt;                                                         //*
 //**************************************************************************
 
@@ -1457,8 +1456,6 @@ At = rhoA*At(-1) + (1-rhoA)*As + epsiA;
 // Union wide
 // ######################################################################
 ECB_Rate = (RECBt-RECBs)*10000;
-eaOutputGap = ((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega));
-eaOutput = eaOutputGap;
 
 //consumption shock
 (fcont/fcons)-((fcont(-1)/fcons)^frhocon)*exp(fepsiconsum);
@@ -1694,10 +1691,8 @@ initval;
     inflation = 0;
     inflationq = 0;
     outputgap = 0;
-    output = 400*log(Ytots^omega*fYtots^(1-omega));
+    output = 100*log(Ytots^omega*fYtots^(1-omega));
     fispol = 0;
-    eaOutputGap = 0;
-    eaOutput = 0;
 end;
 
 // ######################################################################  
