@@ -88,14 +88,20 @@ aSeriesFiMod = databank.fromArray( ...
 );
 
 %% comparing the results
-tempMat = [aSeriesSimult.interest, aSeriesIrf.interest, mmbSim.interest, aSeriesFiMod.Interest]
+close all
+tempMat = [aSeriesSimult.interest, aSeriesIrf.interest, mmbSim.interest, aSeriesFiMod.interestEA]
+figure(1)
 plot(tempMat)
 
-tempMat = [aSeriesSimult.RECBt, aSeriesIrf.RECBt, mmbSim.RECBt, aSeriesFiMod.RECBt]
+tempMat = [aSeriesSimult.output, aSeriesIrf.output, mmbSim.output, aSeriesFiMod.outputEA]
+figure(2)
 plot(tempMat)
 
-tempMat = [aSeriesSimult.output, aSeriesIrf.output, mmbSim.output, aSeriesFiMod.Output]
+tempMat = [aSeriesSimult.inflationq, aSeriesIrf.inflationq, mmbSim.inflationq, aSeriesFiMod.inflationqEA]
+figure(3)
 plot(tempMat)
 
-tempMat = [aSeriesSimult.output, aSeriesIrf.output, mmbSim.output, aSeriesFiMod.Output]
+tempMat = [aSeriesSimult.inflation, aSeriesIrf.inflation, mmbSim.inflation, aSeriesFiMod.inflationEA]
+figure(4)
 plot(tempMat)
+
