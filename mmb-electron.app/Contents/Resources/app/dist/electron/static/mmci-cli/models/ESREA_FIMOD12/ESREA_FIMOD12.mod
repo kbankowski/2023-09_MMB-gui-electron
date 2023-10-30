@@ -719,7 +719,7 @@ model;
 interest   = 400*(RECBt - RECBs);                                            //*
 inflation  = 400*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))-1);  //*
 inflationq = 400*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))-1);  //*
-outputgap  = 400*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega)-1);                                                  //*
+outputgap  = 100*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega)-1);                                                  //*
 output     = 100*log(Ytot^omega*fYtot^(1-omega));                          //*
 fispol     = dCgt;                                                         //*
 //**************************************************************************
