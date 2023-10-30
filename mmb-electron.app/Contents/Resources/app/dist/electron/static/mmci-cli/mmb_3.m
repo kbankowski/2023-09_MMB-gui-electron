@@ -42,21 +42,25 @@ int1=val1.data.IRF.interest_.interest;
 y1=val1.data.IRF.interest_.output;
 inf1=val1.data.IRF.interest_.inflation;
 infq1=val1.data.IRF.interest_.inflationq;
+ygap1=val1.data.IRF.interest_.outputgap;
 
 int2=val2.data.IRF.interest_.interest;
 y2=val2.data.IRF.interest_.output;
 inf2=val2.data.IRF.interest_.inflation;
 infq2=val2.data.IRF.interest_.inflationq;
+ygap2=val2.data.IRF.interest_.outputgap;
 
 int3=val3.data.IRF.interest_.interest;
 y3=val3.data.IRF.interest_.output;
 inf3=val3.data.IRF.interest_.inflation;
 infq3=val3.data.IRF.interest_.inflationq;
+ygap3=val3.data.IRF.interest_.outputgap;
 
 int4=val4.data.IRF.interest_.interest;
 y4=val4.data.IRF.interest_.output;
 inf4=val4.data.IRF.interest_.inflation;
 infq4=val4.data.IRF.interest_.inflationq;
+ygap4=val4.data.IRF.interest_.outputgap;
 
 %plot 
 time=0:20;
@@ -67,6 +71,7 @@ title_int="Interest";
 title_y="Output";
 title_inf="Inflation";
 title_infq="InflationQ";
+title_ygap="Output Gap";
 linewidth_curves=2;
 linewidth_zero=1;
 fontSize_legend=16;
@@ -136,6 +141,23 @@ hold off
 ax = gca;
 ax.FontSize = fontSize_numbers;
 title(title_infq,'FontSize', fontSize_title)
+xlabel(x_label_name,'FontSize', fontSize_axis)
+ylabel(y_label_y,'FontSize', fontSize_axis)
+fileName = fullfile(projectPath, subProjectPath, "mmb_3_Inflation");
+exportgraphics(fig, sprintf('%s.png',fileName),'BackgroundColor','none');
+
+
+fig = figure(5);
+plot(time, ygap1,'-b', 'Linewidth', linewidth_curves),hold on
+plot(time, ygap2,'-r', 'Linewidth', linewidth_curves),hold on
+plot(time, ygap3,'-g', 'Linewidth', linewidth_curves),hold on
+plot(time, ygap4,':k', 'Linewidth', linewidth_curves),hold on
+plot(time,0.*int1,'-k','Linewidth', linewidth_zero),hold on
+legend({'G7\_TAY93','US\_ACELm','US\_SW07','ESREA\_FIMOD12',''},'FontSize',fontSize_legend)
+hold off
+ax = gca;
+ax.FontSize = fontSize_numbers;
+title(title_ygap,'FontSize', fontSize_title)
 xlabel(x_label_name,'FontSize', fontSize_axis)
 ylabel(y_label_y,'FontSize', fontSize_axis)
 fileName = fullfile(projectPath, subProjectPath, "mmb_3_Inflation");
