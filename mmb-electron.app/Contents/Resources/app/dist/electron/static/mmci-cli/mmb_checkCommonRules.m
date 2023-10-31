@@ -56,7 +56,8 @@ function plotHistogramRules(ruleList, projectPath, subProjectPath)
     grid on
     hold on 
     
-    histogram(categorical(ruleList));
+    h = histogram(categorical(ruleList));
+    h.FaceColor = cmap(1, :);
     
     hold off
     
