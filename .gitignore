@@ -21,3 +21,6 @@
 mmb-electron.app/Contents/Resources/app/dist/electron/static/logo.png
 mmb-electron.app/Contents/Resources/app/node_modules/diagnostics/output.PNG
 mmb-electron.app/Contents/Resources/app/node_modules/winston-transport/coverage/lcov-report/sort-arrow-sprite.png
+
+# Don't ignore functions in subroutines folder
+!**/+subroutines/*.m
