@@ -142,11 +142,11 @@
 \begin_body
 
 \begin_layout Title
-Fiscal policy in the semi-structural 
+Implementation of FiMod 
 \begin_inset Newline newline
 \end_inset
 
-model ECB-BASE
+into MMB
 \begin_inset ERT
 status open
 
@@ -154,10 +154,7 @@ status open
 
 
 \backslash
-thanks{The views expressed in this paper, as well as all errors and omissions,
- should be regarded as those solely of the author and are not necessarily
- those of the European Central Bank.
- This paper benefited from valuable comments and suggestions of Cristina
+thanks{This paper benefited from valuable comments and suggestions of Cristina
   Checherita-Westphal, Kai Christoffel, Thomas Faria, Magdalena Lalik, Nadine
  Leiner-Killinger, Richard Morris, Philip Muggenthaler, Joan Paredes, Katja
  Schmidt and Sre{
@@ -772,29 +769,20 @@ arabic{equation}}
 \end_layout
 
 \begin_layout Section
-On standard monetary policy rules in MMB
+Standard Monetary Policy Rules within the MMB Framework
 \end_layout
 
 \begin_layout Standard
-All models have a pre-defined list of viable monetary policy rules, which
- is specified in a model relevant json file.
- The 'standard' rules complement a rule that is specific to a model itself.
- The question arises what are the most common standard rules applicable
- across models.
- Nine monetary policy rules feature 153 models present in the MMB project
- with eight rules available in most of the models (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:rulesHistogram"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- Only OW13 rule (i.e.
- Orphanides & Wieland (2013)) is available in roughly half of the models.
+All models are equipped with a pre-defined list of viable monetary policy
+ rules, which are detailed in a relevant JSON file associated with each
+ model.
+ This raises the question: What are the most common standard rules applicable
+ across different models? Within the collection of 153 macro models featured
+ in the MMB, eight rules are available in the overwhelming majority of the
+ models.
+ (see Figure A.1).
+ Additionally, the OW13 rule (i.e., Orphanides & Wieland, 2013) is present
+ in more than half of the models.
 \end_layout
 
 \begin_layout Standard
@@ -809,8 +797,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Histogram of standard monetary policy rules applied across models stored
- in MMB 
+Histogram of standard monetary policy rules in MMB models 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:rulesHistogram"
@@ -829,7 +816,6 @@ name "fig:rulesHistogram"
 \align center
 \begin_inset Graphics
 	filename figures/rulesHistogram.png
-	width 100text%
 
 \end_inset
 

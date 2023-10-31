@@ -49,7 +49,7 @@ function plotHistogramRules(ruleList, projectPath, subProjectPath)
     
     cmap = subroutines.linspecer(1);
     
-    set(h, 'Units','centimeters', 'Position',[0 0 21-2*2.5 7])
+    set(h, 'Units','centimeters', 'Position',[0 0 21-2*5 6])
     set(h,'defaulttextinterpreter','latex');
     
     nexttile;
