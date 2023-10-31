@@ -1,0 +1,861 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+
+
+% titletoc has to be loaded before hyperfer; otherwise toc does not look properly
+\usepackage{titletoc}
+
+
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},pdfborderstyle={},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{
+ urlcolor=blue, citecolor=blue, linkcolor=red}
+
+
+\usepackage{caption}
+\newcommand{\source}[1]{\vspace{-10pt} \caption*{\footnotesize{\emph{Sources: }{#1}}}}
+\newcommand{\desc}[1]{\vspace{-10pt} \caption*{\footnotesize{\emph{Notes: }{#1}}}}
+\usepackage{colortbl}
+\definecolor{grey}{cmyk}{0, 0, 0, 0.17}
+
+% there are long tables in the document and they need this package
+\usepackage{longtable}
+
+
+
+
+% ECB formatting requirements
+
+
+%%%%%%%%% Paper format A4
+%\documentclass[a4paper,11pt] {article}
+% article is defined in the settings already (Document Class)
+% page size a4 (Page Layout)
+% font size (Fonts)
+
+
+%%%%%%%%% There are NO PAGE NUMBERS, nor any other items in the page headers or footers
+%\pagenumbering{gobble}
+
+
+%%%%%%%%% The margins are 2.5 cm (horizontal) and 3.5 cm (vertical)
+%\usepackage[hmargin=2.5cm,vmargin=3.5cm]{geometry}
+% specified in the setting (Page Margins)
+
+
+%%%%%%%%% Line spacing of about 1.5 line
+\usepackage{setspace}
+\setstretch{1.25}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing single
+\use_hyperref false
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "urlcolor=blue, citecolor=blue, linkcolor=blue"
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 3.5cm
+\rightmargin 2.5cm
+\bottommargin 3.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style british
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Fiscal policy in the semi-structural 
+\begin_inset Newline newline
+\end_inset
+
+model ECB-BASE
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thanks{The views expressed in this paper, as well as all errors and omissions,
+ should be regarded as those solely of the author and are not necessarily
+ those of the European Central Bank.
+ This paper benefited from valuable comments and suggestions of Cristina
+  Checherita-Westphal, Kai Christoffel, Thomas Faria, Magdalena Lalik, Nadine
+ Leiner-Killinger, Richard Morris, Philip Muggenthaler, Joan Paredes, Katja
+ Schmidt and Sre{
+\backslash
+v c}ko Zimic.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Krzysztof Bańkowski
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thanks{European Central Bank, Fiscal Policies Division, 60640 Frankfurt
+ am Main, Germany; Email: krzysztof.bankowski@europa.ecb.eu}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+Fiscal policy constitutes a key tool for business cycle stabilisation next
+ to monetary policy.
+ In this context, having a well-suited macroeconomic model for analysing
+ fiscal policy at a central bank is of primary importance.
+ This paper documents the fiscal block of the ECB-BASE, which is a semi–structur
+al model for the euro area developed at the ECB for projections and policy
+ analysis.
+ The set-up of the fiscal block ensures comprehensive coverage of the government
+ sector and tight links to the quarterly fiscal accounts.
+ Thanks to this design, it is possible to simulate the model with a wide
+ range of fiscal shocks, which, as shown in the paper, have distinct propagation
+ mechanisms.
+ Having discussed the set-up and the potency of fiscal policy in the model,
+ this paper also includes the following applications for fiscal policy analysis:
+ counterfactual scenarios with alternative fiscal rules, assessment of fiscal
+ policy conducted in the euro area in the past and stochastic fiscal projections.
+\end_layout
+
+\begin_layout Abstract
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\backslash
+textbf{Keywords:} Semi-structural model, euro area, simulations, forecasting,
+ fiscal policy
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\backslash
+textbf{JEL Codes:} C3, C5, E1, E2, E6
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+JEL classification based on the original BASE paper; all categories in keywords
+ left the same except for 'monetary policy', which was changed to 'fiscal
+ policy'.
+\end_layout
+
+\begin_layout Plain Layout
+The meaning of the JEL codes is the following:
+\end_layout
+
+\begin_layout Plain Layout
+C3 Multiple or Simultaneous Equation Models • Multiple Variables
+\end_layout
+
+\begin_layout Plain Layout
+C5 Econometric Modeling
+\end_layout
+
+\begin_layout Plain Layout
+E1 General Aggregative Models
+\end_layout
+
+\begin_layout Plain Layout
+E2 Consumption, Saving, Production, Investment, Labor Markets, and Informal
+ Economy
+\end_layout
+
+\begin_layout Plain Layout
+E6 Macroeconomic Policy, Macroeconomic Aspects of Public Finance, and General
+ Outlook
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+startcontents 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+printcontents{ }{1}{
+\backslash
+section*{Table of content}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: one can see a contribution to fiscal shocks to make sure that the
+ description is fine
+\end_layout
+
+\begin_layout Plain Layout
+TODO: let's refer to social transfers everywhere; not benefits
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+xxx
+\end_layout
+
+\begin_layout Section
+The model
+\end_layout
+
+\begin_layout Subsection
+Original monetary policy rule
+\end_layout
+
+\begin_layout Standard
+This is the original rule from the model
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}=\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Take logs on both sides
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\ln\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\ln\left(\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\ln\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\ln\left(\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\right)+\ln\left(\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\right)+\ln\left(\exp\left(\varepsilon_{t}^{R}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\ln\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\ln\left(\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)\right)+\left(1-\rho_{R}\right)\ln\left(\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} \right)+\ln\left(\exp\left(\varepsilon_{t}^{R}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\ln\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\ln\left(\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)\right)+\left(1-\rho_{R}\right)\left(\varphi_{\pi}\ln\left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]+\varphi_{y}\ln\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]\right)+\ln\left(\exp\left(\varepsilon_{t}^{R}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\ln\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\ln\left(\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)\right)+\left(1-\rho_{R}\right)\left(\varphi_{\pi}\left[\omega\ln\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)+\left(1-\omega\right)\ln\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)\right]+\varphi_{y}\left[\omega\ln\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)+\left(1-\omega\right)\ln\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)\right]\right)+\varepsilon_{t}^{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the approximation 
+\begin_inset Formula $\ln\left(1+x\right)\approx x$
+\end_inset
+
+ , which for 
+\begin_inset Formula $x=y-1$
+\end_inset
+
+ yields 
+\begin_inset Formula $\ln\left(y\right)\approx y-1$
+\end_inset
+
+ the equation can be transformed in the following fashion
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}-1=\rho_{R}\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}-1\right)+\left(1-\rho_{R}\right)\left(\varphi_{\pi}\left[\omega\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}-1\right)+\left(1-\omega\right)\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}-1\right)\right]+\varphi_{y}\left[\omega\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}-1\right)+\left(1-\omega\right)\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}-1\right)\right]\right)+\varepsilon_{t}^{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This can be simplified further 
+\end_layout
+
+\begin_layout Itemize
+taking into account that for a value of 
+\begin_inset Formula $\bar{R}^{ecb}=1.0015$
+\end_inset
+
+ , which is close to unity, 
+\begin_inset Formula $\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}-1=\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}\approx R_{t}^{ecb}-\bar{R}^{ecb}\equiv\hat{r}_{t}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+taking into account that 
+\begin_inset Formula $\bar{\pi}^{\tau^{c}}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\pi}^{\tau^{c},*}=1$
+\end_inset
+
+ we can define inflation deviation 
+\begin_inset Formula $\pi_{t}^{\tau^{c}}-1\equiv\hat{\pi}_{t}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+defining output growth 
+\begin_inset Formula $g_{t}^{Y}=\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}-1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{r}_{t}=\rho_{R}\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left(\varphi_{\pi}\left[\omega\hat{\pi}_{t}+\left(1-\omega\right)\hat{\pi}_{t}^{\ast}\right]+\varphi_{y}\left[\omega g_{t}^{Y}+\left(1-\omega\right)g_{t}^{Y,\ast}\right]\right)+\varepsilon_{t}^{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can then switch to union-wide variables
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{r}_{t}=\rho_{R}\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left(\varphi_{\pi}\hat{\pi}_{t}^{EA}+\varphi_{y}g_{t}^{Y,EA}\right)+\varepsilon_{t}^{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To bridge with the MMB rule, which is based on annual variables expressed
+ in percentages/ percentage points following formulations are necessary.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\hat{r}_{t}^{MMB}=400\hat{r}_{t}=400\left(R_{t}^{ecb}-\bar{R}^{ecb}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\hat{\pi}_{t}^{MMB}=400\hat{\pi}_{t}=400\left(\pi_{t}^{\tau^{c}}-1\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $g_{t}^{MMB,Y}=400g_{t}^{Y}=400\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}-1\right)\approx400\ln\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)=400\left(\ln Y_{t}^{tot}-\ln Y_{t-1}^{\text{tot }}\right)=400\ln Y_{t}^{tot}-400\ln Y_{t-1}^{\text{tot }}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+FiMod across rules
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Pick the most common rules of the other model and run them in FiMod (level:
+ easy)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+FiMod compared to other models
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Take the most common rule and put FiMod into perspective vs.
+ other models
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\start_of_appendix
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stopcontents
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+LARGE%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+clearpage
+\end_layout
+
+\begin_layout Plain Layout
+
+Technical Appendix
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+baselineskip=0.85
+\backslash
+baselineskip
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+startcontents 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+printcontents{ }{1}{
+\backslash
+section*{Content}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+thesection}{
+\backslash
+Alph{section}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+thefigure}{
+\backslash
+Alph{section}.
+\backslash
+arabic{figure}} 
+\backslash
+renewcommand{
+\backslash
+thetable}{
+\backslash
+Alph{section}.
+\backslash
+arabic{table}}
+\backslash
+setcounter{figure}{0} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{table}{0} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{equation}{0} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+theequation}{
+\backslash
+thesection.
+\backslash
+arabic{equation}} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+On standard monetary policy rules in MMB
+\end_layout
+
+\begin_layout Standard
+All models have a pre-defined list of viable monetary policy rules, which
+ is specified in a model relevant json file.
+ The 'standard' rules complement a rule that is specific to a model itself.
+ The question arises what are the most common standard rules applicable
+ across models.
+ Nine monetary policy rules feature 153 models present in the MMB project
+ with eight rules available in most of the models (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:rulesHistogram"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Only OW13 rule (i.e.
+ Orphanides & Wieland (2013)) is available in roughly half of the models.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Histogram of standard monetary policy rules applied across models stored
+ in MMB 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:rulesHistogram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/rulesHistogram.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+source{Own calculations with the MMB.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
