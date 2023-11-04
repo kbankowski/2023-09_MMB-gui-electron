@@ -35,7 +35,12 @@ plotFiModWithDiffRules(mmbDatabank, string(ruleList), mmbVarList, projectPath, s
 function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, subProjectPath)
 
     % Please specify the date range of the series
-    dateRange = qq(1,1):qq(5,4);
+    dateRange = qq(1,1): qq(5,4);
+    % thicker Line for Model-Specific-Rule
+    lineWidthSelector = @(aString) 2 * strcmp(aString, "Model") + 1 * ~strcmp(aString, "Model");
+    % thicker Line for Model-Specific-Rule
+    lineTransparencySelector = @(aString) 1 * strcmp(aString, "Model") + 0.5 * ~strcmp(aString, "Model");
+
     
     % Plotting
     figure
@@ -48,7 +53,15 @@ function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, 
     
     h = gcf;
     
-    cmap = subroutines.linspecer(numel(ruleList));
+    cmap = subroutines.linspecer(numel(ruleList)-1);
+    % based on the following palette 
+    % #c1272d - Dark Red
+    % #0000a7 - Indigo
+    % #eecc16 - Yellow
+    % #008176 - Teal
+    % #b3b3b3 - Light Gray
+    line1color = [0, 0, 0.6549];
+    cmap = [cmap; line1color];
     
     set(h, 'Units','centimeters', 'Position',[0 0 21-2 8])
     set(h,'defaulttextinterpreter','latex');
@@ -66,8 +79,8 @@ function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, 
         for aRule = ruleList
             pp.(aRule) = plot(...
                 mmbDatabank.(aRule).(mmbVar)(dateRange) ...
-                , 'Color',cmap(aRule==ruleList, :)...
-                , 'Linewidth',1.5 ...
+                , 'Color', [cmap(aRule==ruleList, :), lineTransparencySelector(aRule)] ...
+                , 'Linewidth', lineWidthSelector(aRule) ...
             );
         end
                 
@@ -83,13 +96,16 @@ function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, 
     
     end 
     
-       
+    % since we plot model at the end so that it overlays other lines we
+    % move it to the front of the legend
+    moveLastToFirstFunc = @(x) [x(end), x(1:end-1)];
+
     % Setting of the legend   
     leg = legend(...
-        struct2array(pp)...
-        , ruleList...
-        , 'Orientation', 'horizontal'...
-        , 'Color', [1 1 1]...
+        moveLastToFirstFunc(struct2array(pp)) ...
+        , moveLastToFirstFunc(fieldnames(pp)') ...
+        , 'Orientation', 'horizontal' ...
+        , 'Color', [1 1 1] ...
         , 'Fontsize', 8 ...
         , 'Interpreter', 'latex' ...
     );
