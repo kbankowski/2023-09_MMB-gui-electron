@@ -9,74 +9,96 @@ subProjectPath = 'mmb-electron.app/Contents/Resources/app/dist/electron/static/m
 %% Running the models with all rules specified in config_4
 mmb('config_4.json','var');
 
-%% List of common rules based on the invesitation in the following driver
+%% Read the simulation results into one structure
+% List of common rules based on the invesitation in the following driver
 % mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/mmb_checkCommonRules.m
-ruleList = {'CEE', 'CMR', 'Coenen', 'GR', 'LWW', 'OW08', 'OW13', 'SW', 'Taylor'};
+ruleList = {'Model', 'CEE', 'CMR', 'Coenen', 'GR', 'LWW', 'OW08', 'OW13', 'SW', 'Taylor'};
+mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
-%% Create a list of all models
-% Define the folder you want to look in
-folder = fullfile(projectPath, subProjectPath, "models");
-% Get a list of all files and folders in this folder
-files = dir(folder);
-% Filter out all the files (keep only directories)
-directories = files([files.isdir]);
-% Remove '.' and '..' from the list
-directories = directories(~ismember({directories.name}, {'.', '..'}));
-% Optionally, extract a list of directory names
-modelList = string({directories.name});
-
-%% Loop through all models and collect the valid rules
-ruleList = {};
-for aModel = modelList
-    fname = fullfile(projectPath, subProjectPath, "models", aModel, aModel+".json"); 
+% looping through all rules
+for aRule = string(ruleList)
+    fname = fullfile('out', sprintf('ESREA_FIMOD12-%s.output.json', aRule)); 
     fid = fopen(fname); 
     raw = fread(fid,inf); 
     str = char(raw'); 
     fclose(fid); 
     val = jsondecode(str);
-    ruleList = [ruleList, val.capabilities.rules'];
+    for mmbVar = mmbVarList
+        mmbDatabank.(aRule).(mmbVar) = Series(qq(0, 4), val.data.IRF.interest_.(mmbVar));
+    end
 end
 
 %% Create a histogram out of rules
-plotHistogramRules(ruleList, projectPath, subProjectPath);
+plotFiModWithDiffRules(mmbDatabank, string(ruleList), mmbVarList, projectPath, subProjectPath);
 
 %% local function to plot the histogram and save it
-function plotHistogramRules(ruleList, projectPath, subProjectPath)
+function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, subProjectPath)
 
+    % Please specify the date range of the series
+    dateRange = qq(1,1):qq(5,4);
+    DateRangeDateTime = dater.toMatlab(dateRange);
+    freqSpec = dater.getFrequency(dateRange(1));
+    
     % Plotting
     figure
     
     % Defining the shape of the figure
-    tiledlayout_width = 1;
-    tiledlayout_height = 1;
+    tiledlayout_width = 3; %Specify the # of columns desired
+    tiledlayout_height = 2;
     
     t = tiledlayout(tiledlayout_height, tiledlayout_width, 'TileSpacing', 'compact','Padding','compact');
     
     h = gcf;
     
-    cmap = subroutines.linspecer(1);
+    cmap = subroutines.linspecer(numel(ruleList));
     
     set(h, 'Units','centimeters', 'Position',[0 0 21-2*5 6])
     set(h,'defaulttextinterpreter','latex');
     
-    nexttile;
-    grid on
-    hold on 
+    for mmbVar = mmbVarList %for each panel
+        nexttile;
+        grid on
+        hold on 
+        
+        title(mmbVar ...
+            ,'Fontsize', 7 ...
+            ,'Fontweight', 'normal'...
+        );
+            
+        for aRule = ruleList
+            pp.(aRule) = plot(...
+                mmbDatabank.(aRule).(mmbVar){dateRange} ...
+                , 'Color',cmap(aRule==ruleList, :)...
+                , 'Linewidth',1.5 ...
+            );
+        end
+                
+        hold off
+        
+        % Setting of the x and y axis
+        set(gca ...
+...            , 'Xtick', 0:5:60 ...
+            , 'Fontsize', 7 ...
+            , 'Box', 'off' ...
+            , 'TickLabelInterpreter','latex' ...
+        );
     
-    h = histogram(categorical(ruleList));
-    h.FaceColor = cmap(1, :);
+    end 
     
-    hold off
-    
-    % Setting of the x and y axis
-    set(gca ...
+       
+    % Setting of the legend   
+    leg = legend(...
+        struct2array(pp)...
+        , ruleList...
+        , 'Orientation', 'horizontal'...
+        , 'Color', [1 1 1]...
         , 'Fontsize', 7 ...
-        , 'Box', 'off' ...
-        , 'TickLabelInterpreter','latex' ...
+        , 'Interpreter', 'latex' ...
     );
+    leg.Layout.Tile = 'north';
         
     % Save graph
-    fileName = fullfile(projectPath, subProjectPath, "docs/figures", "rulesHistogram");
+    fileName = fullfile(projectPath, subProjectPath, "docs/figures", "FiModWithDiffRules");
     exportgraphics(t, sprintf('%s.png',fileName),'BackgroundColor','none');
 
 end
