@@ -1,0 +1,33 @@
+interest L1
+interest L2
+interest L3
+interest L4
+inflationq 
+inflationq L1
+inflationq L2
+inflationq L3
+inflationq L4
+inflationq F1
+inflationq F2
+inflationq F3
+inflationq F4
+output gap 
+output gap L1
+output gap L2
+output gap L3
+output gap L4
+output gap F1
+output gap F2
+output gap F3
+output gap F4
+output
+output L1
+output L2
+output L3
+output L4
+output F1
+output F2
+output F3
+output F4
+std
+innov
