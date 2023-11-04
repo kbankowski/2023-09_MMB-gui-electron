@@ -1,10 +1,17 @@
-
+%% Pre-amble
 clear all
 close all
 clc
 
 projectPath = '/Users/kk/Documents/0000-00_work/2023-09_MMB-gui-electron';
 subProjectPath = 'mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli';
+
+%% Running the models with all rules specified in config_4
+mmb('config_4.json','var');
+
+%% List of common rules based on the invesitation in the following driver
+% mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/mmb_checkCommonRules.m
+ruleList = {'CEE', 'CMR', 'Coenen', 'GR', 'LWW', 'OW08', 'OW13', 'SW', 'Taylor'};
 
 %% Create a list of all models
 % Define the folder you want to look in
