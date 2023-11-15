@@ -44,11 +44,11 @@ function table2latex(T, filename)
     % Parameters
     n_col = size(T,2);
     col_spec = [];
-    for c = 1:n_col, col_spec = [col_spec 'l']; end
+    for c = 1:n_col, col_spec = [col_spec 'c']; end
     col_names = strjoin(T.Properties.VariableNames, ' & ');
     row_names = T.Properties.RowNames;
     if ~isempty(row_names)
-        col_spec = ['l' col_spec]; 
+        col_spec = ['l|' col_spec]; % First column for row names left-aligned with vertical line after
         col_names = ['& ' col_names];
     end
     
@@ -72,11 +72,17 @@ function table2latex(T, filename)
                 else
                     temp{1,col} = num2str(value, '%.2f');
                 end
+                if col == n_col % Make last column bold
+                    temp{1,col} = ['\textbf{' temp{1,col} '}'];
+                end
             end
             if ~isempty(row_names)
                 temp = [row_names{row}, temp];
             end
             fprintf(fileID, '%s \\\\ \n', strjoin(replace(temp, '_', '\_'), ' & '));
+            if ismember(row, [4, 13, 22, 31])
+                fprintf(fileID, '\\hline \n');
+            end
             clear temp;
         end
     catch
