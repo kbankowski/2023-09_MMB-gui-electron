@@ -9,6 +9,7 @@
 !*.mod
 !*.m
 !*.png
+!*.tex
 !*.lyx
 !.gitignore
 !.gitattributes

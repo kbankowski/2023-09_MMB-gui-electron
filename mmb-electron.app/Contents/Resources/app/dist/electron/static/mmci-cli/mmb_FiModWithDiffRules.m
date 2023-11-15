@@ -73,7 +73,7 @@ end
 
 % saving the latex table out of the Matlab table
 texFileName = char(fullfile(projectPath, subProjectPath, "docs/tex", "rulesParameters.tex"));
-table2latex(coeffTable, texFileName);
+subroutines.table2latex(coeffTable, texFileName);
 
 %% Create a histogram out of rules
 plotFiModWithDiffRules(mmbDatabank, string(ruleList), mmbVarList, projectPath, subProjectPath);

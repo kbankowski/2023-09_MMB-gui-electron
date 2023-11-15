@@ -6,5 +6,9 @@ function init()
     addpath(iris_path);
     iris.startup
 
+    % Adding paths
+    projectPath = '/Users/kk/Documents/0000-00_work/2023-09_MMB-gui-electron';
+    addpath(genpath(projectPath));
+
 end
 

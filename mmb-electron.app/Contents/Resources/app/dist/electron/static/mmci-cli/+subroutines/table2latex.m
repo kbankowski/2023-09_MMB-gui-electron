@@ -67,12 +67,16 @@ function table2latex(T, filename)
                 if isstruct(value), error('Table must not contain structs.'); end
                 while iscell(value), value = value{1,1}; end
                 if isinf(value), value = '$\infty$'; end
-                temp{1,col} = num2str(value);
+                if value == 0
+                    temp{1,col} = num2str(value, '%d');
+                else
+                    temp{1,col} = num2str(value, '%.2f');
+                end
             end
             if ~isempty(row_names)
                 temp = [row_names{row}, temp];
             end
-            fprintf(fileID, '%s \\\\ \n', strjoin(temp, ' & '));
+            fprintf(fileID, '%s \\\\ \n', strjoin(replace(temp, '_', '\_'), ' & '));
             clear temp;
         end
     catch

@@ -609,14 +609,62 @@ source{Own calculations with the MMB.}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
+\begin_inset Float table
+placement h
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-jsut continue to set up a table
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Parameters of monetary policy rules in MMB 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:rulesParameters"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand input
+filename "tex/rulesParameters.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+source{Own summary based on MMB.}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
