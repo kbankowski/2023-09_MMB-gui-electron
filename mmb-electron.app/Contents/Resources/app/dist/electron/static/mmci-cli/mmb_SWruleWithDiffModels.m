@@ -1,11 +1,9 @@
 %% Pre-amble
-clear all
-close all
-clc
+clear all; close all; clc
 [projectPath, subProjectPath] = init();
 
 %% Running the models with all rules specified in config_4
-mmb('config_4.json','var');
+mmb('config_5.json','var');
 
 %% Read the simulation results into one structure
 % List of common rules based on the invesitation in the following driver

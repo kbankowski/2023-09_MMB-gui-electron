@@ -1,22 +1,9 @@
-
-clear all
-close all
-clc
-
-projectPath = '/Users/kk/Documents/0000-00_work/2023-09_MMB-gui-electron';
-subProjectPath = 'mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli';
+%% Pre-amble
+clear all; close all; clc
+[projectPath, subProjectPath] = init();
 
 %% Create a list of all models
-% Define the folder you want to look in
-folder = fullfile(projectPath, subProjectPath, "models");
-% Get a list of all files and folders in this folder
-files = dir(folder);
-% Filter out all the files (keep only directories)
-directories = files([files.isdir]);
-% Remove '.' and '..' from the list
-directories = directories(~ismember({directories.name}, {'.', '..'}));
-% Optionally, extract a list of directory names
-modelList = string({directories.name});
+modelList = subroutines.createModelList(projectPath, subProjectPath);
 
 %% Loop through all models and collect the valid rules
 ruleList = {};
