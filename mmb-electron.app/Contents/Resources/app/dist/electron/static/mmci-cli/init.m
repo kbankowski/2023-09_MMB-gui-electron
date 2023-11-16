@@ -1,4 +1,4 @@
-function [projectPath, subProjectPath] = init()
+function [projectPath, subProjectPath, projectPathFimod] = init()
 
     iris_path = "/Users/kk/Documents/0000-00_work/2021-03_iris/iris_live";
 
@@ -11,5 +11,6 @@ function [projectPath, subProjectPath] = init()
     addpath(genpath(projectPath));
     subProjectPath = 'mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli';
 
+    projectPathFimod = '/Users/kk/Documents/0000-00_work/2023-08_fimod';    
 end
 

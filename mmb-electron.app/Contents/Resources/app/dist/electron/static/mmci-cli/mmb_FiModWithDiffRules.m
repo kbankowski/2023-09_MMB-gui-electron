@@ -2,7 +2,7 @@
 clear all
 close all
 clc
-[projectPath, subProjectPath] = init();
+[projectPath, subProjectPath, projectPathFimod] = init();
 
 %% Running the models with all rules specified in config_4
 mmb('config_4.json','var');

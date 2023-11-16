@@ -1,6 +1,6 @@
 % initiating the project
 clear all; close all; clc
-[projectPath, subProjectPath] = init();
+[projectPath, subProjectPath, projectPathFimod] = init();
 
 % running FiMod under various monetary policy rules
 mmb_FiModWithDiffRules

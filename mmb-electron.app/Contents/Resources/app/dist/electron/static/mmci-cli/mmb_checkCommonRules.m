@@ -1,6 +1,6 @@
 %% Pre-amble
 clear all; close all; clc
-[projectPath, subProjectPath] = init();
+[projectPath, subProjectPath, projectPathFimod] = init();
 
 %% Create a list of all models
 modelList = subroutines.createModelList(projectPath, subProjectPath);

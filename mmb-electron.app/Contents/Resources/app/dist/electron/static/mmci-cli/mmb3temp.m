@@ -1,11 +1,15 @@
-projectPath = '/Users/kk/Documents/0000-00_work/2023-09_MMB-gui-electron';
-projectPathFimod = '/Users/kk/Documents/0000-00_work/2023-08_fimod';
-subProjectPath = 'mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/out';
+%% Pre-amble
+clear all; close all; clc
+[projectPath, subProjectPath, projectPathFimod] = init();
+
+%%
 mmb('config_2.json','var');
 
 %% values simulated with simult_ Dynare function
 % the major advantage of this approach is that one can
 % explicitely see both ss values and shock-simulated values
+
+% creating shocks
 ex_ = databank.fromArray( ...
     zeros(20, length(M_.exo_names)) ...
     , M_.exo_names ...
@@ -13,6 +17,7 @@ ex_ = databank.fromArray( ...
 );
 ex_.interest_(qq(1, 1)) = 1;
 
+% stochastic simulation
 y_ = simult_( ...
     M_ ...
     , options_ ...
@@ -22,6 +27,7 @@ y_ = simult_( ...
     , 1 ...
 );
 
+% stochastic simulation, SS and deviations as databanks
 aSeriesY_ = databank.fromArray( ...
     y_' ...
     , M_.endo_names ...
@@ -32,10 +38,7 @@ aSeriesSS = databank.fromArray( ...
     , M_.endo_names ...
     , qq(1, 1)-1: qq(5, 4) ...
 );
-
-for aField = databank.fieldNames(aSeriesY_)
-    aSeriesSimult.(aField) = aSeriesY_.(aField) - aSeriesSS.(aField);
-end
+aSeriesSimult = dbfun(@(x, y) x - y, aSeriesY_, aSeriesSS);
 
 %% values simulated with Dynare irf function
 SS(M_.exo_names_orig_ord,M_.exo_names_orig_ord)=M_.Sigma_e+1e-14*eye(M_.exo_nbr);
@@ -51,6 +54,7 @@ irf_ = irf( ...
     , options_.order ...
 );
 
+% deviations as databanks
 aSeriesIrf = databank.fromArray( ...
     irf_' ...
     , M_.endo_names ...
@@ -58,23 +62,18 @@ aSeriesIrf = databank.fromArray( ...
 );
 
 %% values simulated with MMB
-
-%read the two json files and then plot
-%read
-
-cd out
-
-fname = 'ESREA_FIMOD12-Model.output.json'; 
+% reading in the json file produced with the mmb('config_2.json','var')
+% command
+fname = fullfile(projectPath, subProjectPath, 'out', 'ESREA_FIMOD12-Model.output.json'); 
 fid = fopen(fname); 
 raw = fread(fid,inf); 
 str = char(raw'); 
 fclose(fid); 
-val3 = jsondecode(str);
+val = jsondecode(str);
 
-cd ..
-
-for aSer = string(reshape(fieldnames(val3.data.IRF.interest_), 1, []))
-    mmbSim.(aSer) = Series(qq(0, 4), val3.data.IRF.interest_.(aSer));
+% deviations as a databank
+for aSer = string(reshape(fieldnames(val.data.IRF.interest_), 1, []))
+    mmbSim.(aSer) = Series(qq(0, 4), val.data.IRF.interest_.(aSer));
 end
 
 %% values coming from FiMod project
