@@ -154,12 +154,8 @@ status open
 
 
 \backslash
-thanks{This paper benefited from valuable comments and suggestions of Cristina
-  Checherita-Westphal, Kai Christoffel, Thomas Faria, Magdalena Lalik, Nadine
- Leiner-Killinger, Richard Morris, Philip Muggenthaler, Joan Paredes, Katja
- Schmidt and Sre{
-\backslash
-v c}ko Zimic.}
+thanks{I greatly acknowledge the support of Alexander Duck, who provided
+ me with guidelines on how to operate the MMB infrastructure.}
 \end_layout
 
 \end_inset
@@ -169,149 +165,6 @@ v c}ko Zimic.}
 
 \begin_layout Author
 Krzysztof Bańkowski
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-thanks{European Central Bank, Fiscal Policies Division, 60640 Frankfurt
- am Main, Germany; Email: krzysztof.bankowski@europa.ecb.eu}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Abstract
-Fiscal policy constitutes a key tool for business cycle stabilisation next
- to monetary policy.
- In this context, having a well-suited macroeconomic model for analysing
- fiscal policy at a central bank is of primary importance.
- This paper documents the fiscal block of the ECB-BASE, which is a semi–structur
-al model for the euro area developed at the ECB for projections and policy
- analysis.
- The set-up of the fiscal block ensures comprehensive coverage of the government
- sector and tight links to the quarterly fiscal accounts.
- Thanks to this design, it is possible to simulate the model with a wide
- range of fiscal shocks, which, as shown in the paper, have distinct propagation
- mechanisms.
- Having discussed the set-up and the potency of fiscal policy in the model,
- this paper also includes the following applications for fiscal policy analysis:
- counterfactual scenarios with alternative fiscal rules, assessment of fiscal
- policy conducted in the euro area in the past and stochastic fiscal projections.
-\end_layout
-
-\begin_layout Abstract
-\begin_inset VSpace bigskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Abstract
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\backslash
-textbf{Keywords:} Semi-structural model, euro area, simulations, forecasting,
- fiscal policy
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Abstract
-\begin_inset VSpace bigskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Abstract
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\backslash
-textbf{JEL Codes:} C3, C5, E1, E2, E6
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Comment
-status open
-
-\begin_layout Plain Layout
-JEL classification based on the original BASE paper; all categories in keywords
- left the same except for 'monetary policy', which was changed to 'fiscal
- policy'.
-\end_layout
-
-\begin_layout Plain Layout
-The meaning of the JEL codes is the following:
-\end_layout
-
-\begin_layout Plain Layout
-C3 Multiple or Simultaneous Equation Models • Multiple Variables
-\end_layout
-
-\begin_layout Plain Layout
-C5 Econometric Modeling
-\end_layout
-
-\begin_layout Plain Layout
-E1 General Aggregative Models
-\end_layout
-
-\begin_layout Plain Layout
-E2 Consumption, Saving, Production, Investment, Labor Markets, and Informal
- Economy
-\end_layout
-
-\begin_layout Plain Layout
-E6 Macroeconomic Policy, Macroeconomic Aspects of Public Finance, and General
- Outlook
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Abstract
-\begin_inset VSpace bigskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Abstract
-\begin_inset Newpage clearpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Abstract
-\begin_inset Newpage pagebreak
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -344,15 +197,24 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-xxx
+This brief document provides a description of the FiMod model (as presented
+ in ) implementation into the MMB database.
+ Firstly, it derives how to adapt the original monetary policy rule of FiMod
+ into a rule that is compatible with the standard setup of the MMB infrastructur
+e.
+ Also, it illustrates that the effects of a standard monetary policy shock
+ are identical irrespective or whether FiMod is simulated within its original
+ set up or within the MMB infrastructure.
+ Secondly, the document compares the results of a standard monetary policy
+ shock simulated in FiMod under various monetary policy rules.
+ Subsequently, the document contrast FiMod results against other around
+ 150 models contained in the MMB database.
+ Both comparisons affirm that the results obtained through the implementation
+ of FiMod in the MMB database are plausible.
 \end_layout
 
 \begin_layout Section
-The model
-\end_layout
-
-\begin_layout Subsection
-Original monetary policy rule
+Adaptation of FiMod's monetary policy rule to the MMB infrastructure
 \end_layout
 
 \begin_layout Standard
@@ -549,7 +411,7 @@ To bridge with the MMB rule, which is based on annual variables expressed
 \end_layout
 
 \begin_layout Section
-FiMod across rules
+FiMod's results put into perspective
 \end_layout
 
 \begin_layout Standard
@@ -609,106 +471,6 @@ source{Own calculations with the MMB.}
 \end_inset
 
 
-\begin_inset Float table
-placement h
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Parameters of monetary policy rules in MMB 
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:rulesParameters"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{small}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset include
-LatexCommand input
-filename "tex/rulesParameters.tex"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{small}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset VSpace bigskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-source{Own summary based on MMB.}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-FiMod compared to other models
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -802,13 +564,6 @@ begin{center}
 
 \backslash
 LARGE%
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-clearpage
 \end_layout
 
 \begin_layout Plain Layout
@@ -996,6 +751,107 @@ status open
 
 \backslash
 source{Own calculations with the MMB.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+FiMod Model Specific Rule vs.
+ Standard Rules
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Parameters of monetary policy rules in MMB 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:rulesParameters"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{small}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand input
+filename "tex/rulesParameters.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{small}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+source{Own summary based on MMB.}
 \end_layout
 
 \end_inset
