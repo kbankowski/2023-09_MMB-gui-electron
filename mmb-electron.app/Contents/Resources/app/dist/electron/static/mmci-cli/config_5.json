@@ -1,0 +1,15 @@
+{
+  "dynare": "/Users/kk/Documents/0000-00_work/2021-03_dynare/dynareversion/5.1",
+  "rules": [
+      "SW"
+  ],
+  "models": [
+    "ESREA_FIMOD12"      
+  ],
+  "msr": true,
+  "usr": false,
+  "options": {
+    "gain": 0.01,
+    "horizon": 20
+  }
+}
