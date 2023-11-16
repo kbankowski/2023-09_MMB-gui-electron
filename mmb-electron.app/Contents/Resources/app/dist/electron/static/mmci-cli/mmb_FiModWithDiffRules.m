@@ -2,9 +2,7 @@
 clear all
 close all
 clc
-
-projectPath = '/Users/kk/Documents/0000-00_work/2023-09_MMB-gui-electron';
-subProjectPath = 'mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli';
+[projectPath, subProjectPath] = init();
 
 %% Running the models with all rules specified in config_4
 mmb('config_4.json','var');
