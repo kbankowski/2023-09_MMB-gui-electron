@@ -7,11 +7,12 @@ mmb('config_5.json','var');
 
 %% Read the simulation results into one structure
 modelList = subroutines.createModelList(projectPath, subProjectPath);
+modelListExclude = ["NK_GK11", "US_AJ16"];
+modelListForLoop =  setdiff(string(modelList), modelListExclude);
 mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
 % looping through all models
-modelListExclude = ["NK_GK11", "US_AJ16"];
-for aModel = setdiff(string(modelList), modelListExclude)
+for aModel = modelListForLoop
     fname = fullfile('out', sprintf('%s-SW.output.json', aModel)); 
     fid = fopen(fname); 
     raw = fread(fid,inf); 
@@ -28,64 +29,21 @@ for aModel = setdiff(string(modelList), modelListExclude)
     end
 end
 
-%% Read to rules to see their values
-fileID = fopen('docs/ruleMPvarNames.txt');
-% Read the data into a cell array
-data = textscan(fileID, '%s', 'Delimiter', '\n', 'Whitespace', '');
-coffNames = replace(string(data{1}), " ", "_");
-% Close the file
-fclose(fileID);
-
-% initiating the table
-coeffTable = table( ...
-    'Size', [length(coffNames) length(ruleList)] ...
-    , 'VariableTypes', repmat("double", 1, length(ruleList)) ...
-    , 'VariableNames', ruleList ...
-    , 'RowNames', coffNames ...
-);
-
-% reading the parameters of standard rules from json files
-for aRule = string(ruleList(1:end-1))
-    fname = fullfile('rules', aRule, sprintf('%s.json', aRule)); 
-    fid = fopen(fname); 
-    raw = fread(fid,inf); 
-    str = char(raw'); 
-    fclose(fid); 
-    val = jsondecode(str);
-    rulesCoeff.(aRule) = vertcat(cellfun(@(x) eval(x), val.coefficients));
-    coeffTable{:, aRule} = rulesCoeff.(aRule);
-end
-
-% reading the model specific rule
-fname = fullfile('models', 'ESREA_FIMOD12', sprintf('%s.json', 'ESREA_FIMOD12')); 
-fid = fopen(fname); 
-raw = fread(fid,inf); 
-str = char(raw'); 
-fclose(fid); 
-val = jsondecode(str);
-rulesCoeff.("Model") = vertcat(cellfun(@(x) eval(x), val.msr));
-
-% storing the numbers in the table
-for aRule = string(ruleList)
-    coeffTable{:, aRule} = rulesCoeff.(aRule);
-end
-
-% saving the latex table out of the Matlab table
-texFileName = char(fullfile(projectPath, subProjectPath, "docs/tex", "rulesParameters.tex"));
-subroutines.table2latex(coeffTable, texFileName);
-
 %% Create a histogram out of rules
-plotFiModWithDiffRules(mmbDatabank, string(ruleList), mmbVarList, projectPath, subProjectPath);
+% re-ordering the list to put FiMod last so that it is plotted on top of
+% everything
+modelListForPlotting = [modelListForLoop(modelListForLoop ~= "ESREA_FIMOD12"), modelListForLoop(modelListForLoop == "ESREA_FIMOD12")];
+plotSWruleWithDiffModels(mmbDatabank, modelListForPlotting, mmbVarList, projectPath, subProjectPath);
 
 %% local function to plot the histogram and save it
-function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, subProjectPath)
+function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPath, subProjectPath)
 
     % Please specify the date range of the series
     dateRange = qq(1,1): qq(5,4);
     % thicker Line for Model-Specific-Rule
-    lineWidthSelector = @(aString) 2 * strcmp(aString, "Model") + 1 * ~strcmp(aString, "Model");
+    lineWidthSelector = @(aString) 2 * strcmp(aString, "ESREA_FIMOD12") + 1 * ~strcmp(aString, "ESREA_FIMOD12");
     % thicker Line for Model-Specific-Rule
-    lineTransparencySelector = @(aString) 1 * strcmp(aString, "Model") + 0.5 * ~strcmp(aString, "Model");
+    lineTransparencySelector = @(aString) 1 * strcmp(aString, "ESREA_FIMOD12") + 0.5 * ~strcmp(aString, "ESREA_FIMOD12");
 
     
     % Plotting
@@ -99,7 +57,8 @@ function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, 
     
     h = gcf;
     
-    cmap = subroutines.linspecer(numel(ruleList)-1);
+    % replication of light gray colour for all non-FiMod models
+    cmap = repmat([0.702 0.702 0.702], numel(modelList)-1, 1);
     % based on the following palette 
     % https://www.simplifiedsciencepublishing.com/resources/best-color-palettes-for-scientific-figures-and-data-visualizations
     % #c1272d - Dark Red
@@ -123,11 +82,11 @@ function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, 
             ,'Fontweight', 'normal'...
         );
             
-        for aRule = ruleList
-            pp.(aRule) = plot(...
-                mmbDatabank.(aRule).(mmbVar)(dateRange) ...
-                , 'Color', [cmap(aRule==ruleList, :), lineTransparencySelector(aRule)] ...
-                , 'Linewidth', lineWidthSelector(aRule) ...
+        for aModel = modelList
+            pp.(aModel) = plot(...
+                mmbDatabank.(aModel).(mmbVar)(dateRange) ...
+                , 'Color', [cmap(aModel==modelList, :), lineTransparencySelector(aModel)] ...
+                , 'Linewidth', lineWidthSelector(aModel) ...
             );
         end
                 
@@ -145,22 +104,21 @@ function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, 
     
     % since we plot model at the end so that it overlays other lines we
     % move it to the front of the legend
-    moveLastToFirstFunc = @(x) [x(end), x(1:end-1)];
+    pickLastAndFirst = @(x) [x(end), x(1)];
 
     % Setting of the legend   
     leg = legend(...
-        moveLastToFirstFunc(struct2array(pp)) ...
-        , moveLastToFirstFunc(fieldnames(pp)') ...
+        pickLastAndFirst(struct2array(pp)) ...
+        , ["FiMod", "other models"] ...
         , 'Orientation', 'horizontal' ...
         , 'Color', [1 1 1] ...
         , 'Fontsize', 8 ...
         , 'Interpreter', 'latex' ...
     );
     leg.Layout.Tile = 'north';
-    leg.NumColumns = 5;
         
     % Save graph
-    fileName = fullfile(projectPath, subProjectPath, "docs/figures", "FiModWithDiffRules");
+    fileName = fullfile(projectPath, subProjectPath, "docs/figures", "SWruleWithDiffModels");
     exportgraphics(t, sprintf('%s.png',fileName),'BackgroundColor','none');
 
 end
