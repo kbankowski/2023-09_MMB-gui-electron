@@ -6,24 +6,27 @@ clear all; close all; clc
 mmb('config_5.json','var');
 
 %% Read the simulation results into one structure
-% List of common rules based on the invesitation in the following driver
-% mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/mmb_checkCommonRules.m
-ruleList = {'CEE', 'CMR', 'Coenen', 'GR', 'LWW', 'OW08', 'OW13', 'SW', 'Taylor', 'Model'};
+modelList = subroutines.createModelList(projectPath, subProjectPath);
 mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
-% looping through all rules
-for aRule = string(ruleList)
-    fname = fullfile('out', sprintf('ESREA_FIMOD12-%s.output.json', aRule)); 
+% looping through all models
+modelListExclude = ["NK_GK11", "US_AJ16"];
+for aModel = setdiff(string(modelList), modelListExclude)
+    fname = fullfile('out', sprintf('%s-SW.output.json', aModel)); 
     fid = fopen(fname); 
     raw = fread(fid,inf); 
     str = char(raw'); 
     fclose(fid); 
     val = jsondecode(str);
     for mmbVar = mmbVarList
-        mmbDatabank.(aRule).(mmbVar) = Series(qq(0, 4), val.data.IRF.interest_.(mmbVar));
+        try
+            mmbDatabank.(aModel).(mmbVar) = Series(qq(0, 4), val.data.IRF.interest_.(mmbVar));
+        catch
+            mmbDatabank.(aModel).(mmbVar) = Series(qq(0, 4): qq(0, 4)+20, NaN);
+            fprintf('%s variable not found in the %s model results\n', mmbVar, aModel);
+        end
     end
 end
-
 
 %% Read to rules to see their values
 fileID = fopen('docs/ruleMPvarNames.txt');
