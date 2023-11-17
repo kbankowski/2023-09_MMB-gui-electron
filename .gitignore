@@ -14,6 +14,7 @@
 !.gitignore
 !.gitattributes
 !mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/docs/userguide.pdf
+!mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/docs/MMB_model_description.pdf
 !mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/docs/ruleMPvarNames.txt
 
 # Ignore *.m files in folders starting with "+", even if nested

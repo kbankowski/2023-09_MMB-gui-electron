@@ -12,3 +12,6 @@ mmb_FiModWithDiffRules
 % so that the results of FiMod could be put into 
 % perspective
 mmb_SWruleWithDiffModels
+
+% checking common rules
+mmb_checkCommonRules
