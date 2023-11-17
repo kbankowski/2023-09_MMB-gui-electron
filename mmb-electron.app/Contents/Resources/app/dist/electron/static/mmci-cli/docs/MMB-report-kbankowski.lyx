@@ -217,6 +217,10 @@ e.
 Adaptation of FiMod's monetary policy rule to the MMB infrastructure
 \end_layout
 
+\begin_layout Subsection
+Derivation 1
+\end_layout
+
 \begin_layout Standard
 This is the original rule from the model
 \end_layout
@@ -405,6 +409,233 @@ To bridge with the MMB rule, which is based on annual variables expressed
 
 \begin_layout Itemize
 \begin_inset Formula $g_{t}^{MMB,Y}=400g_{t}^{Y}=400\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}-1\right)\approx400\ln\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)=400\left(\ln Y_{t}^{tot}-\ln Y_{t-1}^{\text{tot }}\right)=400\ln Y_{t}^{tot}-400\ln Y_{t-1}^{\text{tot }}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Derivation 2
+\end_layout
+
+\begin_layout Standard
+Original rule
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}=\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Switch to the EA variables to simplify the equation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}=\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left(\frac{\pi_{t}^{\tau^{c},EA}}{\bar{\pi}^{\tau^{c},EA}}\right)^{\varphi_{\pi}}\left(\frac{Y_{t}^{tot,EA}}{Y_{t-1}^{tot,EA}}\right)^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Take logs on both sides
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\log\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\log\left(\frac{\pi_{t}^{\tau^{c},EA}}{\bar{\pi}^{\tau^{c},EA}}\right)+\varphi_{y}\log\left(\frac{Y_{t}^{tot,EA}}{Y_{t-1}^{tot,EA}}\right)\right]+\exp\left(\varepsilon_{t}^{R}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Some substitution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{r}_{t}=\rho_{R}\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\hat{\pi}_{t}^{\tau^{c},EA}+\varphi_{y}\left(\log Y_{t}^{tot,EA}-\log Y_{t-1}^{tot,EA}\right)\right]+\exp\left(\varepsilon_{t}^{R}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Switching to variables defined in percentages in annual terms (multiplying
+ by 400)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+400\hat{r}_{t}=\rho_{R}400\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}400\hat{\pi}_{t}^{\tau^{c},EA}+4\varphi_{y}\left(100\log Y_{t}^{tot,EA}-100\log Y_{t-1}^{tot,EA}\right)\right]+400\epsilon_{t}^{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This results in the following relationships between original model variables
+ and standard MMB variables
+\end_layout
+
+\begin_layout Itemize
+interest: 
+\begin_inset Formula $\hat{r}_{t}^{MMB}=400\hat{r}_{t}=400\left(R_{t}^{ecb}-\bar{R}^{ecb}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+inflationq: 
+\begin_inset Formula $\hat{\pi}_{t}^{MMB}=400\hat{\pi}_{t}=400\left(\pi_{t}^{\tau^{c}}-1\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+inflation: 
+\end_layout
+
+\begin_layout Itemize
+output: 
+\begin_inset Formula $100\log Y_{t}^{tot,EA}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with the following values of the coefficients in the MMB rule
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Parameters of monetary policy rules in MMB 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:rulesParametersFiMod"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{small}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand input
+filename "tex/rulesParametersFiMod.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{small}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+source{Own summary based on MMB.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
