@@ -99,12 +99,12 @@ varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"
 varStruct.resFiModOrig = ["interestEA", "inflationEA", "inflationqEA", "outputEA", "outputEA"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
-plotFiModWithDiffSetups(allStruct, setupsToPlot(end-1: end), varStruct, projectPath, subProjectPath, "short");
-plotFiModWithDiffSetups(allStruct, setupsToPlot, varStruct, projectPath, subProjectPath, "long");
+plotFiModWithDiffSetups(allStruct, setupsToPlot(end-1: end),  ["MMB setup", "FiMod original setup"], varStruct, projectPath, subProjectPath, "short");
+plotFiModWithDiffSetups(allStruct, setupsToPlot, setupsToPlot, varStruct, projectPath, subProjectPath, "long");
 
 
 %% function for plotting
-function plotFiModWithDiffSetups(allStruct, setupList, varStruct, projectPath, subProjectPath, plotVersion)
+function plotFiModWithDiffSetups(allStruct, setupList, setupLegendList, varStruct, projectPath, subProjectPath, plotVersion)
 
     % Please specify the date range of the series
     dateRange = qq(1,1): qq(5,4);
@@ -176,7 +176,7 @@ function plotFiModWithDiffSetups(allStruct, setupList, varStruct, projectPath, s
     % Setting of the legend   
     leg = legend(...
         struct2array(pp) ...
-        , setupList ...
+        , setupLegendList ...
         , 'Orientation', 'horizontal' ...
         , 'Color', [1 1 1] ...
         , 'Fontsize', 8 ...

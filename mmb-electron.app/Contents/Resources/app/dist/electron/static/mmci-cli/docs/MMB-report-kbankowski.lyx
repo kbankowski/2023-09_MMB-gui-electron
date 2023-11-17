@@ -155,7 +155,7 @@ status open
 
 \backslash
 thanks{I greatly acknowledge the support of Alexander Duck, who provided
- me with guidelines on how to operate the MMB infrastructure.}
+ me with guidance on how to operate the MMB infrastructure.}
 \end_layout
 
 \end_inset
@@ -217,224 +217,30 @@ e.
 Adaptation of FiMod's monetary policy rule to the MMB infrastructure
 \end_layout
 
-\begin_layout Subsection
-Derivation 1
-\end_layout
-
 \begin_layout Standard
-This is the original rule from the model
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}=\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)
-\]
+Original rule as stated in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "stahler2012fimod"
+literal "false"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Take logs on both sides
+ (Eq.
+ 76 in the paper) relies on interest rates responding to the EA-wide inflation
+ gap and output growth.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-\ln\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\ln\left(\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)\right)
-\]
+\begin{equation}
+\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}=\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)\label{eq:originalRule}
+\end{equation}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\ln\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\ln\left(\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\right)+\ln\left(\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\right)+\ln\left(\exp\left(\varepsilon_{t}^{R}\right)\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\ln\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\ln\left(\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)\right)+\left(1-\rho_{R}\right)\ln\left(\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} \right)+\ln\left(\exp\left(\varepsilon_{t}^{R}\right)\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\ln\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\ln\left(\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)\right)+\left(1-\rho_{R}\right)\left(\varphi_{\pi}\ln\left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]+\varphi_{y}\ln\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]\right)+\ln\left(\exp\left(\varepsilon_{t}^{R}\right)\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\ln\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\ln\left(\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)\right)+\left(1-\rho_{R}\right)\left(\varphi_{\pi}\left[\omega\ln\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)+\left(1-\omega\right)\ln\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)\right]+\varphi_{y}\left[\omega\ln\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)+\left(1-\omega\right)\ln\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)\right]\right)+\varepsilon_{t}^{R}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Using the approximation 
-\begin_inset Formula $\ln\left(1+x\right)\approx x$
-\end_inset
-
- , which for 
-\begin_inset Formula $x=y-1$
-\end_inset
-
- yields 
-\begin_inset Formula $\ln\left(y\right)\approx y-1$
-\end_inset
-
- the equation can be transformed in the following fashion
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}-1=\rho_{R}\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}-1\right)+\left(1-\rho_{R}\right)\left(\varphi_{\pi}\left[\omega\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}-1\right)+\left(1-\omega\right)\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}-1\right)\right]+\varphi_{y}\left[\omega\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}-1\right)+\left(1-\omega\right)\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}-1\right)\right]\right)+\varepsilon_{t}^{R}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This can be simplified further 
-\end_layout
-
-\begin_layout Itemize
-taking into account that for a value of 
-\begin_inset Formula $\bar{R}^{ecb}=1.0015$
-\end_inset
-
- , which is close to unity, 
-\begin_inset Formula $\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}-1=\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}\approx R_{t}^{ecb}-\bar{R}^{ecb}\equiv\hat{r}_{t}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-taking into account that 
-\begin_inset Formula $\bar{\pi}^{\tau^{c}}=1$
-\end_inset
-
- and 
-\begin_inset Formula $\bar{\pi}^{\tau^{c},*}=1$
-\end_inset
-
- we can define inflation deviation 
-\begin_inset Formula $\pi_{t}^{\tau^{c}}-1\equiv\hat{\pi}_{t}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-defining output growth 
-\begin_inset Formula $g_{t}^{Y}=\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}-1$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\hat{r}_{t}=\rho_{R}\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left(\varphi_{\pi}\left[\omega\hat{\pi}_{t}+\left(1-\omega\right)\hat{\pi}_{t}^{\ast}\right]+\varphi_{y}\left[\omega g_{t}^{Y}+\left(1-\omega\right)g_{t}^{Y,\ast}\right]\right)+\varepsilon_{t}^{R}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We can then switch to union-wide variables
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\hat{r}_{t}=\rho_{R}\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left(\varphi_{\pi}\hat{\pi}_{t}^{EA}+\varphi_{y}g_{t}^{Y,EA}\right)+\varepsilon_{t}^{R}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-To bridge with the MMB rule, which is based on annual variables expressed
- in percentages/ percentage points following formulations are necessary.
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $\hat{r}_{t}^{MMB}=400\hat{r}_{t}=400\left(R_{t}^{ecb}-\bar{R}^{ecb}\right)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $\hat{\pi}_{t}^{MMB}=400\hat{\pi}_{t}=400\left(\pi_{t}^{\tau^{c}}-1\right)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $g_{t}^{MMB,Y}=400g_{t}^{Y}=400\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}-1\right)\approx400\ln\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)=400\left(\ln Y_{t}^{tot}-\ln Y_{t-1}^{\text{tot }}\right)=400\ln Y_{t}^{tot}-400\ln Y_{t-1}^{\text{tot }}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Derivation 2
-\end_layout
-
-\begin_layout Standard
-Original rule
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}=\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Switch to the EA variables to simplify the equation
+To simplify the equation I substitute the country specific variables with
+ EA-wide variables.
 \end_layout
 
 \begin_layout Standard
@@ -445,26 +251,41 @@ Switch to the EA variables to simplify the equation
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Take logs on both sides
+Furthermore, I take logs on both sides of the equation to make the terms
+ additive takes a formulation similar to the MMB.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\log\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\log\left(\frac{\pi_{t}^{\tau^{c},EA}}{\bar{\pi}^{\tau^{c},EA}}\right)+\varphi_{y}\log\left(\frac{Y_{t}^{tot,EA}}{Y_{t-1}^{tot,EA}}\right)\right]+\exp\left(\varepsilon_{t}^{R}\right)
+\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\log\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\log\left(\frac{\pi_{t}^{\tau^{c},EA}}{\bar{\pi}^{\tau^{c},EA}}\right)+\varphi_{y}\log\left(\frac{Y_{t}^{tot,EA}}{Y_{t-1}^{tot,EA}}\right)\right]+\varepsilon_{t}^{R}
 \]
 
 \end_inset
 
+Using approximations log terms can be written, as follows: 
+\begin_inset Formula $\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)\approx\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}-1=\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}$
+\end_inset
 
-\end_layout
+.
+ Furthermore, since 
+\begin_inset Formula $\bar{R}^{ecb}$
+\end_inset
 
-\begin_layout Standard
-Some substitution
+ is close to unity I can define 
+\begin_inset Formula $\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}\approx R_{t}^{ecb}-\bar{R}^{ecb}\equiv\hat{r}_{t}$
+\end_inset
+
+, which is the interest rate deviation.
+ By the means of analogous transformations and having in mind that 
+\begin_inset Formula $\bar{\pi}^{\tau^{c},EA}=1$
+\end_inset
+
+ in the model, inflation deviation can 
+\begin_inset Formula $\hat{\pi}_{t}^{\tau^{c},EA}$
+\end_inset
+
+ can be obtained.
 \end_layout
 
 \begin_layout Standard
@@ -475,52 +296,81 @@ Some substitution
 
 \end_inset
 
+Finally, the transition to a rule fully consistent with the MMB requires
+ that the variables, most notably interest rates and inflation are reported
+ in percentages in annualised terms.
+ Against this backdrop, I multiply the rule by the factor of 
+\begin_inset Formula $400$
+\end_inset
 
-\end_layout
-
-\begin_layout Standard
-Switching to variables defined in percentages in annual terms (multiplying
- by 400)
+.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-400\hat{r}_{t}=\rho_{R}400\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}400\hat{\pi}_{t}^{\tau^{c},EA}+4\varphi_{y}\left(100\log Y_{t}^{tot,EA}-100\log Y_{t-1}^{tot,EA}\right)\right]+400\epsilon_{t}^{R}
-\]
+\begin{equation}
+400\hat{r}_{t}=\rho_{R}400\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}400\hat{\pi}_{t}^{\tau^{c},EA}+4\varphi_{y}\left(100\log Y_{t}^{tot,EA}-100\log Y_{t-1}^{tot,EA}\right)\right]+400\epsilon_{t}^{R}\label{eq:mmbRule}
+\end{equation}
 
+\end_inset
+
+From the rule that is fully consistent with the MMB standard specification
+ (see Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mmbRule"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) I can easily infer the definition of standard MMB variables in terms of
+ FiMod variables, used in the original rule (Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:originalRule"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+interest
+\family default
+: 
+\begin_inset Formula $400\hat{r}_{t}=400\left(R_{t}^{ecb}-\bar{R}^{ecb}\right)$
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
-This results in the following relationships between original model variables
- and standard MMB variables
-\end_layout
-
 \begin_layout Itemize
-interest: 
-\begin_inset Formula $\hat{r}_{t}^{MMB}=400\hat{r}_{t}=400\left(R_{t}^{ecb}-\bar{R}^{ecb}\right)$
+
+\family typewriter
+inflationq
+\family default
+: 
+\begin_inset Formula $400\hat{\pi}_{t}^{\tau^{c},EA}=400\left(\pi_{t}^{\tau^{c},EA}-1\right)$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Itemize
-inflationq: 
-\begin_inset Formula $\hat{\pi}_{t}^{MMB}=400\hat{\pi}_{t}=400\left(\pi_{t}^{\tau^{c}}-1\right)$
-\end_inset
 
-
-\end_layout
-
-\begin_layout Itemize
-inflation: 
-\end_layout
-
-\begin_layout Itemize
-output: 
+\family typewriter
+output
+\family default
+: 
 \begin_inset Formula $100\log Y_{t}^{tot,EA}$
 \end_inset
 
@@ -528,7 +378,80 @@ output:
 \end_layout
 
 \begin_layout Standard
-with the following values of the coefficients in the MMB rule
+Also, given Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mmbRule"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and the values of relevant model parameters (i.e., 
+\begin_inset Formula $\rho_{R}=0.841$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi_{\pi}=1.796$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi_{y}=0.054$
+\end_inset
+
+), I can specify the calibration of the standard MMB monetary policy rule,
+ as done in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:rulesParametersFiMod"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The parameter values (i.e., 
+\begin_inset Formula $\rho_{R}=0.841$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi_{\pi}=1.796$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi_{y}=0.054$
+\end_inset
+
+) are taken from the model codes as distributed by the FiMod's authors and
+ they differ from the values specified in the paper, which are 
+\begin_inset Formula $\rho_{R}=0.9$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi_{\pi}=1.5$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi_{y}=0.5$
+\end_inset
+
+.
+ The latter set of parameters is at dome distance compared to usual, often
+ estimated, parameters in similar Taylor rules.
+ Their application results in a situation in which a standard policy shock
+ has very profound and long-lasting effects.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -542,7 +465,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Parameters of monetary policy rules in MMB 
+Parametrisation of the FiMod specific monetary policy rule according to
+ the MMB setup 
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:rulesParametersFiMod"
@@ -628,7 +552,7 @@ status open
 
 
 \backslash
-source{Own summary based on MMB.}
+source{Own calculations based on the FiMod callibration.}
 \end_layout
 
 \end_inset
@@ -639,6 +563,44 @@ source{Own summary based on MMB.}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:rulesParameters"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in the appendix compares parameters of FiMod's monetary policy rule to
+ other standard rules featuring into MMB.
+ FiMod's rule exhibit similarities with the CMR rule as both have a similar
+ persistence and encompass output growth with the difference being that
+ the latter operates on the basis of expected inflation gap.
+ Also, FiMod's rule resembles the SW rule with the latter embedding the
+ output gap difference rather than output growth.
+\end_layout
+
+\begin_layout Standard
+The transition of the FiMod's original monetary policy rule into the MMB
+ set up guarantees the same results.
+ When compared IRFs to a standard temporary monetary policy shocks simulated
+ in the original FiMod model setup and in the MMB setup do not reveal any
+ differences (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FiModWithDiffSetups"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -653,7 +615,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-FiMod results across various policy rules 
+FiMod's simulation of a standard monetary policy shock in the MMB and original
+ model set up 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:FiModWithDiffSetups"
@@ -687,7 +650,7 @@ status open
 
 
 \backslash
-source{Own calculations with the MMB.}
+source{Own calculations using the MMB.}
 \end_layout
 
 \end_inset
@@ -821,6 +784,35 @@ source{Own calculations with the MMB.}
 
 \begin_layout Standard
 \begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "/Users/kk/Documents/0000-00_work/2021-08_literature/_literature_references"
+options "ecta"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+bibliographystyle{agsm} 
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+input{_local_litrRef_path.tex}
+\end_layout
+
 \end_inset
 
 
