@@ -1,0 +1,106 @@
+\documentclass{article}
+\begin{document}
+
+\section{Adaptation of FiMod's monetary policy rule to the MMB infrastructure}
+
+Original rule as stated in \citet{stahler2012fimod} (Eq. 76 in the
+paper) relies on interest rates responding to the EA-wide inflation
+gap and output growth.
+
+\begin{equation}
+\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}=\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)\label{eq:originalRule}
+\end{equation}
+To simplify the equation I substitute the country specific variables
+with EA-wide variables.
+
+\[
+\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}=\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left(\frac{\pi_{t}^{\tau^{c},EA}}{\bar{\pi}^{\tau^{c},EA}}\right)^{\varphi_{\pi}}\left(\frac{Y_{t}^{tot,EA}}{Y_{t-1}^{tot,EA}}\right)^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)
+\]
+Furthermore, I take logs on both sides of the equation to make the
+terms additive takes a formulation similar to the MMB.
+
+\[
+\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\log\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\log\left(\frac{\pi_{t}^{\tau^{c},EA}}{\bar{\pi}^{\tau^{c},EA}}\right)+\varphi_{y}\log\left(\frac{Y_{t}^{tot,EA}}{Y_{t-1}^{tot,EA}}\right)\right]+\varepsilon_{t}^{R}
+\]
+Using approximations log terms can be written, as follows: $\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)\approx\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}-1=\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}$.
+Furthermore, since $\bar{R}^{ecb}$ is close to unity I can define
+$\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}\approx R_{t}^{ecb}-\bar{R}^{ecb}\equiv\hat{r}_{t}$,
+which is the interest rate deviation. By the means of analogous transformations
+and having in mind that $\bar{\pi}^{\tau^{c},EA}=1$ in the model,
+inflation deviation can $\hat{\pi}_{t}^{\tau^{c},EA}$ can be obtained.
+
+\[
+\hat{r}_{t}=\rho_{R}\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\hat{\pi}_{t}^{\tau^{c},EA}+\varphi_{y}\left(\log Y_{t}^{tot,EA}-\log Y_{t-1}^{tot,EA}\right)\right]+\exp\left(\varepsilon_{t}^{R}\right)
+\]
+Finally, the transition to a rule fully consistent with the MMB requires
+that the variables, most notably interest rates and inflation are
+reported in percentages in annualised terms. Against this backdrop,
+I multiply the rule by the factor of $400$.
+
+\begin{equation}
+400\hat{r}_{t}=\rho_{R}400\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}400\hat{\pi}_{t}^{\tau^{c},EA}+4\varphi_{y}\left(100\log Y_{t}^{tot,EA}-100\log Y_{t-1}^{tot,EA}\right)\right]+400\epsilon_{t}^{R}\label{eq:mmbRule}
+\end{equation}
+From the rule that is fully consistent with the MMB standard specification
+(see Eq. \ref{eq:mmbRule}) I can easily infer the definition of standard
+MMB variables in terms of FiMod variables, used in the original rule
+(Eq. \ref{eq:originalRule}).
+\begin{itemize}
+\item \texttt{interest}: $400\hat{r}_{t}=400\left(R_{t}^{ecb}-\bar{R}^{ecb}\right)$
+\item \texttt{inflationq}: $400\hat{\pi}_{t}^{\tau^{c},EA}=400\left(\pi_{t}^{\tau^{c},EA}-1\right)$
+\item \texttt{output}: $100\log Y_{t}^{tot,EA}$
+\end{itemize}
+Also, given Eq. \ref{eq:mmbRule} and the values of relevant model
+parameters (i.e., $\rho_{R}=0.841$, $\varphi_{\pi}=1.796$, $\varphi_{y}=0.054$),
+I can specify the calibration of the standard MMB monetary policy
+rule, as done in Table \ref{tab:rulesParametersFiMod}.\footnote{The parameter values (i.e., $\rho_{R}=0.841$, $\varphi_{\pi}=1.796$,
+$\varphi_{y}=0.054$) are taken from the model codes as distributed
+by the FiMod's authors and they differ from the values specified in
+the paper, which are $\rho_{R}=0.9$, $\varphi_{\pi}=1.5$, $\varphi_{y}=0.5$.
+The latter set of parameters is at dome distance compared to usual,
+often estimated, parameters in similar Taylor rules. Their application
+results in a situation in which a standard policy shock has very profound
+and long-lasting effects.}
+
+\begin{table}[H]
+\caption{Parametrisation of the FiMod specific monetary policy rule according
+to the MMB setup \label{tab:rulesParametersFiMod}}
+
+\begin{small}
+\begin{center}
+
+\input{tex/rulesParametersFiMod.tex}
+
+\end{center}
+\end{small}
+
+\bigskip{}
+
+\source{Own calculations based on the FiMod callibration.}
+\end{table}
+
+Table \ref{tab:rulesParameters} in the appendix compares parameters
+of FiMod's monetary policy rule to other standard rules featuring
+into MMB. FiMod's rule exhibit similarities with the CMR rule as both
+have a similar persistence and encompass output growth with the difference
+being that the latter operates on the basis of expected inflation
+gap. Also, FiMod's rule resembles the SW rule with the latter embedding
+the output gap difference rather than output growth.
+
+The transition of the FiMod's original monetary policy rule into the
+MMB set up guarantees the same results. When compared IRFs to a standard
+temporary monetary policy shocks simulated in the original FiMod model
+setup and in the MMB setup do not reveal any differences (see Figure
+\ref{fig:FiModWithDiffSetups}).
+
+\begin{figure}[H]
+\begin{centering}
+\caption{FiMod's simulation of a standard monetary policy shock in the MMB
+and original model set up \label{fig:FiModWithDiffSetups}}
+\par\end{centering}
+\begin{centering}
+\includegraphics[width=1\textwidth]{figures/FiModWithDiffSetups_short}
+\par\end{centering}
+\source{Own calculations with the MMB.}
+\end{figure}
+
+\end{document}
