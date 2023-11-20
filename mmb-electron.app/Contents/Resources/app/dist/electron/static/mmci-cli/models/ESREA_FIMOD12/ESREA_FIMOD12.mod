@@ -1,19 +1,9 @@
-//**************************************************************************
-// A New Comparative Approach to Macroeconomic Modeling and Policy Analysis
-//
-// Volker Wieland, Tobias Cwik, Gernot J. Mueller, Sebastian Schmidt and
-// Maik Wolters
-//
-// Working Paper, 2009
-//**************************************************************************
+// Model: ESREA_FIMOD12
 
-// Model: US_SW07
+// References:
+// Stähler, N. and C. Thomas (2012): “FiMod—A DSGE model for fiscal policy simulations,” Economic Modelling, 29, 239–261.
 
-// Further references:
-// Smets, F., and R. Wouters. 2007. "Shocks and Frictions in US Business Cycles: A Bayesian DSGE-Approach."
-// American Economic Review 97(3), pp. 586-606.
-
-// Last edited: 10/08/26 by S. Schmidt
+// Last edited: 2023/11/20 by K. Bankowski
 
 var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt, 
         dDebttoGDP, dDeficit, dPrimDefRatio, dCgtoGDP, dtauct, dtaut, dwgt, dngt, dIgt,
