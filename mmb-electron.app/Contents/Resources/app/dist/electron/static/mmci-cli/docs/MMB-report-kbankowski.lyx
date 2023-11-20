@@ -146,7 +146,7 @@ Implementation of FiMod
 \begin_inset Newline newline
 \end_inset
 
-into MMB
+into the MMB database
 \begin_inset ERT
 status open
 
@@ -154,8 +154,14 @@ status open
 
 
 \backslash
-thanks{I greatly acknowledge the support of Alexander Duck, who provided
- me with guidance on how to operate the MMB infrastructure.}
+thanks{I greatly appreciate the support of Alexander D{
+\backslash
+"u}ck -- a member of the MMB team -- who provided essential guidance on
+ running the codes behind the MMB infrastructure.
+ I am also grateful to Nicholai St{
+\backslash
+"a}hler -- the co-authour of FiMod -- for making FiMod model available and
+ endorsing its inclusion in the MMB database.}
 \end_layout
 
 \end_inset
@@ -193,32 +199,58 @@ section*{Table of content}}
 \end_layout
 
 \begin_layout Section
-Introduction
+Overview
 \end_layout
 
 \begin_layout Standard
-This brief document provides a description of the FiMod model (as presented
- in ) implementation into the MMB database.
- Firstly, it derives how to adapt the original monetary policy rule of FiMod
- into a rule that is compatible with the standard setup of the MMB infrastructur
-e.
- Also, it illustrates that the effects of a standard monetary policy shock
- are identical irrespective or whether FiMod is simulated within its original
- set up or within the MMB infrastructure.
- Secondly, the document compares the results of a standard monetary policy
- shock simulated in FiMod under various monetary policy rules.
- Subsequently, the document contrast FiMod results against other around
- 150 models contained in the MMB database.
- Both comparisons affirm that the results obtained through the implementation
- of FiMod in the MMB database are plausible.
+This brief document provides a description of the FiMod model's implementation
+ into the MMB database.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Adaptation-of-FiMod's"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ outlines how to adapt the FiMod's original monetary policy rule to the
+ standard setup of the MMB infrastructure.
+ It further demonstrates that the effects of a standard monetary policy
+ shock are consistent, whether FiMod is simulated within its original setup
+ or within the MMB framework.
+ Subsequently Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Comparison-of-FiMod's"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ compares the results of a standard monetary policy shock simulated in FiMod
+ under various monetary policy rules.
+ Additionally, it contrasts FiMod's results with those from approximately
+ 150 other models in the MMB database.
+ Both comparisons collectively validate the plausibility of the results
+ obtained through FiMod's integration into the MMB database.
 \end_layout
 
 \begin_layout Section
-Adaptation of FiMod's monetary policy rule to the MMB infrastructure
+Adaptation of FiMod's monetary policy rule to the MMB framework
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Adaptation-of-FiMod's"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Original rule as stated in 
+The original FiMod monetary policy rule, as detailed in 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "stahler2012fimod"
@@ -227,8 +259,8 @@ literal "false"
 \end_inset
 
  (Eq.
- 76 in the paper) relies on interest rates responding to the EA-wide inflation
- gap and output growth.
+ 76 in the paper), relies on interest rates responding to the aggregate
+ inflation gap and the aggregate output growth.
 \end_layout
 
 \begin_layout Standard
@@ -239,7 +271,7 @@ literal "false"
 
 \end_inset
 
-To simplify the equation I substitute the country specific variables with
+To simplify the equation, I substitute the country-specific variables with
  EA-wide variables.
 \end_layout
 
@@ -251,8 +283,8 @@ To simplify the equation I substitute the country specific variables with
 
 \end_inset
 
-Furthermore, I take logs on both sides of the equation to make the terms
- additive takes a formulation similar to the MMB.
+Furthermore, by taking logarithms on both sides of the equation, the terms
+ become additive, resulting in a formulation similar to that of the MMB.
 \end_layout
 
 \begin_layout Standard
@@ -263,43 +295,53 @@ Furthermore, I take logs on both sides of the equation to make the terms
 
 \end_inset
 
-Using approximations log terms can be written, as follows: 
+Using approximations, the logarithmic terms can be expressed as follows:
+ 
 \begin_inset Formula $\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)\approx\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}-1=\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}$
 \end_inset
 
 .
- Furthermore, since 
+ Furthermore, given that 
 \begin_inset Formula $\bar{R}^{ecb}$
 \end_inset
 
- is close to unity I can define 
+ is close to unity, I can approximate and define 
 \begin_inset Formula $\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}\approx R_{t}^{ecb}-\bar{R}^{ecb}\equiv\hat{r}_{t}$
 \end_inset
 
-, which is the interest rate deviation.
- By the means of analogous transformations and having in mind that 
+, representing the interest rate deviation.
+ Similarly, having in mind that 
 \begin_inset Formula $\bar{\pi}^{\tau^{c},EA}=1$
 \end_inset
 
- in the model, inflation deviation can 
+ in the model, I can derive the inflation deviation 
 \begin_inset Formula $\hat{\pi}_{t}^{\tau^{c},EA}$
 \end_inset
 
- can be obtained.
+ through analogous transformations.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\hat{r}_{t}=\rho_{R}\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\hat{\pi}_{t}^{\tau^{c},EA}+\varphi_{y}\left(\log Y_{t}^{tot,EA}-\log Y_{t-1}^{tot,EA}\right)\right]+\exp\left(\varepsilon_{t}^{R}\right)
+\hat{r}_{t}=\rho_{R}\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\hat{\pi}_{t}^{\tau^{c},EA}+\varphi_{y}\left(\log Y_{t}^{tot,EA}-\log Y_{t-1}^{tot,EA}\right)\right]+\varepsilon_{t}^{R}
 \]
 
 \end_inset
 
-Finally, the transition to a rule fully consistent with the MMB requires
- that the variables, most notably interest rates and inflation are reported
- in percentages in annualised terms.
- Against this backdrop, I multiply the rule by the factor of 
+Finally, to achieve full consistency with the MMB framework, it is necessary
+ to report key variables, such as interest rates and inflation, in annualised
+ percentage terms (for specification see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Wieland-et-al_2016_Handbook-of-macroeconomics"
+literal "false"
+
+\end_inset
+
+, Table 4).
+ In line with this requirement, I have multiplied the rule by a factor of
+ 
 \begin_inset Formula $400$
 \end_inset
 
@@ -309,13 +351,13 @@ Finally, the transition to a rule fully consistent with the MMB requires
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-400\hat{r}_{t}=\rho_{R}400\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}400\hat{\pi}_{t}^{\tau^{c},EA}+4\varphi_{y}\left(100\log Y_{t}^{tot,EA}-100\log Y_{t-1}^{tot,EA}\right)\right]+400\epsilon_{t}^{R}\label{eq:mmbRule}
+400\hat{r}_{t}=\rho_{R}400\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}400\hat{\pi}_{t}^{\tau^{c},EA}+4\varphi_{y}\left(100\log Y_{t}^{tot,EA}-100\log Y_{t-1}^{tot,EA}\right)\right]+400\varepsilon_{t}^{R}\label{eq:mmbRule}
 \end{equation}
 
 \end_inset
 
-From the rule that is fully consistent with the MMB standard specification
- (see Eq.
+From the rule that aligns fully with the MMB's standard specification (see
+ Eq.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -326,8 +368,8 @@ noprefix "false"
 
 \end_inset
 
-) I can easily infer the definition of standard MMB variables in terms of
- FiMod variables, used in the original rule (Eq.
+) I can readily deduce the definitions of standard MMB variables in terms
+ of the FiMod variables utilised in the original rule (Eq.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -378,7 +420,7 @@ output
 \end_layout
 
 \begin_layout Standard
-Also, given Eq.
+Additionally, considering the formulation in Eq.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -389,7 +431,7 @@ noprefix "false"
 
 \end_inset
 
- and the values of relevant model parameters (i.e., 
+ and the relevant model parameters (i.e., 
 \begin_inset Formula $\rho_{R}=0.841$
 \end_inset
 
@@ -401,8 +443,8 @@ noprefix "false"
 \begin_inset Formula $\varphi_{y}=0.054$
 \end_inset
 
-), I can specify the calibration of the standard MMB monetary policy rule,
- as done in Table 
+), I am able to specify the calibration of the standard MMB monetary policy
+ rule, as detailed in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:rulesParametersFiMod"
@@ -429,8 +471,8 @@ The parameter values (i.e.,
 \begin_inset Formula $\varphi_{y}=0.054$
 \end_inset
 
-) are taken from the model codes as distributed by the FiMod's authors and
- they differ from the values specified in the paper, which are 
+) are sourced from the model codes provided by FiMod's authors, and they
+ differ from those specified in their paper (
 \begin_inset Formula $\rho_{R}=0.9$
 \end_inset
 
@@ -442,11 +484,11 @@ The parameter values (i.e.,
 \begin_inset Formula $\varphi_{y}=0.5$
 \end_inset
 
-.
- The latter set of parameters is at dome distance compared to usual, often
- estimated, parameters in similar Taylor rules.
- Their application results in a situation in which a standard policy shock
- has very profound and long-lasting effects.
+).
+ This latter set of parameters deviates notably from the commonly estimated
+ values in similar Taylor rules.
+ Their usage leads to a scenario where a standard monetary policy shock
+ yields exceptionally pronounced and long-lasting effects.
 \end_layout
 
 \end_inset
@@ -566,7 +608,7 @@ source{Own calculations based on the FiMod callibration.}
 \end_layout
 
 \begin_layout Standard
-Table 
+In the appendix, Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:rulesParameters"
@@ -576,21 +618,22 @@ noprefix "false"
 
 \end_inset
 
- in the appendix compares parameters of FiMod's monetary policy rule to
- other standard rules featuring into MMB.
- FiMod's rule exhibit similarities with the CMR rule as both have a similar
- persistence and encompass output growth with the difference being that
- the latter operates on the basis of expected inflation gap.
- Also, FiMod's rule resembles the SW rule with the latter embedding the
- output gap difference rather than output growth.
+ compares the parameters of FiMod's monetary policy rule with other standard
+ rules used in the MMB.
+ FiMod's rule shows similarities to the CMR rule, as both exhibit similar
+ persistence and incorporate output growth.
+ However, a notable difference is that the CMR rule is based on the expected
+ inflation gap.
+ Additionally, FiMod's rule is akin to the SW rule, which, unlike FiMod,
+ uses the output gap difference instead of output growth.
 \end_layout
 
 \begin_layout Standard
-The transition of the FiMod's original monetary policy rule into the MMB
- set up guarantees the same results.
- When compared IRFs to a standard temporary monetary policy shocks simulated
- in the original FiMod model setup and in the MMB setup do not reveal any
- differences (see Figure 
+The adaptation of FiMod's original monetary policy rule to the MMB framework
+ ensures consistent results.
+ Comparing the Impulse Response Functions (IRFs) for a standard temporary
+ monetary policy shock simulated in both the original FiMod model and the
+ MMB framework reveals virtually no differences (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:FiModWithDiffSetups"
@@ -664,10 +707,44 @@ source{Own calculations with the MMB.}
 \end_layout
 
 \begin_layout Section
-FiMod's results put into perspective
+Comparison of FiMod's results
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Comparison-of-FiMod's"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
+The FiMod model is compatible with all the standard monetary policy rules
+ incorporated in the MMB.
+ A comparison across various rules indicate that the specific rule used
+ in FiMod produces relatively pronounced effects of a standard temporary
+ monetary policy shock (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FiModWithDiffRules"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Unsurprisingly, in terms of macroeconomic impact, the model rule is close
+ to the CMR rule, reflecting their similar specification (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Adaptation-of-FiMod's"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \begin_inset Float figure
 placement H
 wide false
@@ -723,6 +800,45 @@ source{Own calculations with the MMB.}
 
 \end_inset
 
+To assess the plausibility of FiMod's results, they can be compared with
+ those from around 150 other macroeconomic models, under a unified monetary
+ policy rule.
+ Such a comparison reveals that FiMod's responses to a standard temporary
+ monetary policy shock are roughly median within the range implied by these
+ models (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:SWruleWithDiffModels"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Specifically, the effects observed under the selected SW rule are neither
+ overly subdued nor exceptionally pronounced compared to those in other
+ models.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The SW rule is one of the most commonly used rules in the MMB framework,
+ as it is embedded in the majority of macroeconomic models (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:rulesHistogram"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in the appendix).
+\end_layout
+
+\end_inset
+
 
 \begin_inset Float figure
 placement H
@@ -735,7 +851,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-FiMod results across various policy rules 
+FiMod results compared to all other MMB models 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:SWruleWithDiffModels"
@@ -822,6 +938,13 @@ input{_local_litrRef_path.tex}
 \start_of_appendix
 \begin_inset ERT
 status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+clearpage{}
+\end_layout
 
 \begin_layout Plain Layout
 
@@ -963,13 +1086,6 @@ arabic{equation}}
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Standard Monetary Policy Rules within the MMB Framework
 \end_layout
@@ -1040,6 +1156,13 @@ source{Own calculations with the MMB.}
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
 \end_inset
 
 
