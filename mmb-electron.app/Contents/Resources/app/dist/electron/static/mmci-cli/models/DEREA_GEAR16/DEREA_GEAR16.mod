@@ -124,9 +124,18 @@ varexo
 //**************************************************************************        
 
 parameters  
-  //***************************************************************************************
-  // Defin_a_tstion of deep model parameters
-  //***************************************************************************************
+//**************************************************************************
+// Modelbase Parameters                                                  //*
+                                                                         //*
+        cofintintb1 cofintintb2 cofintintb3 cofintintb4                  //*
+        cofintinf0 cofintinfb1 cofintinfb2 cofintinfb3 cofintinfb4       //*
+        cofintinff1 cofintinff2 cofintinff3 cofintinff4                  //*
+        cofintout cofintoutb1 cofintoutb2 cofintoutb3 cofintoutb4        //*
+        cofintoutf1 cofintoutf2 cofintoutf3 cofintoutf4                  //*
+        cofintoutp cofintoutpb1 cofintoutpb2 cofintoutpb3 cofintoutpb4   //*
+        cofintoutpf1 cofintoutpf2 cofintoutpf3 cofintoutpf4              //*
+        std_r_ std_r_quart coffispol                                     //*
+//**************************************************************************  
   mu_a              mu_b                      // share of RoT-households
   mu_bar_a          mu_bar_b                  // Transfers distribution parameter
   betta_a           betta_b                   // discount factor
@@ -283,19 +292,7 @@ parameters
   pi_ts                                 // CPI and PPI inflation
   B_c_ts        B_a_ts                  // x
   B_ac_ts       B_bc_ts       B_ba_ts   // Total Real Bond Holdings
-  nfa_a_ts      nfa_b_ts      nfa_c_ts  // Net Foreign Asset Position
-//**************************************************************************
-// Modelbase Parameters                                                  //*
-                                                                         //*
-        cofintintb1 cofintintb2 cofintintb3 cofintintb4                  //*
-        cofintinf0 cofintinfb1 cofintinfb2 cofintinfb3 cofintinfb4       //*
-        cofintinff1 cofintinff2 cofintinff3 cofintinff4                  //*
-        cofintout cofintoutb1 cofintoutb2 cofintoutb3 cofintoutb4        //*
-        cofintoutf1 cofintoutf2 cofintoutf3 cofintoutf4                  //*
-        cofintoutp cofintoutpb1 cofintoutpb2 cofintoutpb3 cofintoutpb4   //*
-        cofintoutpf1 cofintoutpf2 cofintoutpf3 cofintoutpf4              //*
-        std_r_ std_r_quart coffispol;                                    //*
-//**************************************************************************  
+  nfa_a_ts      nfa_b_ts      nfa_c_ts;  // Net Foreign Asset Position
 
 //**************************************************************************
 // Specification of Modelbase Parameters                                 //*
@@ -323,9 +320,9 @@ model;
 interest   = 400*log((1+i_policy_t)/(1+i_policy_ts));                                       //*
 inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;             //*
 inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));                 //*
-outputgap  = 100*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts))); //*
-output     = 100*(pop_a/(pop_b+pop_a)*log(y_a_t)+(pop_b/(pop_b+pop_a)*log(y_b_t)));                                           //*
-fispol     = cG_a_t;                                                                          //*
+outputgap  = 0; //*
+output     = outputgap;                                           //*
+fispol     = 0;                                                                          //*
 //**************************************************************************
 
 //**************************************************************************
