@@ -239,7 +239,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Section
-Adaptation of FiMod's monetary policy rule to the MMB framework
+Adaptation of FiMod's and GEAR's monetary policy rules to the MMB framework
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Adaptation-of-FiMod's"
@@ -247,6 +247,10 @@ name "sec:Adaptation-of-FiMod's"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+FiMod
 \end_layout
 
 \begin_layout Standard
@@ -699,6 +703,82 @@ source{Own calculations with the MMB.}
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+GEAR
+\end_layout
+
+\begin_layout Standard
+The GEAR model-specific monetary policy rule, outlined in Equation 19 of
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Gadatsch-et-al_2016_EconMod"
+literal "false"
+
+\end_inset
+
+, is based on the adjustment of interest rates in response to the overall
+ union-aggregate inflation and output gaps,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)= & \rho_{i}\log\left(\frac{1+i_{t-1}^{EA}}{1+i^{EA}}\right)\\
+ & +\left(1-\rho_{i}\right)\phi_{\pi}^{EA}\left(s\cdot\log\left(\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}\right)+(1-s)\cdot\log\left(\frac{\pi_{t}^{b}}{\bar{\pi}^{b}}\right)\right)\\
+ & +\left(1-\rho_{i}\right)\phi_{y}^{EA}\left(s\cdot\log\left(\frac{Y_{t}^{a}}{\bar{Y}^{a}}\right)+(1-s)\cdot\log\left(\frac{Y_{t}^{b}}{\bar{Y}^{b}}\right)\right)+\nu_{t}^{M^{EA}}
+\end{aligned}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $s=\frac{\mathcal{P}^{a}}{\mathcal{P}^{a}+\mathcal{P}^{b}}$
+\end_inset
+
+ is the relative population-weight of country 
+\begin_inset Formula $a$
+\end_inset
+
+ in the monetary union and the remaining terms follow the standard notation.
+\end_layout
+
+\begin_layout Standard
+As the rule is already fairly close to the MMB formulation, I recognise
+ that 
+\begin_inset Formula $\log\left(\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}\right)\approx\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}-1\approx\pi_{t}^{a}-1\equiv\hat{\pi}_{t}^{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\log\left(\frac{Y_{t}^{a}}{\bar{Y}^{a}}\right)\approx\frac{Y_{t}^{a}-\bar{Y}^{a}}{\bar{Y}^{a}}\equiv\hat{Y}_{t}^{a}$
+\end_inset
+
+, which are inflation gap and output gap respectively.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The approximation 
+\begin_inset Formula $\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}-1\approx\pi_{t}^{a}-1$
+\end_inset
+
+ is possible given the value of 
+\begin_inset Formula $\bar{\pi}^{a}$
+\end_inset
+
+ close to unity 
+\begin_inset Formula $(1.00475)$
+\end_inset
+
+.
+ 
 \end_layout
 
 \end_inset
