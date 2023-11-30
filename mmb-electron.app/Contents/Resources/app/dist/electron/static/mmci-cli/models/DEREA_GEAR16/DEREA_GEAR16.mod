@@ -91,7 +91,7 @@ var
   epsilon_enG_a_t  epsilon_enG_b_t                                    // Public Employment shock (AR(1) process assumed)
 //**************************************************************************
 // Modelbase Variables                                                   //*
-        interest inflation inflationq outputgap output fispol;           //*
+        interest inflation inflationq outputgap output;           //*
 //**************************************************************************
 
 varexo  
@@ -120,7 +120,7 @@ varexo
   eps_z_g                          // Global technology shock
 //**************************************************************************
 // Modelbase Shocks                                                      //*
-       interest_ fiscal_;                                                //*
+       interest_;                                                //*
 //**************************************************************************        
 
 parameters  
@@ -134,7 +134,7 @@ parameters
         cofintoutf1 cofintoutf2 cofintoutf3 cofintoutf4                  //*
         cofintoutp cofintoutpb1 cofintoutpb2 cofintoutpb3 cofintoutpb4   //*
         cofintoutpf1 cofintoutpf2 cofintoutpf3 cofintoutpf4              //*
-        std_r_ std_r_quart coffispol                                     //*
+        std_r_ std_r_quart                                     //*
 //**************************************************************************  
   mu_a              mu_b                      // share of RoT-households
   mu_bar_a          mu_bar_b                  // Transfers distribution parameter
@@ -307,8 +307,6 @@ for i=1:33
 end
 cd(thispath);
 
-// Definition of Discretionary Fiscal Policy Parameter                   //*
-coffispol = 1;                                                           //*
 //**************************************************************************
 
 set_params_31_08_aw1;
@@ -322,7 +320,6 @@ inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4; 
 inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));                 //*
 outputgap  = 0; //*
 output     = outputgap;                                           //*
-fispol     = 0;                                                                          //*
 //**************************************************************************
 
 //**************************************************************************
@@ -363,9 +360,6 @@ interest =   cofintintb1*interest(-1)                                    //*
            + cofintoutpf4*output(+4)                                     //*
            + std_r_ *interest_;                                          //*
                                                                          //*
-// Discretionary Government Spending                                     //*
-                                                                         //*
-fispol = coffispol*fiscal_;                                              //*
 //**************************************************************************
 
 //*************************************************************************
@@ -418,7 +412,7 @@ mu_a*lambda_r_a_t*UB_a_t = omega_r_a_t*(lambda_r_a_t*UB_a_t-psi_a*l_r_a_t^(psi_a
 
 // government spending shock country A
 
-// log(cG_a_t/cG_a_ts) = rho_eg_a*log(cG_a_t(-1)/cG_a_ts) - xi_b_eg_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eg_a*log(y_a_t(-1)/y_a_ts) + psi_cG_a*shock_eCG_a_t + (1-psi_cG_a)*shock_eCG_a_t(-1);
+log(cG_a_t/cG_a_ts) = rho_eg_a*log(cG_a_t(-1)/cG_a_ts) - xi_b_eg_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eg_a*log(y_a_t(-1)/y_a_ts) + psi_cG_a*shock_eCG_a_t + (1-psi_cG_a)*shock_eCG_a_t(-1);
 log(inG_a_t/inG_a_ts) = rho_einG_a*log(inG_a_t(-1)/inG_a_ts) - xi_b_ein_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_ein_a*log(y_a_t(-1)/y_a_ts) + psi_inG_a*shock_einG_a_t + (1-psi_inG_a)*shock_einG_a_t(-1);
 log(TR_a_t/TR_a_ts) = rho_eTR_a*log(TR_a_t(-1)/TR_a_ts) - xi_b_eTR_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eTR_a*log(y_a_t(-1)/y_a_ts) + psi_TR_a*shock_eTR_a_t + (1-psi_TR_a)*shock_eTR_a_t(-1);
 (T_a_t-T_a_ts)/y_a_ts = rho_eT_a*(T_a_t(-1)-T_a_ts)/y_a_ts + xi_b_eT_a*log(BG_a_t(-1)/BG_a_ts) + xi_y_eT_a*log(y_a_t(-1)/y_a_ts) + psi_T_a*shock_eT_a_t + (1-psi_T_a)*shock_eT_a_t(-1); 
