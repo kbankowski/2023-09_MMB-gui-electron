@@ -1,79 +1,78 @@
 {
-    "$schema": "model",
-    "name": "DEREA_GEAR16",
-    "capabilities": {
-      "rules": [
-        "Taylor",
-        "GR",
-        "LWW",
-        "SW",
-        "CEE",
-        "OW08",
-        "OW13",
-        "Coenen",
-        "CMR"
-      ],
-      "unconditional_variances": true
-    },
-    "description": {
-      "ac_ref": "Gadatsch et al. (2016)",
-      "paper_title": "Fiscal policy during the crisis: A look on Germany and the Euro area with GEAR",
-      "journal": "Economic Modelling, 52, 997-1016",
-      "replicants_name": "K. Bankowski",
-      "pub_date": "2016",
-      "keywords": [],
-      "description": "",
-      "category": "Other",
-      "authors": [
-        "Gadatsch, Niklas"
-        "Hauzenberger, Klemens"
-        "Stähler, Nikolai",
-      ]
-    },
-    "msr": [
-      "0.8410",
-      "0",
-      "0",
-      "0",
-      "(1-0.8410)*1.7960",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "(1-0.8410)*0.0540*4",
-      "-(1-0.8410)*0.0540*4",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "1",
-      "0.25"
+  "$schema": "model",
+  "name": "DEREA_GEAR16",
+  "capabilities": {
+    "rules": [
+      "Taylor",
+      "GR",
+      "LWW",
+      "SW",
+      "CEE",
+      "OW08",
+      "OW13",
+      "Coenen",
+      "CMR"
     ],
-    "variabledim": 1,
-    "al": false,
-    "shocks": [
-      {
-        "name": "interest_",
-        "text": "Monetary Policy Shock"
-      }
-    ],
-    "al_info": null,
-    "variables": [
+    "unconditional_variances": true
+  },
+  "description": {
+    "ac_ref": "Stähler and Thomas (2012)",
+    "paper_title": "FiMod—A DSGE model for fiscal policy simulations",
+    "journal": "Economic Modelling, 29, 239–261",
+    "replicants_name": "K. Bankowski",
+    "pub_date": "2012",
+    "keywords": [],
+    "description": "",
+    "category": "Other",
+    "authors": [
+      "Stähler, Nikolai",
+      "Thomas, Carlos"
     ]
-  }
+  },
+  "msr": [
+    "0.8410",
+    "0",
+    "0",
+    "0",
+    "(1-0.8410)*1.7960",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "(1-0.8410)*0.0540*4",
+    "-(1-0.8410)*0.0540*4",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "0.25"
+  ],
+  "variabledim": 1,
+  "al": false,
+  "shocks": [
+    {
+      "name": "interest_",
+      "text": "Monetary Policy Shock"
+    }
+  ],
+  "al_info": null,
+  "variables": [
+  ]
+}
