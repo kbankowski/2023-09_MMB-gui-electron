@@ -3,7 +3,7 @@ clear all; close all; clc
 [projectPath, subProjectPath, projectPathFimod] = init();
 
 %%
-mmb('config_2.json','var');
+mmb('config_2g.json','var');
 
 %% values simulated with simult_ Dynare function
 % the major advantage of this approach is that one can
