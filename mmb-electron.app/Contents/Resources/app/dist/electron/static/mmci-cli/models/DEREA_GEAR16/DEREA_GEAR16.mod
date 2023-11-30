@@ -89,7 +89,10 @@ var
   shock_eCG_a_t    shock_eCG_b_t                                      // Public consumption shock
   shock_emg_a_t    shock_emg_b_t                                      // Public wage markup shock
   epsilon_enG_a_t  epsilon_enG_b_t                                    // Public Employment shock (AR(1) process assumed)
-;
+//**************************************************************************
+// Modelbase Variables                                                   //*
+        interest inflation inflationq outputgap output fispol;           //*
+//**************************************************************************
 
 varexo  
   nua_a       nub_a                // Technology shock
@@ -115,7 +118,10 @@ varexo
   nua_RoE     nub_RoE              // Country-specific demand shocks from RoE
   eps_y_c     eps_i_c    eps_pi_c  // Shocks foreign VAR 
   eps_z_g                          // Global technology shock
-;
+//**************************************************************************
+// Modelbase Shocks                                                      //*
+       interest_ fiscal_;                                                //*
+//**************************************************************************        
 
 parameters  
   //***************************************************************************************
@@ -278,11 +284,93 @@ parameters
   B_c_ts        B_a_ts                  // x
   B_ac_ts       B_bc_ts       B_ba_ts   // Total Real Bond Holdings
   nfa_a_ts      nfa_b_ts      nfa_c_ts  // Net Foreign Asset Position
-;
+//**************************************************************************
+// Modelbase Parameters                                                  //*
+                                                                         //*
+        cofintintb1 cofintintb2 cofintintb3 cofintintb4                  //*
+        cofintinf0 cofintinfb1 cofintinfb2 cofintinfb3 cofintinfb4       //*
+        cofintinff1 cofintinff2 cofintinff3 cofintinff4                  //*
+        cofintout cofintoutb1 cofintoutb2 cofintoutb3 cofintoutb4        //*
+        cofintoutf1 cofintoutf2 cofintoutf3 cofintoutf4                  //*
+        cofintoutp cofintoutpb1 cofintoutpb2 cofintoutpb3 cofintoutpb4   //*
+        cofintoutpf1 cofintoutpf2 cofintoutpf3 cofintoutpf4              //*
+        std_r_ std_r_quart coffispol;                                    //*
+//**************************************************************************  
+
+//**************************************************************************
+// Specification of Modelbase Parameters                                 //*
+                                                                         //*
+// Load Modelbase Monetary Policy Parameters                             //*
+thispath = pwd;
+cd('..');
+load policy_param.mat;
+for i=1:33
+    deep_parameter_name = M_.param_names(i,:);
+    eval(['M_.params(i)  = ' deep_parameter_name ' ;'])
+end
+cd(thispath);
+
+// Definition of Discretionary Fiscal Policy Parameter                   //*
+coffispol = 1;                                                           //*
+//**************************************************************************
 
 set_params_31_08_aw1;
 
 model;
+//**************************************************************************
+// Definition of Modelbase Variables in Terms of Original Model Variables //*
+
+interest   = 400*(RECBt - RECBs);                                                           //*
+inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;             //*
+inflationq = 400*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))-1);                 //*
+outputgap  = 100*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega)-1); //*
+output     = 100*log(Ytot^omega*fYtot^(1-omega));                                           //*
+fispol     = dCgt;                                                                          //*
+//**************************************************************************
+
+//**************************************************************************
+// Policy Rule                                                           //*
+                                                                         //*
+// Monetary Policy                                                       //*
+                                                                         //*
+interest =   cofintintb1*interest(-1)                                    //*
+           + cofintintb2*interest(-2)                                    //*
+           + cofintintb3*interest(-3)                                    //*
+           + cofintintb4*interest(-4)                                    //*
+           + cofintinf0*inflationq                                       //*
+           + cofintinfb1*inflationq(-1)                                  //*
+           + cofintinfb2*inflationq(-2)                                  //*
+           + cofintinfb3*inflationq(-3)                                  //*
+           + cofintinfb4*inflationq(-4)                                  //*
+           + cofintinff1*inflationq(+1)                                  //*
+           + cofintinff2*inflationq(+2)                                  //*
+           + cofintinff3*inflationq(+3)                                  //*
+           + cofintinff4*inflationq(+4)                                  //*
+           + cofintout*outputgap 	                                     //*
+           + cofintoutb1*outputgap(-1)                                   //*
+           + cofintoutb2*outputgap(-2)                                   //*
+           + cofintoutb3*outputgap(-3)                                   //*
+           + cofintoutb4*outputgap(-4)                                   //*
+           + cofintoutf1*outputgap(+1)                                   //*
+           + cofintoutf2*outputgap(+2)                                   //*
+           + cofintoutf3*outputgap(+3)                                   //*
+           + cofintoutf4*outputgap(+4)                                   //*
+           + cofintoutp*output 	                                         //*
+           + cofintoutpb1*output(-1)                                     //*
+           + cofintoutpb2*output(-2)                                     //*
+           + cofintoutpb3*output(-3)                                     //*
+           + cofintoutpb4*output(-4)                                     //*
+           + cofintoutpf1*output(+1)                                     //*
+           + cofintoutpf2*output(+2)                                     //*
+           + cofintoutpf3*output(+3)                                     //*
+           + cofintoutpf4*output(+4)                                     //*
+           + std_r_ *interest_;                                          //*
+                                                                         //*
+// Discretionary Government Spending                                     //*
+                                                                         //*
+fispol = coffispol*fiscal_;                                              //*
+//**************************************************************************
+
 //*************************************************************************
 // equations relevant for country A (monetary union member)
 //*************************************************************************
