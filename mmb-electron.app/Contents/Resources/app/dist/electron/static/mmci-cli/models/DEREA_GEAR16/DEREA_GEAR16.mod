@@ -113,7 +113,7 @@ varexo
   nua_eTR     nub_eTR              // Transfer shock (excluding unemployment benefits)
   nua_eT      nub_eT               // Lump-sum tax shock
   nua_emg     nub_emg              // Public wage shock
-  nua_eM                           // Monetary Policy shock
+//  nua_eM                           // Monetary Policy shock
   nua_RoW     nub_RoW              // Country-specific demand shocks from RoW
   nua_RoE     nub_RoE              // Country-specific demand shocks from RoE
   eps_y_c     eps_i_c    eps_pi_c  // Shocks foreign VAR 
@@ -421,7 +421,7 @@ mu_a*lambda_r_a_t*UB_a_t = omega_r_a_t*(lambda_r_a_t*UB_a_t-psi_a*l_r_a_t^(psi_a
 
 // government spending shock country A
 
-log(cG_a_t/cG_a_ts) = rho_eg_a*log(cG_a_t(-1)/cG_a_ts) - xi_b_eg_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eg_a*log(y_a_t(-1)/y_a_ts) + psi_cG_a*shock_eCG_a_t + (1-psi_cG_a)*shock_eCG_a_t(-1);
+// log(cG_a_t/cG_a_ts) = rho_eg_a*log(cG_a_t(-1)/cG_a_ts) - xi_b_eg_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eg_a*log(y_a_t(-1)/y_a_ts) + psi_cG_a*shock_eCG_a_t + (1-psi_cG_a)*shock_eCG_a_t(-1);
 log(inG_a_t/inG_a_ts) = rho_einG_a*log(inG_a_t(-1)/inG_a_ts) - xi_b_ein_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_ein_a*log(y_a_t(-1)/y_a_ts) + psi_inG_a*shock_einG_a_t + (1-psi_inG_a)*shock_einG_a_t(-1);
 log(TR_a_t/TR_a_ts) = rho_eTR_a*log(TR_a_t(-1)/TR_a_ts) - xi_b_eTR_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eTR_a*log(y_a_t(-1)/y_a_ts) + psi_TR_a*shock_eTR_a_t + (1-psi_TR_a)*shock_eTR_a_t(-1);
 (T_a_t-T_a_ts)/y_a_ts = rho_eT_a*(T_a_t(-1)-T_a_ts)/y_a_ts + xi_b_eT_a*log(BG_a_t(-1)/BG_a_ts) + xi_y_eT_a*log(y_a_t(-1)/y_a_ts) + psi_T_a*shock_eT_a_t + (1-psi_T_a)*shock_eT_a_t(-1); 
@@ -521,13 +521,13 @@ y_a_t = c_aa_t+in_aa_t+pop_b/pop_a*(c_ba_t+in_ba_t)+pop_c/pop_a*exp(e_RoW_a_t)*(
 // Equation 33
 
 // Equation 36
-log((1+i_policy_t)/(1+i_policy_ts)) = rho_a_i*log((1+i_policy_t(-1))/(1+i_policy_ts))   
-                                      + (1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)
-                                        +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)
-                                        +(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
-                                      + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
-                                        + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
-                                      + nua_eM; 
+//log((1+i_policy_t)/(1+i_policy_ts)) = rho_a_i*log((1+i_policy_t(-1))/(1+i_policy_ts))   
+//                                      + (1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)
+//                                        +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)
+//                                        +(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
+//                                      + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
+//                                        + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
+//                                      + nua_eM; 
 // Possible modification: Use GDP_i_t instead of y_i_t
 
 // Equation 37
@@ -854,7 +854,7 @@ shocks;
   var	nua_ethetaw	=	0.21101449478709	^2	;
   var	nua_RoE	=	0.02735018785307	^2	;
   var	nua_RoW	=	0.05734678553545	^2	;
-  var	nua_eM	=	0.00102971453438	^2	;
+ // var	nua_eM	=	0.00102971453438	^2	;
   var	nua_etauw	=	0.00227315527636	^2	;
   var	nua_etauc	=	0.00162619256566	^2	;
   var	nua_etausc	=	0.00137848984641	^2	;
