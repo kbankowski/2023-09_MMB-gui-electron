@@ -320,12 +320,12 @@ model;
 //**************************************************************************
 // Definition of Modelbase Variables in Terms of Original Model Variables //*
 
-interest   = 400*(RECBt - RECBs);                                                           //*
+interest   = 400*log((1+i_policy_t)/(1+i_policy_ts));                                       //*
 inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;             //*
-inflationq = 400*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))-1);                 //*
-outputgap  = 100*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega)-1); //*
-output     = 100*log(Ytot^omega*fYtot^(1-omega));                                           //*
-fispol     = dCgt;                                                                          //*
+inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));                 //*
+outputgap  = 100*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts))); //*
+output     = 100*(pop_a/(pop_b+pop_a)*log(y_a_t)+(pop_b/(pop_b+pop_a)*log(y_b_t)));                                           //*
+fispol     = cG_a_t;                                                                          //*
 //**************************************************************************
 
 //**************************************************************************
