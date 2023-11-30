@@ -89,10 +89,7 @@ var
   shock_eCG_a_t    shock_eCG_b_t                                      // Public consumption shock
   shock_emg_a_t    shock_emg_b_t                                      // Public wage markup shock
   epsilon_enG_a_t  epsilon_enG_b_t                                    // Public Employment shock (AR(1) process assumed)
-//**************************************************************************
-// Modelbase Variables                                                   //*
-        interest inflation inflationq outputgap output fispol;           //*
-//**************************************************************************
+;
 
 varexo  
   nua_a       nub_a                // Technology shock
@@ -113,29 +110,17 @@ varexo
   nua_eTR     nub_eTR              // Transfer shock (excluding unemployment benefits)
   nua_eT      nub_eT               // Lump-sum tax shock
   nua_emg     nub_emg              // Public wage shock
-//  nua_eM                           // Monetary Policy shock
+  nua_eM                           // Monetary Policy shock
   nua_RoW     nub_RoW              // Country-specific demand shocks from RoW
   nua_RoE     nub_RoE              // Country-specific demand shocks from RoE
   eps_y_c     eps_i_c    eps_pi_c  // Shocks foreign VAR 
   eps_z_g                          // Global technology shock
-//**************************************************************************
-// Modelbase Shocks                                                      //*
-       interest_ fiscal_;                                                //*
-//**************************************************************************        
+;
 
 parameters  
-//**************************************************************************
-// Modelbase Parameters                                                  //*
-                                                                         //*
-        cofintintb1 cofintintb2 cofintintb3 cofintintb4                  //*
-        cofintinf0 cofintinfb1 cofintinfb2 cofintinfb3 cofintinfb4       //*
-        cofintinff1 cofintinff2 cofintinff3 cofintinff4                  //*
-        cofintout cofintoutb1 cofintoutb2 cofintoutb3 cofintoutb4        //*
-        cofintoutf1 cofintoutf2 cofintoutf3 cofintoutf4                  //*
-        cofintoutp cofintoutpb1 cofintoutpb2 cofintoutpb3 cofintoutpb4   //*
-        cofintoutpf1 cofintoutpf2 cofintoutpf3 cofintoutpf4              //*
-        std_r_ std_r_quart coffispol                                     //*
-//**************************************************************************  
+  //***************************************************************************************
+  // Defin_a_tstion of deep model parameters
+  //***************************************************************************************
   mu_a              mu_b                      // share of RoT-households
   mu_bar_a          mu_bar_b                  // Transfers distribution parameter
   betta_a           betta_b                   // discount factor
@@ -292,82 +277,12 @@ parameters
   pi_ts                                 // CPI and PPI inflation
   B_c_ts        B_a_ts                  // x
   B_ac_ts       B_bc_ts       B_ba_ts   // Total Real Bond Holdings
-  nfa_a_ts      nfa_b_ts      nfa_c_ts;  // Net Foreign Asset Position
-
-//**************************************************************************
-// Specification of Modelbase Parameters                                 //*
-                                                                         //*
-// Load Modelbase Monetary Policy Parameters                             //*
-thispath = pwd;
-cd('..');
-load policy_param.mat;
-for i=1:33
-    deep_parameter_name = M_.param_names(i,:);
-    eval(['M_.params(i)  = ' deep_parameter_name ' ;'])
-end
-cd(thispath);
-
-// Definition of Discretionary Fiscal Policy Parameter                   //*
-coffispol = 1;                                                           //*
-//**************************************************************************
+  nfa_a_ts      nfa_b_ts      nfa_c_ts  // Net Foreign Asset Position
+;
 
 set_params_31_08_aw1;
 
 model;
-//**************************************************************************
-// Definition of Modelbase Variables in Terms of Original Model Variables //*
-
-interest   = 400*log((1+i_policy_t)/(1+i_policy_ts));                                       //*
-inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;             //*
-inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));                 //*
-outputgap  = 0; //*
-output     = outputgap;                                           //*
-fispol     = 0;                                                                          //*
-//**************************************************************************
-
-//**************************************************************************
-// Policy Rule                                                           //*
-                                                                         //*
-// Monetary Policy                                                       //*
-                                                                         //*
-interest =   cofintintb1*interest(-1)                                    //*
-           + cofintintb2*interest(-2)                                    //*
-           + cofintintb3*interest(-3)                                    //*
-           + cofintintb4*interest(-4)                                    //*
-           + cofintinf0*inflationq                                       //*
-           + cofintinfb1*inflationq(-1)                                  //*
-           + cofintinfb2*inflationq(-2)                                  //*
-           + cofintinfb3*inflationq(-3)                                  //*
-           + cofintinfb4*inflationq(-4)                                  //*
-           + cofintinff1*inflationq(+1)                                  //*
-           + cofintinff2*inflationq(+2)                                  //*
-           + cofintinff3*inflationq(+3)                                  //*
-           + cofintinff4*inflationq(+4)                                  //*
-           + cofintout*outputgap 	                                     //*
-           + cofintoutb1*outputgap(-1)                                   //*
-           + cofintoutb2*outputgap(-2)                                   //*
-           + cofintoutb3*outputgap(-3)                                   //*
-           + cofintoutb4*outputgap(-4)                                   //*
-           + cofintoutf1*outputgap(+1)                                   //*
-           + cofintoutf2*outputgap(+2)                                   //*
-           + cofintoutf3*outputgap(+3)                                   //*
-           + cofintoutf4*outputgap(+4)                                   //*
-           + cofintoutp*output 	                                         //*
-           + cofintoutpb1*output(-1)                                     //*
-           + cofintoutpb2*output(-2)                                     //*
-           + cofintoutpb3*output(-3)                                     //*
-           + cofintoutpb4*output(-4)                                     //*
-           + cofintoutpf1*output(+1)                                     //*
-           + cofintoutpf2*output(+2)                                     //*
-           + cofintoutpf3*output(+3)                                     //*
-           + cofintoutpf4*output(+4)                                     //*
-           + std_r_ *interest_;                                          //*
-                                                                         //*
-// Discretionary Government Spending                                     //*
-                                                                         //*
-fispol = coffispol*fiscal_;                                              //*
-//**************************************************************************
-
 //*************************************************************************
 // equations relevant for country A (monetary union member)
 //*************************************************************************
@@ -418,7 +333,7 @@ mu_a*lambda_r_a_t*UB_a_t = omega_r_a_t*(lambda_r_a_t*UB_a_t-psi_a*l_r_a_t^(psi_a
 
 // government spending shock country A
 
-// log(cG_a_t/cG_a_ts) = rho_eg_a*log(cG_a_t(-1)/cG_a_ts) - xi_b_eg_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eg_a*log(y_a_t(-1)/y_a_ts) + psi_cG_a*shock_eCG_a_t + (1-psi_cG_a)*shock_eCG_a_t(-1);
+log(cG_a_t/cG_a_ts) = rho_eg_a*log(cG_a_t(-1)/cG_a_ts) - xi_b_eg_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eg_a*log(y_a_t(-1)/y_a_ts) + psi_cG_a*shock_eCG_a_t + (1-psi_cG_a)*shock_eCG_a_t(-1);
 log(inG_a_t/inG_a_ts) = rho_einG_a*log(inG_a_t(-1)/inG_a_ts) - xi_b_ein_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_ein_a*log(y_a_t(-1)/y_a_ts) + psi_inG_a*shock_einG_a_t + (1-psi_inG_a)*shock_einG_a_t(-1);
 log(TR_a_t/TR_a_ts) = rho_eTR_a*log(TR_a_t(-1)/TR_a_ts) - xi_b_eTR_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eTR_a*log(y_a_t(-1)/y_a_ts) + psi_TR_a*shock_eTR_a_t + (1-psi_TR_a)*shock_eTR_a_t(-1);
 (T_a_t-T_a_ts)/y_a_ts = rho_eT_a*(T_a_t(-1)-T_a_ts)/y_a_ts + xi_b_eT_a*log(BG_a_t(-1)/BG_a_ts) + xi_y_eT_a*log(y_a_t(-1)/y_a_ts) + psi_T_a*shock_eT_a_t + (1-psi_T_a)*shock_eT_a_t(-1); 
@@ -518,13 +433,13 @@ y_a_t = c_aa_t+in_aa_t+pop_b/pop_a*(c_ba_t+in_ba_t)+pop_c/pop_a*exp(e_RoW_a_t)*(
 // Equation 33
 
 // Equation 36
-//log((1+i_policy_t)/(1+i_policy_ts)) = rho_a_i*log((1+i_policy_t(-1))/(1+i_policy_ts))   
-//                                      + (1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)
-//                                        +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)
-//                                        +(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
-//                                      + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
-//                                        + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
-//                                      + nua_eM; 
+log((1+i_policy_t)/(1+i_policy_ts)) = rho_a_i*log((1+i_policy_t(-1))/(1+i_policy_ts))   
+                                      + (1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)
+                                        +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)
+                                        +(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
+                                      + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
+                                        + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
+                                      + nua_eM; 
 // Possible modification: Use GDP_i_t instead of y_i_t
 
 // Equation 37
@@ -851,7 +766,7 @@ shocks;
   var	nua_ethetaw	=	0.21101449478709	^2	;
   var	nua_RoE	=	0.02735018785307	^2	;
   var	nua_RoW	=	0.05734678553545	^2	;
- // var	nua_eM	=	0.00102971453438	^2	;
+  var	nua_eM	=	0.00102971453438	^2	;
   var	nua_etauw	=	0.00227315527636	^2	;
   var	nua_etauc	=	0.00162619256566	^2	;
   var	nua_etausc	=	0.00137848984641	^2	;
