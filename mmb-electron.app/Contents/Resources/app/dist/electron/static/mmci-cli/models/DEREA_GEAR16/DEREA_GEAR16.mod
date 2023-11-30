@@ -835,6 +835,9 @@ epsilon_enG_b_t = rho_epsilon_enG_b*epsilon_enG_b_t(-1) + nub_enG;
 
 end;
 
+resid(1);
+steady;
+
 //*************************************************************************
 // Set up of the Variance-Covariance Matrix of innovations
 // (assumption: all shocks are structural and uncorrelated)
