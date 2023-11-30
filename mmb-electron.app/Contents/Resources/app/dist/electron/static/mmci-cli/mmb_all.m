@@ -5,6 +5,9 @@ clear all; close all; clc
 % running FiMod under different setups to make sure resutls are the same
 mmb_FiModWithDiffSetups
 
+% running FiMod under different setups to make sure resutls are the same
+mmb_GEARWithDiffSetups
+
 % running FiMod under various monetary policy rules
 mmb_FiModWithDiffRules
 
