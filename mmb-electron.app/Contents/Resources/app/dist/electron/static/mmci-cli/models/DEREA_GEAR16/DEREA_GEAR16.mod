@@ -89,7 +89,7 @@ var
   shock_eCG_a_t    shock_eCG_b_t                                      // Public consumption shock
   shock_emg_a_t    shock_emg_b_t                                      // Public wage markup shock
   epsilon_enG_a_t  epsilon_enG_b_t                                    // Public Employment shock (AR(1) process assumed)
-;
+        interest;           //*
 
 varexo  
   nua_a       nub_a                // Technology shock
@@ -115,7 +115,7 @@ varexo
   nua_RoE     nub_RoE              // Country-specific demand shocks from RoE
   eps_y_c     eps_i_c    eps_pi_c  // Shocks foreign VAR 
   eps_z_g                          // Global technology shock
-;
+       interest_;                                                //*
 
 parameters  
   //***************************************************************************************
@@ -283,6 +283,7 @@ parameters
 set_params_31_08_aw1;
 
 model;
+interest =  0.9*interest(-1) + interest_;                                          //*
 //*************************************************************************
 // equations relevant for country A (monetary union member)
 //*************************************************************************

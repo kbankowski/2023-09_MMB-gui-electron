@@ -474,6 +474,7 @@ thetaw_b_t = thetaw_b;
    e_tauw_a_t = 0;
    e_tauw_b_t = 0;
    
+   interest = 0;
    
 NumberOfEndogenousVariables = M_.endo_nbr;                    % Number of endogenous variables.
 ys = zeros(NumberOfEndogenousVariables,1);                    % Initialization of ys (steady state).
