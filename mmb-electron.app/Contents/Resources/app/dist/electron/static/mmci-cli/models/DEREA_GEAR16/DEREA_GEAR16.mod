@@ -139,8 +139,6 @@ parameters
   rho_a_i                                     // Taylor Rule - Interest smoothing 
   phi_a_pi                                    // Taylor Rule - Inflation gap target
   phi_a_y                                     // Taylor Rule - Output gap target
-  phi_a_dy                                    // Taylor Rule - Output growth reaction
-  phi_a_dpi                                   // Taylor Rule - Inflation growth reaction
   phi                                         // risk premium parameter
   gamma_a           gamma_b                   // Trend growth of reals variables
   eta_a             eta_b             eta_c   // determines elasticity of substitution between home and foreign traded goods
@@ -283,13 +281,10 @@ set_params_31_08_aw1;
 
 model;
 interest = log((1+i_policy_t)/(1+i_policy_ts));
-interest = rho_a_i*interest(-1)   
-                                      + (1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)
-                                        +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)
-                                        +(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
-                                      + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
-                                        + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
-                                      + interest_/400; 
+400*interest = rho_a_i*400*interest(-1)   
+                                      + 400*(1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) 
+                                      + 400*(1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
+                                      + interest_; 
 //*************************************************************************
 // equations relevant for country A (monetary union member)
 //*************************************************************************
@@ -445,8 +440,6 @@ log((1+i_policy_t)/(1+i_policy_ts)) = rho_a_i*log((1+i_policy_t(-1))/(1+i_policy
                                       + (1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)
                                         +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)
                                         +(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
-                                      + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
-                                        + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
                                       + nua_eM; 
 */                                      
 // Possible modification: Use GDP_i_t instead of y_i_t

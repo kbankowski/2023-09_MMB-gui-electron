@@ -183,8 +183,6 @@ phi_a_pi= 1.655099;
 phi_a_y = 0;%0.094439;
 
 % Taylor Rule - Growth reactions
-phi_a_dy = 0;%0.128165;
-phi_a_dpi = 0;%0.024699;
   
 % international risk premium parameter
 phi   = 0.01;
