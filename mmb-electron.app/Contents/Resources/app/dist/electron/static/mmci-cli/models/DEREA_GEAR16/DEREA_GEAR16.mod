@@ -89,7 +89,7 @@ var
   shock_eCG_a_t    shock_eCG_b_t                                      // Public consumption shock
   shock_emg_a_t    shock_emg_b_t                                      // Public wage markup shock
   epsilon_enG_a_t  epsilon_enG_b_t                                    // Public Employment shock (AR(1) process assumed)
-        interest;           //*
+        interest inflationq outputgap;           //*
 
 varexo  
   nua_a       nub_a                // Technology shock
@@ -280,10 +280,14 @@ parameters
 set_params_31_08_aw1;
 
 model;
-interest = log((1+i_policy_t)/(1+i_policy_ts));
-400*interest = rho_a_i*400*interest(-1)   
-                                      + 400*(1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) 
-                                      + 400*(1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
+interest = 400*log((1+i_policy_t)/(1+i_policy_ts));
+inflationq = (pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));
+outputgap = (pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)));
+
+
+interest = rho_a_i*interest(-1)   
+                                      + (1-rho_a_i)*phi_a_pi*400*inflationq
+                                      + (1-rho_a_i)*phi_a_y*400*outputgap
                                       + interest_; 
 //*************************************************************************
 // equations relevant for country A (monetary union member)
