@@ -731,7 +731,7 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\begin{aligned}\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)= & \rho_{i}\log\left(\frac{1+i_{t-1}^{EA}}{1+i^{EA}}\right)\\
+\begin{aligned}\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)= & \rho_{i}\log\left(\frac{1+i_{t-1}^{EA}}{1+\bar{i}^{EA}}\right)\\
  & +\left(1-\rho_{i}\right)\phi_{\pi}^{EA}\left(s\cdot\log\left(\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}\right)+(1-s)\cdot\log\left(\frac{\pi_{t}^{b}}{\bar{\pi}^{b}}\right)\right)\\
  & +\left(1-\rho_{i}\right)\phi_{y}^{EA}\left(s\cdot\log\left(\frac{Y_{t}^{a}}{\bar{Y}^{a}}\right)+(1-s)\cdot\log\left(\frac{Y_{t}^{b}}{\bar{Y}^{b}}\right)\right)+\nu_{t}^{M^{EA}}
 \end{aligned}
@@ -762,7 +762,7 @@ As the rule is already fairly close to the MMB formulation, I recognise
 
 , which are inflation gap and output gap respectively.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 The approximation 
@@ -780,6 +780,27 @@ The approximation
 .
  
 \end_layout
+
+\end_inset
+
+ Furthermore, I can define 
+\begin_inset Formula $\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)\approx\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}-1$
+\end_inset
+
+ as the interest rate deviation.
+ Lastly, I can replace the country/ region specific gaps by aggregated union-wid
+e gaps (e.g., for inflation, 
+\begin_inset Formula $s\cdot\hat{\pi}_{t}^{a}+(1-s)\cdot\hat{\pi}_{t}^{b}=\hat{\pi}_{t}^{EA}$
+\end_inset
+
+), which brings me to the following form of the rule.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\underbrace{\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t}^{EA}}=\rho_{i}\underbrace{\log\left(\frac{1+i_{t-1}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t-1}^{EA}}+\left(1-\rho_{i}\right)\left(\phi_{\pi}^{EA}\hat{\pi}_{t}^{a}+\phi_{y}^{EA}\hat{Y}_{t}^{a}\right)
+\end{equation}
 
 \end_inset
 
