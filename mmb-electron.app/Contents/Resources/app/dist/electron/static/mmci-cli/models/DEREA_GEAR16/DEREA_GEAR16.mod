@@ -89,7 +89,10 @@ var
   shock_eCG_a_t    shock_eCG_b_t                                      // Public consumption shock
   shock_emg_a_t    shock_emg_b_t                                      // Public wage markup shock
   epsilon_enG_a_t  epsilon_enG_b_t                                    // Public Employment shock (AR(1) process assumed)
-        interest inflationq outputgap output;           //*
+//**************************************************************************
+// Modelbase Variables                                                   //*
+        interest inflation inflationq outputgap output;           //*
+//**************************************************************************
 
 varexo  
   nua_a       nub_a                // Technology shock
@@ -114,7 +117,10 @@ varexo
   nua_RoE     nub_RoE              // Country-specific demand shocks from RoE
   eps_y_c     eps_i_c    eps_pi_c  // Shocks foreign VAR 
   eps_z_g                          // Global technology shock
+//**************************************************************************
+// Modelbase Shocks                                                      //*
        interest_;                                                //*
+//**************************************************************************        
 
 parameters  
   //***************************************************************************************
@@ -305,11 +311,16 @@ cd(thispath);
 
 set_params_31_08_aw1;
 
+//**************************************************************************
+// Definition of Modelbase Variables in Terms of Original Model Variables //*
 model;
 interest = 400*log((1+i_policy_t)/(1+i_policy_ts));
+inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;
 inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));
-outputgap = 400*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)));
+outputgap = 100*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)));
 output = outputgap;
+//**************************************************************************
+
 
 //**************************************************************************
 // Policy Rule                                                           //*

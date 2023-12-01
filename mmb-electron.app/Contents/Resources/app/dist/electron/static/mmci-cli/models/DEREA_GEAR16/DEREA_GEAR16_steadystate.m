@@ -475,6 +475,7 @@ thetaw_b_t = thetaw_b;
    e_tauw_b_t = 0;
    
    interest = 0;
+   inflation = 0;
    inflationq = 0;
    outputgap = 0;
    output = 0;
