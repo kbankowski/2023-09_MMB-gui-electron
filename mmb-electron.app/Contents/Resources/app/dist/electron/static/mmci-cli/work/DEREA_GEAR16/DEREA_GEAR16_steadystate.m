@@ -477,12 +477,14 @@ thetaw_b_t = thetaw_b;
    interest = 0;
    inflationq = 0;
    outputgap = 0;
+   output = 0;
    
-NumberOfEndogenousVariables = M_.endo_nbr;                    % Number of endogenous variables.
-ys = zeros(NumberOfEndogenousVariables,1);                    % Initialization of ys (steady state).
+  endoList = M_.endo_names(~startsWith(M_.endo_names, "AUX_"));   
+  NumberOfEndogenousVariables = numel(endoList);     
+  ys = zeros(NumberOfEndogenousVariables,1);                    % Initialization of ys (steady state).
 for i = 1:NumberOfEndogenousVariables                         % Loop...
 %   varname = deblank(M_.endo_names(i,:)); %    Get the name of endogenous variable i.                      
-  varname = char(deblank(M_.endo_names(i,:))); %    Get the name of endogenous variable i.
+  varname = char(deblank(endoList(i,:))); %    Get the name of endogenous variable i.
   eval(['ys(' int2str(i) ') = ' varname ';']);              %    Get the steady state value of this variable.
 end   
 
