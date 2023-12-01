@@ -89,7 +89,7 @@ var
   shock_eCG_a_t    shock_eCG_b_t                                      // Public consumption shock
   shock_emg_a_t    shock_emg_b_t                                      // Public wage markup shock
   epsilon_enG_a_t  epsilon_enG_b_t                                    // Public Employment shock (AR(1) process assumed)
-        interest;           //*
+;
 
 varexo  
   nua_a       nub_a                // Technology shock
@@ -110,14 +110,17 @@ varexo
   nua_eTR     nub_eTR              // Transfer shock (excluding unemployment benefits)
   nua_eT      nub_eT               // Lump-sum tax shock
   nua_emg     nub_emg              // Public wage shock
-//  nua_eM                           // Monetary Policy shock
+  nua_eM                           // Monetary Policy shock
   nua_RoW     nub_RoW              // Country-specific demand shocks from RoW
   nua_RoE     nub_RoE              // Country-specific demand shocks from RoE
   eps_y_c     eps_i_c    eps_pi_c  // Shocks foreign VAR 
   eps_z_g                          // Global technology shock
-       interest_;                                                //*
+;
 
 parameters  
+  //***************************************************************************************
+  // Defin_a_tstion of deep model parameters
+  //***************************************************************************************
   mu_a              mu_b                      // share of RoT-households
   mu_bar_a          mu_bar_b                  // Transfers distribution parameter
   betta_a           betta_b                   // discount factor
@@ -274,13 +277,12 @@ parameters
   pi_ts                                 // CPI and PPI inflation
   B_c_ts        B_a_ts                  // x
   B_ac_ts       B_bc_ts       B_ba_ts   // Total Real Bond Holdings
-  nfa_a_ts      nfa_b_ts      nfa_c_ts;  // Net Foreign Asset Position
+  nfa_a_ts      nfa_b_ts      nfa_c_ts  // Net Foreign Asset Position
+;
 
 set_params_31_08_aw1;
 
 model;
-interest   = 400*(i_policy_t-i_policy_ts);                                       //*
-interest =  interest_;                                          //*
 //*************************************************************************
 // equations relevant for country A (monetary union member)
 //*************************************************************************
@@ -431,13 +433,13 @@ y_a_t = c_aa_t+in_aa_t+pop_b/pop_a*(c_ba_t+in_ba_t)+pop_c/pop_a*exp(e_RoW_a_t)*(
 // Equation 33
 
 // Equation 36
-//log((1+i_policy_t)/(1+i_policy_ts)) = rho_a_i*log((1+i_policy_t(-1))/(1+i_policy_ts))   
-//                                      + (1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)
-//                                        +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)
-//                                        +(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
-//                                      + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
-//                                        + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
-//                                      + nua_eM; 
+log((1+i_policy_t)/(1+i_policy_ts)) = rho_a_i*log((1+i_policy_t(-1))/(1+i_policy_ts))   
+                                      + (1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)
+                                        +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)
+                                        +(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
+                                      + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
+                                        + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
+                                      + nua_eM; 
 // Possible modification: Use GDP_i_t instead of y_i_t
 
 // Equation 37
@@ -748,9 +750,6 @@ epsilon_enG_b_t = rho_epsilon_enG_b*epsilon_enG_b_t(-1) + nub_enG;
 
 end;
 
-resid(1);
-steady;
-
 //*************************************************************************
 // Set up of the Variance-Covariance Matrix of innovations
 // (assumption: all shocks are structural and uncorrelated)
@@ -767,7 +766,7 @@ shocks;
   var	nua_ethetaw	=	0.21101449478709	^2	;
   var	nua_RoE	=	0.02735018785307	^2	;
   var	nua_RoW	=	0.05734678553545	^2	;
- // var	nua_eM	=	0.00102971453438	^2	;
+  var	nua_eM	=	0.00102971453438	^2	;
   var	nua_etauw	=	0.00227315527636	^2	;
   var	nua_etauc	=	0.00162619256566	^2	;
   var	nua_etausc	=	0.00137848984641	^2	;
@@ -799,3 +798,5 @@ shocks;
   var	eps_pi_c	=	0.00532841738948	^2	;
   var eps_z_g = 0;//0.01^2;
 end;
+
+stoch_simul(order = 1, IRF=200, nograph);
