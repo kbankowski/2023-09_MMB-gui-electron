@@ -799,9 +799,72 @@ e gaps (e.g., for inflation,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\underbrace{\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t}^{EA}}=\rho_{i}\underbrace{\log\left(\frac{1+i_{t-1}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t-1}^{EA}}+\left(1-\rho_{i}\right)\left(\phi_{\pi}^{EA}\hat{\pi}_{t}^{a}+\phi_{y}^{EA}\hat{Y}_{t}^{a}\right)
+\underbrace{\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t}^{EA}}=\rho_{i}\underbrace{\log\left(\frac{1+i_{t-1}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t-1}^{EA}}+\left(1-\rho_{i}\right)\left(\phi_{\pi}^{EA}\hat{\pi}_{t}^{a}+\phi_{y}^{EA}\hat{Y}_{t}^{a}\right)+\nu_{t}^{M^{EA}}
 \end{equation}
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have to be mindful of the MMB definitions.
+ In this context, multiplying the rule by 400 gets us closer
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\underbrace{400\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t}^{EA}}=\rho_{i}\underbrace{400\log\left(\frac{1+i_{t-1}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t-1}^{EA}}+\left(1-\rho_{i}\right)\left(\phi_{\pi}^{EA}400\hat{\pi}_{t}^{a}+\phi_{y}^{EA}4\cdot100\hat{Y}_{t}^{a}\right)+400\nu_{t}^{M^{EA}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{i}_{t}^{MMB}=\rho_{i}\hat{i}_{t-1}^{MMB}+\left(1-\rho_{i}\right)\left(\phi_{\pi}^{EA}\hat{\pi}_{t}^{MMB}+\phi_{y}^{EA}4\cdot\hat{Y}_{t}^{EA,MMB}\right)+400\nu_{t}^{M^{EA}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+interest
+\family default
+: 
+\begin_inset Formula $400\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+inflationq
+\family default
+: 
+\begin_inset Formula $400\left(s\cdot\log\left(\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}\right)+(1-s)\cdot\log\left(\frac{\pi_{t}^{b}}{\bar{\pi}^{b}}\right)\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+outputgap
+\family default
+: 
+\begin_inset Formula $100\left(s\cdot\log\left(\frac{Y_{t}^{a}}{\bar{Y}^{a}}\right)+(1-s)\cdot\log\left(\frac{Y_{t}^{b}}{\bar{Y}^{b}}\right)\right)$
 \end_inset
 
 
