@@ -173,17 +173,6 @@ xip_b = 0.478292;
 xiw_a=0.449473;
 xiw_b=0.320079;
 
-% Taylor Rule - Interest smoothing 
-rho_a_i =0.961658;
-
-% Taylor Rule - Inflation target
-phi_a_pi= 1.655099;
-
-% Taylor Rule - Output target
-phi_a_y = 0;%0.094439;
-
-% Taylor Rule - Growth reactions
-  
 % international risk premium parameter
 phi   = 0.01;
 
@@ -465,8 +454,11 @@ rho_enG_a	=	0.90811594398425	;
 rho_eTR_a	=	0.96919154317430	;
 rho_eT_a	=	0.29504261162457	;
 rho_emg_a	=	0.92794449252638	;
+% Taylor Rule - Interest smoothing 
 rho_a_i	=	0.86889737103460	;
+% Taylor Rule - Inflation coefficient
 phi_a_pi	=	1.75721683204365	;
+% Taylor Rule - Output gap coefficient
 phi_a_y	=	0.05197578976967	;
 rho_a_a	=	0.89678238936306	;
 rho_ein_a	=	0.74965664646529	;
