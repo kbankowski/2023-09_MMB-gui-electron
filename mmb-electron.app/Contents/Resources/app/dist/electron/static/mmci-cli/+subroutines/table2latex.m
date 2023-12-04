@@ -44,7 +44,12 @@ function table2latex(T, filename)
     % Parameters
     n_col = size(T,2);
     col_spec = [];
-    for c = 1:n_col, col_spec = [col_spec 'c']; end
+    for c = 1:n_col
+        col_spec = [col_spec 'c'];
+        if c == n_col - 2 % Insert vertical line between the second and third column from the right
+            col_spec = [col_spec '|'];
+        end
+    end
     col_names = strjoin(T.Properties.VariableNames, ' & ');
     row_names = T.Properties.RowNames;
     if ~isempty(row_names)
