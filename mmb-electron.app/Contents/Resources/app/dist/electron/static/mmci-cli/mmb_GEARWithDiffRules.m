@@ -2,7 +2,7 @@
 clear all
 close all
 clc
-[projectPath, subProjectPath, projectPathFimod] = init();
+[projectPath, subProjectPath, projectPathFimod, projectPathGEAR] = init();
 
 %% Running the models with all rules specified in config_4
 mmb('config_4g.json','var');
@@ -15,7 +15,7 @@ mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
 % looping through all rules
 for aRule = string(ruleList)
-    fname = fullfile('out', sprintf('ESREA_FIMOD12-%s.output.json', aRule)); 
+    fname = fullfile('out', sprintf('DEREA_GEAR16-%s.output.json', aRule)); 
     fid = fopen(fname); 
     raw = fread(fid,inf); 
     str = char(raw'); 
@@ -56,7 +56,7 @@ for aRule = string(ruleList(1:end-1))
 end
 
 % reading the model specific rule
-fname = fullfile('models', 'ESREA_FIMOD12', sprintf('%s.json', 'ESREA_FIMOD12')); 
+fname = fullfile('models', 'DEREA_GEAR16', sprintf('%s.json', 'DEREA_GEAR16')); 
 fid = fopen(fname); 
 raw = fread(fid,inf); 
 str = char(raw'); 
@@ -74,10 +74,10 @@ texFileName = char(fullfile(projectPath, subProjectPath, "docs/tex", "rulesParam
 subroutines.table2latex(coeffTable, texFileName);
 
 %% Create a histogram out of rules
-plotFiModWithDiffRules(mmbDatabank, string(ruleList), mmbVarList, projectPath, subProjectPath);
+plotGEARWithDiffRules(mmbDatabank, string(ruleList), mmbVarList, projectPath, subProjectPath);
 
 %% local function to plot the histogram and save it
-function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, subProjectPath)
+function plotGEARWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, subProjectPath)
 
     % Please specify the date range of the series
     dateRange = qq(1,1): qq(5,4);
@@ -144,12 +144,12 @@ function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, 
     
     % since we plot model at the end so that it overlays other lines we
     % move it to the front of the legend
-    moveLastToFirstFunc = @(x) [x(end), x(1:end-1)];
+    moveLastToFirstFunc = @(x) [x(end); x(1:end-1)];
 
     % Setting of the legend   
     leg = legend(...
         moveLastToFirstFunc(struct2array(pp)) ...
-        , moveLastToFirstFunc(fieldnames(pp)') ...
+        , moveLastToFirstFunc(fieldnames(pp)) ...
         , 'Orientation', 'horizontal' ...
         , 'Color', [1 1 1] ...
         , 'Fontsize', 8 ...
@@ -159,7 +159,7 @@ function plotFiModWithDiffRules(mmbDatabank, ruleList, mmbVarList, projectPath, 
     leg.NumColumns = 5;
         
     % Save graph
-    fileName = fullfile(projectPath, subProjectPath, "docs/figures", "FiModWithDiffRules");
+    fileName = fullfile(projectPath, subProjectPath, "docs/figures", "GEARWithDiffRules");
     exportgraphics(t, sprintf('%s.png',fileName),'BackgroundColor','none');
 
 end
