@@ -1,0 +1,23 @@
+{
+  "dynare": "/Applications/Dynare/5.5-arm64",
+  "rules": [
+      "Taylor",
+      "GR",
+      "LWW",
+      "SW",
+      "CEE",
+      "OW08",
+      "OW13",
+      "Coenen",
+      "CMR"
+  ],
+  "models": [
+    "DEREA_GEAR16"
+  ],
+  "msr": true,
+  "usr": false,
+  "options": {
+    "gain": 0.01,
+    "horizon": 20
+  }
+}

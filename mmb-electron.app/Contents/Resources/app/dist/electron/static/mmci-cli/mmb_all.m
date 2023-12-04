@@ -11,6 +11,9 @@ mmb_GEARWithDiffSetups
 % running FiMod under various monetary policy rules
 mmb_FiModWithDiffRules
 
+% running GEAR under various monetary policy rules
+mmb_GEARWithDiffRules
+
 % running various MMB models with SW rule
 % so that the results of FiMod could be put into 
 % perspective
