@@ -77,9 +77,6 @@ function table2latex(T, filename)
                 else
                     temp{1,col} = num2str(value, '%.2f');
                 end
-                if col == n_col % Make last column bold
-                    temp{1,col} = ['\textbf{' temp{1,col} '}'];
-                end
             end
             if ~isempty(row_names)
                 temp = [row_names{row}, temp];
@@ -93,7 +90,7 @@ function table2latex(T, filename)
     catch
         error('Unknown error. Make sure that table only contains chars, strings or numeric values.');
     end
-    
+
     % Closing the file
     fprintf(fileID, '\\hline \n');
     fprintf(fileID, '\\end{tabular}');
