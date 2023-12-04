@@ -8,10 +8,8 @@ mmb_FiModWithDiffSetups
 % running FiMod under different setups to make sure resutls are the same
 mmb_GEARWithDiffSetups
 
-% running FiMod under various monetary policy rules
+% running FiMod & GEAR under various monetary policy rules
 mmb_FiModWithDiffRules
-
-% running GEAR under various monetary policy rules
 mmb_GEARWithDiffRules
 
 % running various MMB models with SW rule
