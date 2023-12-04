@@ -223,7 +223,7 @@ noprefix "false"
  Subsequently Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Comparison-of-FiMod's"
+reference "sec:comparison-vis-a-vis-other"
 plural "false"
 caps "false"
 noprefix "false"
@@ -710,6 +710,95 @@ source{Own calculations with the MMB.}
 
 \end_layout
 
+\begin_layout Standard
+The FiMod model is compatible with all the standard monetary policy rules
+ incorporated in the MMB.
+ A comparison across various rules indicate that the specific rule used
+ in FiMod produces relatively pronounced effects of a standard temporary
+ monetary policy shock (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FiModWithDiffRules"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Unsurprisingly, in terms of macroeconomic impact, the model rule is close
+ to the CMR rule, reflecting their similar specification (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Adaptation-of-FiMod's"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+FiMod results across various policy rules 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:FiModWithDiffRules"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/FiModWithDiffRules.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+source{Own calculations with the MMB.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 GEAR
 \end_layout
@@ -870,45 +959,7 @@ outputgap
 
 \end_layout
 
-\begin_layout Section
-Comparison of FiMod's results
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:Comparison-of-FiMod's"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
-The FiMod model is compatible with all the standard monetary policy rules
- incorporated in the MMB.
- A comparison across various rules indicate that the specific rule used
- in FiMod produces relatively pronounced effects of a standard temporary
- monetary policy shock (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:FiModWithDiffRules"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- Unsurprisingly, in terms of macroeconomic impact, the model rule is close
- to the CMR rule, reflecting their similar specification (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Adaptation-of-FiMod's"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
 \begin_inset Float figure
 placement H
 wide false
@@ -920,10 +971,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-FiMod results across various policy rules 
+GEAR results across various policy rules 
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:FiModWithDiffRules"
+name "fig:GEARWithDiffRules"
 
 \end_inset
 
@@ -938,7 +989,7 @@ name "fig:FiModWithDiffRules"
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename figures/FiModWithDiffRules.png
+	filename figures/GEARWithDiffRules.png
 	width 100text%
 
 \end_inset
@@ -964,6 +1015,21 @@ source{Own calculations with the MMB.}
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Section
+Comparison of FiMod's and GEAR's results vis-a-vis other models
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:comparison-vis-a-vis-other"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 To assess the plausibility of FiMod's results, they can be compared with
  those from around 150 other macroeconomic models, under a unified monetary
  policy rule.
