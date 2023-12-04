@@ -1,4 +1,4 @@
-function [projectPath, subProjectPath, projectPathFimod] = init()
+function [projectPath, subProjectPath, projectPathFimod, projectPathGEAR] = init()
 
     restoredefaultpath;
 
@@ -18,5 +18,6 @@ function [projectPath, subProjectPath, projectPathFimod] = init()
     subProjectPath = 'mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli';
 
     projectPathFimod = '/Users/kk/Documents/0000-00_work/2023-08_fimod';    
+    projectPathGEAR = '/Users/kk/Documents/0000-00_work/2022-10_fiscal-policy-in-the-EA-core-periphery';    
 end
 
