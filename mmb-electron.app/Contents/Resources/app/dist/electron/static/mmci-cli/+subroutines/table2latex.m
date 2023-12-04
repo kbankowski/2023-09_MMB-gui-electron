@@ -59,6 +59,7 @@ function table2latex(T, filename)
     
     % Writing header
     fileID = fopen(filename, 'w');
+    fprintf(fileID, '\\begin{scriptsize}\n'); % Start of scriptsize environment
     fprintf(fileID, '\\begin{tabular}{%s}\n', col_spec);
     fprintf(fileID, '%s \\\\ \n', col_names);
     fprintf(fileID, '\\hline \n');
@@ -94,5 +95,6 @@ function table2latex(T, filename)
     % Closing the file
     fprintf(fileID, '\\hline \n');
     fprintf(fileID, '\\end{tabular}');
+    fprintf(fileID, '\\end{scriptsize}'); % End of scriptsize environment
     fclose(fileID);
 end
