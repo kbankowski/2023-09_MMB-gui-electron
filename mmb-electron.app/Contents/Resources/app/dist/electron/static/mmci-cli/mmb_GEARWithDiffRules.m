@@ -36,10 +36,11 @@ coffNames = replace(string(data{1}), " ", "_");
 fclose(fileID);
 
 % initiating the table
+ruleListForTable = [string(ruleList(1:end-1)), "FiMod", "GEAR"];
 coeffTable = table( ...
-    'Size', [length(coffNames) length(ruleList)] ...
-    , 'VariableTypes', repmat("double", 1, length(ruleList)) ...
-    , 'VariableNames', ruleList ...
+    'Size', [length(coffNames) length(ruleListForTable)] ...
+    , 'VariableTypes', repmat("double", 1, length(ruleListForTable)) ...
+    , 'VariableNames', ruleListForTable ...
     , 'RowNames', coffNames ...
 );
 
@@ -55,17 +56,26 @@ for aRule = string(ruleList(1:end-1))
     coeffTable{:, aRule} = rulesCoeff.(aRule);
 end
 
-% reading the model specific rule
+% reading the model specific rule - FiMod
+fname = fullfile('models', 'ESREA_FIMOD12', sprintf('%s.json', 'ESREA_FIMOD12')); 
+fid = fopen(fname); 
+raw = fread(fid,inf); 
+str = char(raw'); 
+fclose(fid); 
+val = jsondecode(str);
+rulesCoeff.("FiMod") = vertcat(cellfun(@(x) eval(x), val.msr));
+
+% reading the model specific rule - GEAR
 fname = fullfile('models', 'DEREA_GEAR16', sprintf('%s.json', 'DEREA_GEAR16')); 
 fid = fopen(fname); 
 raw = fread(fid,inf); 
 str = char(raw'); 
 fclose(fid); 
 val = jsondecode(str);
-rulesCoeff.("Model") = vertcat(cellfun(@(x) eval(x), val.msr));
+rulesCoeff.("GEAR") = vertcat(cellfun(@(x) eval(x), val.msr));
 
 % storing the numbers in the table
-for aRule = string(ruleList)
+for aRule = ruleListForTable
     coeffTable{:, aRule} = rulesCoeff.(aRule);
 end
 
