@@ -2,7 +2,7 @@
 clear all
 close all
 clc
-[projectPath, subProjectPath, projectPathFimod] = init();
+[projectPath, subProjectPath, projectPathFimod, projectPathGEAR] = init();
 
 %% Running the models with all rules specified in config_4
 mmb('config_4.json','var');
@@ -25,53 +25,6 @@ for aRule = string(ruleList)
         mmbDatabank.(aRule).(mmbVar) = Series(qq(0, 4), val.data.IRF.interest_.(mmbVar));
     end
 end
-
-
-%% Read to rules to see their values
-fileID = fopen('docs/ruleMPvarNames.txt');
-% Read the data into a cell array
-data = textscan(fileID, '%s', 'Delimiter', '\n', 'Whitespace', '');
-coffNames = replace(string(data{1}), " ", "_");
-% Close the file
-fclose(fileID);
-
-% initiating the table
-coeffTable = table( ...
-    'Size', [length(coffNames) length(ruleList)] ...
-    , 'VariableTypes', repmat("double", 1, length(ruleList)) ...
-    , 'VariableNames', ruleList ...
-    , 'RowNames', coffNames ...
-);
-
-% reading the parameters of standard rules from json files
-for aRule = string(ruleList(1:end-1))
-    fname = fullfile('rules', aRule, sprintf('%s.json', aRule)); 
-    fid = fopen(fname); 
-    raw = fread(fid,inf); 
-    str = char(raw'); 
-    fclose(fid); 
-    val = jsondecode(str);
-    rulesCoeff.(aRule) = vertcat(cellfun(@(x) eval(x), val.coefficients));
-    coeffTable{:, aRule} = rulesCoeff.(aRule);
-end
-
-% reading the model specific rule
-fname = fullfile('models', 'ESREA_FIMOD12', sprintf('%s.json', 'ESREA_FIMOD12')); 
-fid = fopen(fname); 
-raw = fread(fid,inf); 
-str = char(raw'); 
-fclose(fid); 
-val = jsondecode(str);
-rulesCoeff.("Model") = vertcat(cellfun(@(x) eval(x), val.msr));
-
-% storing the numbers in the table
-for aRule = string(ruleList)
-    coeffTable{:, aRule} = rulesCoeff.(aRule);
-end
-
-% saving the latex table out of the Matlab table
-texFileName = char(fullfile(projectPath, subProjectPath, "docs/tex", "rulesParameters.tex"));
-subroutines.table2latex(coeffTable, texFileName);
 
 %% Create a histogram out of rules
 plotFiModWithDiffRules(mmbDatabank, string(ruleList), mmbVarList, projectPath, subProjectPath);
