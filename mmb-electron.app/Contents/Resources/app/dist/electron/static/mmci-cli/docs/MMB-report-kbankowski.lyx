@@ -971,6 +971,66 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+FiMod's simulation of a standard monetary policy shock in the MMB and original
+ model set up 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:GEARWithDiffSetups"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/GEARWithDiffSetups_short.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+source{Own calculations with the MMB.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
 GEAR results across various policy rules 
 \begin_inset CommandInset label
 LatexCommand label

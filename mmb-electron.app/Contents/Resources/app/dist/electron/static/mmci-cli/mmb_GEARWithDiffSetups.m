@@ -1,6 +1,6 @@
 %% Pre-amble
 clear all; close all; clc
-[projectPath, subProjectPath, projectPathFimod] = init();
+[projectPath, subProjectPath, projectPathFiMod, projectPathGEAR] = init();
 
 %%
 mmb('config_2g.json','var');
@@ -64,7 +64,7 @@ resDynareIrf_ = databank.fromArray( ...
 %% values simulated with MMB
 % reading in the json file produced with the mmb('config_2.json','var')
 % command
-fname = fullfile(projectPath, subProjectPath, 'out', 'ESREA_FIMOD12-Model.output.json'); 
+fname = fullfile(projectPath, subProjectPath, 'out', 'DEREA_GEAR16-Model.output.json'); 
 fid = fopen(fname); 
 raw = fread(fid,inf); 
 str = char(raw'); 
@@ -76,35 +76,35 @@ for aSer = string(reshape(fieldnames(val.data.IRF.interest_), 1, []))
     resMMB.(aSer) = Series(qq(0, 4), val.data.IRF.interest_.(aSer));
 end
 
-%% values coming from FiMod project
-matFilePath = fullfile(projectPathFimod, "FiMod/Output/FiMod_results.mat");
-aDataFiMod = load(matFilePath);
+%% values coming from GEAR project
+% //TODO: change to GEAR from the FiMod placeholder
+matFilePath = fullfile(projectPathFiMod, "FiMod/Output/FiMod_results.mat");
+aDataGEAR = load(matFilePath);
 
-resFiModOrig = databank.fromArray( ...
-    cell2mat(struct2cell(aDataFiMod.oo_.irfs))' ...
-    , extractBefore(databank.fieldNames(aDataFiMod.oo_.irfs), "_epsii") ...
+resGEAROrig = databank.fromArray( ...
+    cell2mat(struct2cell(aDataGEAR.oo_.irfs))' ...
+    , extractBefore(databank.fieldNames(aDataGEAR.oo_.irfs), "_epsii") ...
     , qq(1) ...
 );
 
-%% plotting results based on various FiMod setups
+%% plotting results based on various GEAR setups
 allStruct.resDynareSimult_ = resDynareSimult_;
 allStruct.resDynareIrf_ = resDynareIrf_;
 allStruct.resMMB = resMMB;
-allStruct.resFiModOrig = resFiModOrig;
+allStruct.resGEAROrig = resGEAROrig;
 
 varStruct.resDynareSimult_ = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resDynareIrf_ = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
-% //TODO: define output gap in FiMod
-varStruct.resFiModOrig = ["interestEA", "inflationEA", "inflationqEA", "outputEA", "outputEA"];
+varStruct.resGEAROrig = ["interestEA", "inflationEA", "inflationqEA", "outputEA", "outputEA"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
-plotFiModWithDiffSetups(allStruct, setupsToPlot(end-1: end),  ["MMB setup", "FiMod original setup"], varStruct, projectPath, subProjectPath, "short");
-plotFiModWithDiffSetups(allStruct, setupsToPlot, setupsToPlot, varStruct, projectPath, subProjectPath, "long");
+plotGEARWithDiffSetups(allStruct, setupsToPlot(end-1: end),  ["MMB setup", "GEAR original setup"], varStruct, projectPath, subProjectPath, "short");
+plotGEARWithDiffSetups(allStruct, setupsToPlot, setupsToPlot, varStruct, projectPath, subProjectPath, "long");
 
 
 %% function for plotting
-function plotFiModWithDiffSetups(allStruct, setupList, setupLegendList, varStruct, projectPath, subProjectPath, plotVersion)
+function plotGEARWithDiffSetups(allStruct, setupList, setupLegendList, varStruct, projectPath, subProjectPath, plotVersion)
 
     % Please specify the date range of the series
     dateRange = qq(1,1): qq(5,4);
@@ -120,7 +120,7 @@ function plotFiModWithDiffSetups(allStruct, setupList, setupLegendList, varStruc
     
     h = gcf;
     
-    % replication of light gray colour for all non-FiMod models
+    % replication of light gray colour for all non-GEAR models
     cmap = subroutines.linspecer(4);
     % based on the following palette 
     % https://www.simplifiedsciencepublishing.com/resources/best-color-palettes-for-scientific-figures-and-data-visualizations
@@ -185,7 +185,7 @@ function plotFiModWithDiffSetups(allStruct, setupList, setupLegendList, varStruc
     leg.Layout.Tile = 'north';
         
     % Save graph
-    fileName = fullfile(projectPath, subProjectPath, "docs/figures", sprintf('FiModWithDiffSetups_%s', plotVersion));
+    fileName = fullfile(projectPath, subProjectPath, "docs/figures", sprintf('GEARWithDiffSetups_%s', plotVersion));
     exportgraphics(t, sprintf('%s.png',fileName),'BackgroundColor','none');
 
 end
