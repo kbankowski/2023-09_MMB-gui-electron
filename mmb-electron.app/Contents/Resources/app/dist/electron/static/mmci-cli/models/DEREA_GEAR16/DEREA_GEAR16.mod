@@ -829,6 +829,12 @@ epsilon_enG_b_t = rho_epsilon_enG_b*epsilon_enG_b_t(-1) + nub_enG;
 
 end;
 
+// ######################################################################  
+// Calculate steady state
+// ###################################################################### 
+resid(1);
+steady;
+
 //*************************************************************************
 // Set up of the Variance-Covariance Matrix of innovations
 // (assumption: all shocks are structural and uncorrelated)
@@ -876,5 +882,3 @@ shocks;
   var	eps_pi_c	=	0.00532841738948	^2	;
   var eps_z_g = 0;//0.01^2;
 end;
-
-stoch_simul(order = 1, IRF=200, nograph);

@@ -1,21 +1,33 @@
-b = M_.param_names;
-a = M_.params;
-§ = struct();
+[aSeriesY_.interest, aSeriesY_.interest{-1}, aSeriesY_.inflationq, aSeriesY_.outputgap]
 
-for k = 1:length(b)
-    c.(b{k}) = a(k);
+M_.param_names
+M_.params
+
+paramList = string(reshape(M_.param_names, 1, []));
+
+for aPara = paramList
+
+    evalc([char(aPara) ' = M_.params(aPara == paramList)'])
+
 end
 
-aSeries = databank.fromArray( ...
-    R' ...
-    , M_.endo_names ...
-    , qq(1, 1): qq(5, 4) ...
-);
-aSeries.interest
+400*(pop_a/(pop_b+pop_a)*log(aSeriesY_.pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(aSeriesY_.pi_b_t/pi_ts)))
 
-aSeries = databank.fromArray( ...
-    result.IRF' ...
-    , result.IRFendo_names ...
-    , qq(1, 1)-1: qq(5, 4) ...
-);
-aSeries.interest
+%% just saving the irf result in the debugging
+
+resultsSIMULT = load('resultsSIMULT.mat');
+resultsIRF = load('resultsIRF.mat');
+
+[resultsSIMULT.out2.inflationq, resultsIRF.out2.inflationq]
+
+openvar('resultsSIMULT.out1')
+openvar('resultsIRF.out1')
+
+openvar('resultsSIMULT.arg1')
+openvar('resultsIRF.arg1')
+
+openvar('resultsSIMULT.arg2')
+openvar('resultsIRF.arg2')
+
+openvar('resultsSIMULT.arg3')
+openvar('resultsIRF.arg3')
