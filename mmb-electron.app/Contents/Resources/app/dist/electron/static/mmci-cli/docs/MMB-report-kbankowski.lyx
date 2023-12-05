@@ -299,6 +299,39 @@ Furthermore, by taking logarithms on both sides of the equation, the terms
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\underbrace{\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)}_{\hat{i}_{t}^{EA}}=\rho_{R}\underbrace{\log\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)}_{\hat{i}_{t-1}^{EA}}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\underbrace{\log\left(\frac{\pi_{t}^{\tau^{c},EA}}{\bar{\pi}^{\tau^{c},EA}}\right)}_{\hat{\pi}_{t}^{EA}}+\varphi_{y}\left(\underbrace{\log Y_{t}^{tot,EA}}_{y_{t}^{EA}}-\underbrace{\log Y_{t-1}^{tot,EA}}_{y_{t-1}^{EA}}\right)\right]+\varepsilon_{t}^{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+400\hat{i}_{t}^{EA}=400\hat{i}_{t-1}^{EA}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}400\hat{\pi}_{t}^{EA}+\varphi_{y}4\cdot\left(100y_{t}^{EA}-100y_{t-1}^{EA}\right)\right]+400\varepsilon_{t}^{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\underbrace{400\hat{i}_{t}^{EA}}_{\hat{i}_{t}^{EA,MMB}}=\underbrace{400\hat{i}_{t-1}^{EA}}_{\hat{i}_{t-1}^{EA,MMB}}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\underbrace{400\hat{\pi}_{t}^{EA}}_{\hat{\pi}_{t}^{EA,MMB}}+\varphi_{y}4\cdot\left(\underbrace{100y_{t}^{EA}}_{y_{t}^{EA,MMB}}-\underbrace{100y_{t-1}^{EA}}_{y_{t-1}^{EA,MMB}}\right)\right]+4\cdot\underbrace{100\varepsilon_{t}^{R}}_{\varepsilon_{t}^{R,MMB}}
+\]
+
+\end_inset
+
 Using approximations, the logarithmic terms can be expressed as follows:
  
 \begin_inset Formula $\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)\approx\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}-1=\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}$
@@ -393,7 +426,7 @@ noprefix "false"
 interest
 \family default
 : 
-\begin_inset Formula $400\hat{r}_{t}=400\left(R_{t}^{ecb}-\bar{R}^{ecb}\right)$
+\begin_inset Formula $\hat{i}_{t}^{EA,MMB}=400\hat{i}_{t}^{EA}=400\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)$
 \end_inset
 
 
@@ -405,7 +438,7 @@ interest
 inflationq
 \family default
 : 
-\begin_inset Formula $400\hat{\pi}_{t}^{\tau^{c},EA}=400\left(\pi_{t}^{\tau^{c},EA}-1\right)$
+\begin_inset Formula $\hat{\pi}_{t}^{EA,MMB}=400\hat{\pi}_{t}^{EA}=400\log\left(\frac{\pi_{t}^{\tau^{c},EA}}{\bar{\pi}^{\tau^{c},EA}}\right)=400\log\left(\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right)$
 \end_inset
 
 
@@ -417,7 +450,7 @@ inflationq
 output
 \family default
 : 
-\begin_inset Formula $100\log Y_{t}^{tot,EA}$
+\begin_inset Formula $y_{t}^{EA,MMB}=100y_{t}^{EA}=100\log Y_{t}^{tot,EA}=100\log\left(Y_{t}^{tot}\right)^{\omega}\left(Y_{t}^{tot,*}\right)^{1-\omega}$
 \end_inset
 
 
