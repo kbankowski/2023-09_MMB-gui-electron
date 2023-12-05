@@ -43,10 +43,10 @@ var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt,
         
 //**************************************************************************
 // Modelbase Variables                                                   //*
-        interest inflation inflationq outputgap output fispol;           //*
+        interest inflation inflationq outputgap output;           //*
 //**************************************************************************
 
-varexo  epsiA, epsing, epsik, 
+varexo  epsiA, epsiG, epsing, epsik, 
         epsisc, epsic, epsiwg, epsiIg, 
         epsiconsum, epsib, epsitw, epsisub, fepsisub,
         fepsiG, fepsiA, fepsing, fepsik, 
@@ -55,7 +55,7 @@ varexo  epsiA, epsing, epsik,
 
 //**************************************************************************
 // Modelbase Shocks                                                      //*
-       interest_ fiscal_;                                                //*
+       interest_;                                                        //*
 //**************************************************************************        
 
 parameters
@@ -69,7 +69,7 @@ parameters
         cofintoutf1 cofintoutf2 cofintoutf3 cofintoutf4                  //*
         cofintoutp cofintoutpb1 cofintoutpb2 cofintoutpb3 cofintoutpb4   //*
         cofintoutpf1 cofintoutpf2 cofintoutpf3 cofintoutpf4              //*
-        std_r_ std_r_quart coffispol                                     //*
+        std_r_ std_r_quart                                               //*
 //**************************************************************************  
             betta, epsi, phi, alphaa, rhoi, phipie, kappaep, sg,
             varphip, sp, sigmac, xoui, kappaB, delta,
@@ -145,9 +145,6 @@ for i=1:33
     eval(['M_.params(i)  = ' deep_parameter_name ' ;'])
 end
 cd(thispath);
-
-// Definition of Discretionary Fiscal Policy Parameter                   //*
-coffispol = 1;                                                           //*
 //**************************************************************************
 
 // ######################################################################
@@ -706,12 +703,11 @@ model;
 //**************************************************************************
 // Definition of Modelbase Variables in Terms of Original Model Variables //*
 
-interest   = 400*(RECBt - RECBs);                                                           //*
+interest   = 400*log(RECBt/RECBs);                                                           //*
 inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;             //*
-inflationq = 400*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))-1);                 //*
-outputgap  = 100*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega)-1); //*
+inflationq = 400*log((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega));                 //*
+outputgap  = 100*log((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega)); //*
 output     = 100*log(Ytot^omega*fYtot^(1-omega));                                           //*
-fispol     = dCgt;                                                                          //*
 //**************************************************************************
 
 //**************************************************************************
@@ -751,10 +747,6 @@ interest =   cofintintb1*interest(-1)                                    //*
            + cofintoutpf3*output(+3)                                     //*
            + cofintoutpf4*output(+4)                                     //*
            + std_r_ *interest_;                                          //*
-                                                                         //*
-// Discretionary Government Spending                                     //*
-                                                                         //*
-fispol = coffispol*fiscal_;                                              //*
 //**************************************************************************
 
 // ##############################################################################################  
@@ -1162,7 +1154,7 @@ tausct-tauscs               = rhosc*(tausct(-1)-tauscs)            + xi_bsc*log(
 wgt-wgs                     = rhow*(wgt(-1)-wgs)                   + xi_pubw*log(Debt(-1)/Debt) + xi_ypubw*log(Ytot(-1)/Ytots) + psi_pubw*epsiwg + (1-psi_pubw)*epsiwg(-1);
 (Tt-steady_state(Tt))/Ytots = rhot*(Tt(-1)-steady_state(Tt))/Ytots + xi_b*log(Debt(-1)/Debts)   + xi_y*log(Ytot(-1)/Ytots);
 
-// log(Cgt/Cgs) = rhoG*log(Cgt(-1)/Cgs)  - xi_bg*log(Debt(-1)/Debts)  - xi_ycg*log(Ytot(-1)/Ytots) + psi_cg*epsiG  + (1-psi_cg)*epsiG(-1);
+log(Cgt/Cgs) = rhoG*log(Cgt(-1)/Cgs)  - xi_bg*log(Debt(-1)/Debts)  - xi_ycg*log(Ytot(-1)/Ytots) + psi_cg*epsiG  + (1-psi_cg)*epsiG(-1);
 log(Igt/Igs) = rhoIg*log(Igt(-1)/Igs) - xi_big*log(Debt(-1)/Debts) - xi_yig*log(Ytot(-1)/Ytots) + psi_ig*epsiIg + (1-psi_ig)*epsiIg(-1);
 log(ngt/ngs) = rhon*log(ngt(-1)/ngs)  - xi_bn*log(Debt(-1)/Debts)  - xi_yn*log(Ytot(-1)/Ytots)  + psi_n*epsing  + (1-psi_n)*epsing(-1);
 
@@ -1677,7 +1669,6 @@ initval;
     inflationq = 0;
     outputgap = 0;
     output = 100*log(Ytots^omega*fYtots^(1-omega));
-    fispol = 0;
 end;
 
 // ######################################################################  
@@ -1699,7 +1690,7 @@ steady;
 shocks;
 var epsiA  = 0;
 // var epsii = (0.01/4)^2;
-// var epsiG = 0*((0.01/omegaCg))^2;
+var epsiG = 0*((0.01/omegaCg))^2;
 var epsiwg = 0;
 var epsing = 0*(0.01/(pBs^(1-omega-Psi)*(1-taus)*(wgs*ngtots)/Ytots))^2;
 var epsik = 0;
