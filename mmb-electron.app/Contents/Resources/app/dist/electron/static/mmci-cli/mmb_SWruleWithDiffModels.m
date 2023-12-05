@@ -1,6 +1,6 @@
 %% Pre-amble
 clear all; close all; clc
-[projectPath, subProjectPath, projectPathFimod] = init();
+[projectPath, subProjectPath, ~, ~] = init();
 
 %% Running the models with all rules specified in config_4
 mmb('config_5.json','var');
@@ -32,7 +32,11 @@ end
 %% Create a histogram out of rules
 % re-ordering the list to put FiMod last so that it is plotted on top of
 % everything
-modelListForPlotting = [modelListForLoop(modelListForLoop ~= "ESREA_FIMOD12"), modelListForLoop(modelListForLoop == "ESREA_FIMOD12")];
+selectedModels = ["DEREA_GEAR16", "ESREA_FIMOD12"];
+modelListForPlotting = [ ...
+    modelListForLoop(~ismember(modelListForLoop, selectedModels)) ...
+    , selectedModels ...
+];
 plotSWruleWithDiffModels(mmbDatabank, modelListForPlotting, mmbVarList, projectPath, subProjectPath);
 
 %% local function to plot the histogram and save it
@@ -40,10 +44,12 @@ function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPat
 
     % Please specify the date range of the series
     dateRange = qq(1,1): qq(5,4);
-    % thicker Line for Model-Specific-Rule
-    lineWidthSelector = @(aString) 2 * strcmp(aString, "ESREA_FIMOD12") + 1 * ~strcmp(aString, "ESREA_FIMOD12");
-    % thicker Line for Model-Specific-Rule
-    lineTransparencySelector = @(aString) 1 * strcmp(aString, "ESREA_FIMOD12") + 0.5 * ~strcmp(aString, "ESREA_FIMOD12");
+    % model selector function
+    modelSelector = @(aModel) strcmp(aModel, "ESREA_FIMOD12") || strcmp(aModel, "DEREA_GEAR16");
+    % thicker Line for selected models
+    lineWidthSelector = @(aModel) 2 * modelSelector(aModel) + 1 * ~modelSelector(aModel);
+    % less transparency for selected models
+    lineTransparencySelector = @(aModel) 1 * modelSelector(aModel) + 0.5 * ~modelSelector(aModel);
 
     
     % Plotting
@@ -57,8 +63,8 @@ function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPat
     
     h = gcf;
     
-    % replication of light gray colour for all non-FiMod models
-    cmap = repmat([0.702 0.702 0.702], numel(modelList)-1, 1);
+    % replication of light gray colour for all non-FiMod and non-GEAR models
+    cmap = repmat([0.702 0.702 0.702], numel(modelList)-2, 1);
     % based on the following palette 
     % https://www.simplifiedsciencepublishing.com/resources/best-color-palettes-for-scientific-figures-and-data-visualizations
     % #c1272d - Dark Red
@@ -67,7 +73,9 @@ function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPat
     % #008176 - Teal
     % #b3b3b3 - Light Gray
     line1color = [0, 0, 0.6549];
-    cmap = [cmap; line1color];
+    line2color = [0.756, 0.153, 0.176];
+    
+    cmap = [cmap; line1color; line2color];
     
     set(h, 'Units','centimeters', 'Position',[0 0 21-2 8])
     set(h,'defaulttextinterpreter','latex');
@@ -104,12 +112,12 @@ function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPat
     
     % since we plot model at the end so that it overlays other lines we
     % move it to the front of the legend
-    pickLastAndFirst = @(x) [x(end), x(1)];
+    pickLastAndFirst = @(x) [x(end), x(end-1), x(1)];
 
     % Setting of the legend   
     leg = legend(...
         pickLastAndFirst(struct2array(pp)) ...
-        , ["FiMod", "other models"] ...
+        , ["FiMod", "GEAR", "other models"] ...
         , 'Orientation', 'horizontal' ...
         , 'Color', [1 1 1] ...
         , 'Fontsize', 8 ...
