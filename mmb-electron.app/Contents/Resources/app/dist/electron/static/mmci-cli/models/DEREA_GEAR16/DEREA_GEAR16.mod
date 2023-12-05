@@ -318,6 +318,7 @@ interest = 400*log((1+i_policy_t)/(1+i_policy_ts));
 inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;
 inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));
 outputgap = 100*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)));
+// TODO: fine tune the output specification in GEAR
 output = outputgap;
 //**************************************************************************
 
