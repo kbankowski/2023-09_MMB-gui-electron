@@ -199,6 +199,36 @@ section*{Table of content}}
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+check charts titles
+\end_layout
+
+\begin_layout Plain Layout
+check table titles
+\end_layout
+
+\begin_layout Plain Layout
+check sections/ subsection titles
+\end_layout
+
+\begin_layout Plain Layout
+check charts/ tables footnotes
+\end_layout
+
+\begin_layout Plain Layout
+check i.e.
+ and e.g.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Overview
 \end_layout
@@ -331,17 +361,26 @@ literal "false"
 
  (Eq.
  76 in the paper), relies on interest rates responding to the aggregate
- inflation gap and the aggregate output growth.
+ inflation gap and the aggregate output growth,
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}=\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)\label{eq:originalRule}
+\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}=\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)^{\rho_{R}}\left\{ \left[\left(\frac{\pi_{t}^{\tau^{c}}}{\bar{\pi}^{\tau^{c}}}\right)^{\omega}\left(\frac{\pi_{t}^{\tau^{c},*}}{\bar{\pi}^{\tau^{c},*}}\right)^{1-\omega}\right]^{\varphi_{\pi}}\left[\left(\frac{Y_{t}^{tot}}{Y_{t-1}^{\text{tot }}}\right)^{\omega}\left(\frac{Y_{t}^{tot,*}}{Y_{t-1}^{tot,*}}\right)^{1-\omega}\right]^{\varphi_{y}}\right\} ^{\left(1-\rho_{R}\right)}\exp\left(\varepsilon_{t}^{R}\right)\label{eq:originalRuleFiMod}
 \end{equation}
 
 \end_inset
 
+where 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is the relative size of home country and other parameters follow the standard
+ notation of the literature.
+\end_layout
+
+\begin_layout Standard
 To simplify the equation, I substitute the country-specific variables with
  EA-wide variables.
 \end_layout
@@ -355,18 +394,8 @@ To simplify the equation, I substitute the country-specific variables with
 \end_inset
 
 Furthermore, by taking logarithms on both sides of the equation, the terms
- become additive, resulting in a formulation similar to that of the MMB.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)=\rho_{R}\log\left(\frac{R_{t-1}^{ecb}}{\bar{R}^{ecb}}\right)+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\log\left(\frac{\pi_{t}^{\tau^{c},EA}}{\bar{\pi}^{\tau^{c},EA}}\right)+\varphi_{y}\log\left(\frac{Y_{t}^{tot,EA}}{Y_{t-1}^{tot,EA}}\right)\right]+\varepsilon_{t}^{R}
-\]
-
-\end_inset
-
-
+ become additive, to a significant degree resembling the MMB formulation
+ with standard MMB variables.
 \end_layout
 
 \begin_layout Standard
@@ -381,61 +410,9 @@ Furthermore, by taking logarithms on both sides of the equation, the terms
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\[
-400\hat{i}_{t}^{EA}=400\hat{i}_{t-1}^{EA}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}400\hat{\pi}_{t}^{EA}+\varphi_{y}4\cdot\left(100y_{t}^{EA}-100y_{t-1}^{EA}\right)\right]+400\varepsilon_{t}^{R}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\underbrace{400\hat{i}_{t}^{EA}}_{\hat{i}_{t}^{EA,MMB}}=\underbrace{400\hat{i}_{t-1}^{EA}}_{\hat{i}_{t-1}^{EA,MMB}}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\underbrace{400\hat{\pi}_{t}^{EA}}_{\hat{\pi}_{t}^{EA,MMB}}+\varphi_{y}4\cdot\left(\underbrace{100y_{t}^{EA}}_{y_{t}^{EA,MMB}}-\underbrace{100y_{t-1}^{EA}}_{y_{t-1}^{EA,MMB}}\right)\right]+4\cdot\underbrace{100\varepsilon_{t}^{R}}_{\varepsilon_{t}^{R,MMB}}
-\]
-
-\end_inset
-
-Using approximations, the logarithmic terms can be expressed as follows:
- 
-\begin_inset Formula $\log\left(\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}\right)\approx\frac{R_{t}^{ecb}}{\bar{R}^{ecb}}-1=\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}$
-\end_inset
-
-.
- Furthermore, given that 
-\begin_inset Formula $\bar{R}^{ecb}$
-\end_inset
-
- is close to unity, I can approximate and define 
-\begin_inset Formula $\frac{R_{t}^{ecb}-\bar{R}^{ecb}}{\bar{R}^{ecb}}\approx R_{t}^{ecb}-\bar{R}^{ecb}\equiv\hat{r}_{t}$
-\end_inset
-
-, representing the interest rate deviation.
- Similarly, having in mind that 
-\begin_inset Formula $\bar{\pi}^{\tau^{c},EA}=1$
-\end_inset
-
- in the model, I can derive the inflation deviation 
-\begin_inset Formula $\hat{\pi}_{t}^{\tau^{c},EA}$
-\end_inset
-
- through analogous transformations.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\hat{r}_{t}=\rho_{R}\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\hat{\pi}_{t}^{\tau^{c},EA}+\varphi_{y}\left(\log Y_{t}^{tot,EA}-\log Y_{t-1}^{tot,EA}\right)\right]+\varepsilon_{t}^{R}
-\]
-
-\end_inset
-
-Finally, to achieve full consistency with the MMB framework, it is necessary
- to report key variables, such as interest rates and inflation, in annualised
- percentage terms (for specification see 
+Bearing in mind the exact definition of the MMB variables, most notably
+ that the interest rate and quarterly inflation are expressed in annualised
+ terms as a percentage (see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Wieland-et-al_2016_Handbook-of-macroeconomics"
@@ -443,41 +420,28 @@ literal "false"
 
 \end_inset
 
-, Table 4).
- In line with this requirement, I have multiplied the rule by a factor of
- 
-\begin_inset Formula $400$
+, Table 4), I multiply the rule by the factor of 400.
+ is thus reformulated to depict MMB variables (marked with superscript 
+\begin_inset Formula $MMB$
 \end_inset
 
-.
+) in a manner fully consistent with this framework.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-400\hat{r}_{t}=\rho_{R}400\hat{r}_{t-1}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}400\hat{\pi}_{t}^{\tau^{c},EA}+4\varphi_{y}\left(100\log Y_{t}^{tot,EA}-100\log Y_{t-1}^{tot,EA}\right)\right]+400\varepsilon_{t}^{R}\label{eq:mmbRule}
+\underbrace{400\hat{i}_{t}^{EA}}_{\hat{i}_{t}^{EA,MMB}}=\underbrace{400\hat{i}_{t-1}^{EA}}_{\hat{i}_{t-1}^{EA,MMB}}+\left(1-\rho_{R}\right)\left[\varphi_{\pi}\underbrace{400\hat{\pi}_{t}^{EA}}_{\hat{\pi}_{t}^{EA,MMB}}+\varphi_{y}4\cdot\left(\underbrace{100y_{t}^{EA}}_{y_{t}^{EA,MMB}}-\underbrace{100y_{t-1}^{EA}}_{y_{t-1}^{EA,MMB}}\right)\right]+4\cdot\underbrace{100\varepsilon_{t}^{R}}_{\epsilon_{t}^{EA,MMB}}\label{eq:mmbRuleFiMod}
 \end{equation}
 
 \end_inset
 
-From the rule that aligns fully with the MMB's standard specification (see
- Eq.
+At this stage, I can readily express the definitions of standard MMB variables
+ in terms of the FiMod variables used in the original rule (Eq.
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:mmbRule"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) I can readily deduce the definitions of standard MMB variables in terms
- of the FiMod variables utilised in the original rule (Eq.
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:originalRule"
+reference "eq:originalRuleFiMod"
 plural "false"
 caps "false"
 noprefix "false"
@@ -485,6 +449,21 @@ noprefix "false"
 \end_inset
 
 ).
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I do not include the annual inflation (
+\family typewriter
+inflation
+\family default
+) among the variables below as it can be calculated by averaging q-o-q inflation
+ rates over 4 quarters.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -514,21 +493,33 @@ inflationq
 \begin_layout Itemize
 
 \family typewriter
+outputgap
+\family default
+: 
+\begin_inset Formula $\hat{y}_{t}^{EA,MMB}=100\log\left(\frac{y_{t}^{EA}}{\bar{y}^{EA}}\right)=100\log\left(\left(\frac{y_{t}}{\bar{y}}\right)^{\omega}\left(\frac{y_{t}^{\ast}}{\bar{y}^{\ast}}\right)^{1-\omega}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
 output
 \family default
 : 
-\begin_inset Formula $y_{t}^{EA,MMB}=100y_{t}^{EA}=100\log Y_{t}^{tot,EA}=100\log\left(Y_{t}^{tot}\right)^{\omega}\left(Y_{t}^{tot,*}\right)^{1-\omega}$
+\begin_inset Formula $y_{t}^{EA,MMB}=100\log Y_{t}^{tot,EA}=100\log\left(Y_{t}^{tot}\right)^{\omega}\left(Y_{t}^{tot,*}\right)^{1-\omega}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-Additionally, considering the formulation in Eq.
+Furthermore, considering the formulation in Eq.
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:mmbRule"
+reference "eq:mmbRuleFiMod"
 plural "false"
 caps "false"
 noprefix "false"
@@ -547,8 +538,8 @@ noprefix "false"
 \begin_inset Formula $\varphi_{y}=0.054$
 \end_inset
 
-), I am able to specify the calibration of the standard MMB monetary policy
- rule, as detailed in Table 
+), I can specify the calibration of the standard MMB monetary policy rule,
+ as detailed in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:rulesParametersFiMod"
@@ -592,7 +583,7 @@ The parameter values (i.e.,
  This latter set of parameters deviates notably from the commonly estimated
  values in similar Taylor rules.
  Their usage leads to a scenario where a standard monetary policy shock
- yields exceptionally pronounced and long-lasting effects.
+ yields unusually pronounced and long-lasting effects.
 \end_layout
 
 \end_inset
@@ -601,143 +592,11 @@ The parameter values (i.e.,
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Parametrisation of the FiMod specific monetary policy rule according to
- the MMB setup 
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:rulesParametersFiMod"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{small}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{center}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset include
-LatexCommand input
-filename "tex/rulesParametersFiMod.tex"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{center}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{small}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset VSpace bigskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-source{Own calculations based on the FiMod callibration.}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In the appendix, Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:rulesParameters"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- compares the parameters of FiMod's monetary policy rule with other standard
- rules used in the MMB.
- FiMod's rule shows similarities to the CMR rule, as both exhibit similar
- persistence and incorporate output growth.
- However, a notable difference is that the CMR rule is based on the expected
- inflation gap.
- Additionally, FiMod's rule is akin to the SW rule, which, unlike FiMod,
- uses the output gap difference instead of output growth.
-\end_layout
-
-\begin_layout Standard
-The adaptation of FiMod's original monetary policy rule to the MMB framework
+The adaptation of the FiMod's original monetary policy rule to the MMB framework
  ensures consistent results.
- Comparing the Impulse Response Functions (IRFs) for a standard temporary
- monetary policy shock simulated in both the original FiMod model and the
- MMB framework reveals virtually no differences (see Figure 
+ A comparison of the Impulse Response Functions (IRFs) for a standard temporary
+ monetary policy shock, as simulated in both the original FiMod model and
+ the MMB framework, reveals no differences (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:FiModWithDiffSetups"
@@ -797,7 +656,7 @@ status open
 
 
 \backslash
-source{Own calculations with the MMB.}
+source{Own calculations.}
 \end_layout
 
 \end_inset
@@ -808,36 +667,6 @@ source{Own calculations with the MMB.}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-The FiMod model is compatible with all the standard monetary policy rules
- incorporated in the MMB.
- A comparison across various rules indicate that the specific rule used
- in FiMod produces relatively pronounced effects of a standard temporary
- monetary policy shock (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:FiModWithDiffRules"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- Unsurprisingly, in terms of macroeconomic impact, the model rule is close
- to the CMR rule, reflecting their similar specification (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:adaptation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
 \end_layout
 
 \begin_layout Subsection
@@ -860,12 +689,12 @@ literal "false"
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{equation}
+\[
 \begin{aligned}\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)= & \rho_{i}\log\left(\frac{1+i_{t-1}^{EA}}{1+\bar{i}^{EA}}\right)\\
  & +\left(1-\rho_{i}\right)\phi_{\pi}^{EA}\left(s\cdot\log\left(\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}\right)+(1-s)\cdot\log\left(\frac{\pi_{t}^{b}}{\bar{\pi}^{b}}\right)\right)\\
  & +\left(1-\rho_{i}\right)\phi_{y}^{EA}\left(s\cdot\log\left(\frac{Y_{t}^{a}}{\bar{Y}^{a}}\right)+(1-s)\cdot\log\left(\frac{Y_{t}^{b}}{\bar{Y}^{b}}\right)\right)+\nu_{t}^{M^{EA}}
 \end{aligned}
-\end{equation}
+\]
 
 \end_inset
 
@@ -873,7 +702,7 @@ where
 \begin_inset Formula $s=\frac{\mathcal{P}^{a}}{\mathcal{P}^{a}+\mathcal{P}^{b}}$
 \end_inset
 
- is the relative population-weight of country 
+ is the relative population weight of country 
 \begin_inset Formula $a$
 \end_inset
 
@@ -881,82 +710,32 @@ where
 \end_layout
 
 \begin_layout Standard
-As the rule is already fairly close to the MMB formulation, I recognise
- that 
-\begin_inset Formula $\log\left(\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}\right)\approx\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}-1\approx\pi_{t}^{a}-1\equiv\hat{\pi}_{t}^{a}$
-\end_inset
-
- and 
-\begin_inset Formula $\log\left(\frac{Y_{t}^{a}}{\bar{Y}^{a}}\right)\approx\frac{Y_{t}^{a}-\bar{Y}^{a}}{\bar{Y}^{a}}\equiv\hat{Y}_{t}^{a}$
-\end_inset
-
-, which are inflation gap and output gap respectively.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-The approximation 
-\begin_inset Formula $\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}-1\approx\pi_{t}^{a}-1$
-\end_inset
-
- is possible given the value of 
-\begin_inset Formula $\bar{\pi}^{a}$
-\end_inset
-
- close to unity 
-\begin_inset Formula $(1.00475)$
-\end_inset
-
-.
- 
+As the rule is already fairly close to the MMB formulation, I simply replace
+ country-specific variables with the euro-area aggregates.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)=\rho_{i}\log\left(\frac{1+i_{t-1}^{EA}}{1+\bar{i}^{EA}}\right)+\left(1-\rho_{i}\right)\left(\phi_{\pi}^{EA}\hat{\pi}_{t}^{EA}+\phi_{y}^{EA}\hat{Y}_{t}^{EA}\right)+\nu_{t}^{M^{EA}}
+\]
+
 \end_inset
 
- Furthermore, I can define 
-\begin_inset Formula $\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)\approx\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}-1$
-\end_inset
 
- as the interest rate deviation.
- Lastly, I can replace the country/ region specific gaps by aggregated union-wid
-e gaps (e.g., for inflation, 
-\begin_inset Formula $s\cdot\hat{\pi}_{t}^{a}+(1-s)\cdot\hat{\pi}_{t}^{b}=\hat{\pi}_{t}^{EA}$
-\end_inset
+\end_layout
 
-), which brings me to the following form of the rule.
+\begin_layout Standard
+Similarly to the previous subsection, I need to be mindful of the exact
+ definition of the MMB variables.
+ Against this background, I multiply the rule by the factor of 400, which
+ allows me to depict and define the standard MMB variables.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\underbrace{\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t}^{EA}}=\rho_{i}\underbrace{\log\left(\frac{1+i_{t-1}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t-1}^{EA}}+\left(1-\rho_{i}\right)\left(\phi_{\pi}^{EA}\hat{\pi}_{t}^{a}+\phi_{y}^{EA}\hat{Y}_{t}^{a}\right)+\nu_{t}^{M^{EA}}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We have to be mindful of the MMB definitions.
- In this context, multiplying the rule by 400 gets us closer
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-\underbrace{400\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t}^{EA}}=\rho_{i}\underbrace{400\log\left(\frac{1+i_{t-1}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t-1}^{EA}}+\left(1-\rho_{i}\right)\left(\phi_{\pi}^{EA}400\hat{\pi}_{t}^{a}+\phi_{y}^{EA}4\cdot100\hat{Y}_{t}^{a}\right)+400\nu_{t}^{M^{EA}}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-\hat{i}_{t}^{MMB}=\rho_{i}\hat{i}_{t-1}^{MMB}+\left(1-\rho_{i}\right)\left(\phi_{\pi}^{EA}\hat{\pi}_{t}^{MMB}+\phi_{y}^{EA}4\cdot\hat{Y}_{t}^{EA,MMB}\right)+400\nu_{t}^{M^{EA}}
+\underbrace{400\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t}^{EA,MMB}}=\rho_{i}\underbrace{400\log\left(\frac{1+i_{t-1}^{EA}}{1+\bar{i}^{EA}}\right)}_{\hat{i}_{t-1}^{EA,MMB}}+\left(1-\rho_{i}\right)\left(\phi_{\pi}^{EA}\underbrace{400\hat{\pi}_{t}^{EA}}_{\hat{\pi}_{t}^{EA,MMB}}+\phi_{y}^{EA}4\cdot\underbrace{100\hat{Y}_{t}^{EA}}_{\hat{y}_{t}^{EA,MMB}}\right)+4\cdot\underbrace{100\nu_{t}^{M^{EA}}}_{\epsilon_{t}^{EA,MMB}}\label{eq:mmbRuleGEAR}
 \end{equation}
 
 \end_inset
@@ -970,7 +749,7 @@ We have to be mindful of the MMB definitions.
 interest
 \family default
 : 
-\begin_inset Formula $400\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)$
+\begin_inset Formula $\hat{i}_{t}^{EA,MMB}=400\log\left(\frac{1+i_{t}^{EA}}{1+\bar{i}^{EA}}\right)$
 \end_inset
 
 
@@ -982,7 +761,7 @@ interest
 inflationq
 \family default
 : 
-\begin_inset Formula $400\left(s\cdot\log\left(\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}\right)+(1-s)\cdot\log\left(\frac{\pi_{t}^{b}}{\bar{\pi}^{b}}\right)\right)$
+\begin_inset Formula $\hat{\pi}_{t}^{EA,MMB}=400\hat{\pi}_{t}^{EA}=400\left(s\cdot\log\left(\frac{\pi_{t}^{a}}{\bar{\pi}^{a}}\right)+(1-s)\cdot\log\left(\frac{\pi_{t}^{b}}{\bar{\pi}^{b}}\right)\right)$
 \end_inset
 
 
@@ -994,10 +773,72 @@ inflationq
 outputgap
 \family default
 : 
-\begin_inset Formula $100\left(s\cdot\log\left(\frac{Y_{t}^{a}}{\bar{Y}^{a}}\right)+(1-s)\cdot\log\left(\frac{Y_{t}^{b}}{\bar{Y}^{b}}\right)\right)$
+\begin_inset Formula $\hat{y}_{t}^{EA,MMB}=100\hat{Y}_{t}^{EA}=100\left(s\cdot\log\left(\frac{Y_{t}^{a}}{\bar{Y}^{a}}\right)+(1-s)\cdot\log\left(\frac{Y_{t}^{b}}{\bar{Y}^{b}}\right)\right)$
 \end_inset
 
 
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+output
+\family default
+: 
+\begin_inset Formula $y_{t}^{EA,MMB}=100\left(s\cdot\log\left(\frac{Y_{t}^{a}}{\bar{Y}^{a}}\right)+(1-s)\cdot\log\left(\frac{Y_{t}^{b}}{\bar{Y}^{b}}\right)\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Analogously to FiMod, by knowing the parameter values in Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mmbRuleGEAR"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (i.e., 
+\begin_inset Formula $\rho_{i}=0.868$
+\end_inset
+
+, 
+\begin_inset Formula $\phi_{\pi}^{EA}=1.757$
+\end_inset
+
+, 
+\begin_inset Formula $\phi_{y}^{EA}=0.052$
+\end_inset
+
+) I am able to derive the monetary policy coefficients for the MMB framework,
+ which are also specified in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:rulesParametersFiMod"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in the appendix.
+ As demonstrated in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GEARWithDiffSetups"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the GEAR implementation in both the original and MMB setups ensures fully
+ consistent results.
 \end_layout
 
 \begin_layout Standard
@@ -1012,7 +853,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-FiMod's simulation of a standard monetary policy shock in the MMB and original
+GEAR's simulation of a standard monetary policy shock in the MMB and original
  model set up 
 \begin_inset CommandInset label
 LatexCommand label
@@ -1047,7 +888,7 @@ status open
 
 
 \backslash
-source{Own calculations with the MMB.}
+source{Own calculations.}
 \end_layout
 
 \end_inset
@@ -1069,6 +910,36 @@ name "sec:variousMPrules"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The FiMod model is compatible with all the standard monetary policy rules
+ incorporated in the MMB.
+ A comparison across various rules indicate that the specific rule used
+ in FiMod produces relatively pronounced effects of a standard temporary
+ monetary policy shock (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FiModWithDiffRules"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Unsurprisingly, in terms of macroeconomic impact, the model rule is close
+ to the CMR rule, reflecting their similar specification (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:adaptation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Subsection
@@ -1578,8 +1449,148 @@ source{Own calculations with the MMB.}
 \end_layout
 
 \begin_layout Section
+FiMod and GEAR monetary policy rules coefficients
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Parametrisation of the FiMod specific monetary policy rule according to
+ the MMB setup 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:rulesParametersFiMod"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{small}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand input
+filename "tex/rulesParametersFiMod.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{small}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+source{Own calculations based on the FiMod callibration.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 FiMod Model Specific Rule vs.
  Standard Rules
+\end_layout
+
+\begin_layout Standard
+In the appendix, Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:rulesParameters"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ compares the parameters of FiMod's monetary policy rule with other standard
+ rules used in the MMB.
+ FiMod's rule shows similarities to the CMR rule, as both exhibit similar
+ persistence and incorporate output growth.
+ However, a notable difference is that the CMR rule is based on the expected
+ inflation gap.
+ Additionally, FiMod's rule is akin to the SW rule, which, unlike FiMod,
+ uses the output gap difference instead of output growth.
 \end_layout
 
 \begin_layout Standard
