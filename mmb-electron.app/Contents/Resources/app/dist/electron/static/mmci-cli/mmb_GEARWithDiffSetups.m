@@ -78,12 +78,12 @@ end
 
 %% values coming from GEAR project
 % //TODO: change to GEAR from the FiMod placeholder
-matFilePath = fullfile(projectPathFiMod, "FiMod/Output/FiMod_results.mat");
+matFilePath = fullfile(projectPathGEAR, "/estimation/GEAR_baseline_simulationMMB/Output/GEAR_baseline_simulationMMB_results.mat");
 aDataGEAR = load(matFilePath);
 
 resGEAROrig = databank.fromArray( ...
     cell2mat(struct2cell(aDataGEAR.oo_.irfs))' ...
-    , extractBefore(databank.fieldNames(aDataGEAR.oo_.irfs), "_epsii") ...
+    , extractBefore(databank.fieldNames(aDataGEAR.oo_.irfs), "_nua_eM") ...
     , qq(1) ...
 );
 
@@ -96,7 +96,7 @@ allStruct.resGEAROrig = resGEAROrig;
 varStruct.resDynareSimult_ = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resDynareIrf_ = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
-varStruct.resGEAROrig = ["interestEA", "inflationEA", "inflationqEA", "outputEA", "outputEA"];
+varStruct.resGEAROrig = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
 plotGEARWithDiffSetups(allStruct, setupsToPlot(end-1: end),  ["MMB setup", "GEAR original setup"], varStruct, projectPath, subProjectPath, "short");
