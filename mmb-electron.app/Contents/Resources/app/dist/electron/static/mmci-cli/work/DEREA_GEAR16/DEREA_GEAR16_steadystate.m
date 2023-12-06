@@ -478,7 +478,7 @@ thetaw_b_t = thetaw_b;
    inflation = 0;
    inflationq = 0;
    outputgap = 0;
-   output = 0;
+   output = 100*(pop_a/(pop_b+pop_a)*log(y_a_t)+(pop_b/(pop_b+pop_a)*log(y_b_t)));
    
   endoList = M_.endo_names(~startsWith(M_.endo_names, "AUX_"));   
   NumberOfEndogenousVariables = numel(endoList);     
