@@ -95,8 +95,7 @@ allStruct.resFiModOrig = resFiModOrig;
 varStruct.resDynareSimult_ = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resDynareIrf_ = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
-% //TODO: define output gap in FiMod
-varStruct.resFiModOrig = ["interestEA", "inflationEA", "inflationqEA", "outputEA", "outputEA"];
+varStruct.resFiModOrig = ["interestEA", "inflationEA", "inflationqEA", "outputgapEA", "outputEA"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
 plotFiModWithDiffSetups(allStruct, setupsToPlot(end-1: end),  ["MMB setup", "FiMod original setup"], varStruct, projectPath, subProjectPath, "short");
