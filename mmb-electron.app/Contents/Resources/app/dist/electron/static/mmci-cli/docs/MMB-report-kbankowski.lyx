@@ -199,40 +199,6 @@ section*{Table of content}}
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-check charts titles
-\end_layout
-
-\begin_layout Plain Layout
-check table titles
-\end_layout
-
-\begin_layout Plain Layout
-check sections/ subsection titles
-\end_layout
-
-\begin_layout Plain Layout
-check charts/ tables footnotes
-\end_layout
-
-\begin_layout Plain Layout
-check i.e.
- and e.g.
-\end_layout
-
-\begin_layout Plain Layout
-check references
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Overview
 \end_layout
@@ -625,8 +591,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-FiMod's simulation of a standard monetary policy shock in the MMB and original
- model set up 
+FiMod simulation of a standard monetary policy shock in the MMB and original
+ model setup 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:FiModWithDiffSetups"
@@ -857,8 +823,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-GEAR's simulation of a standard monetary policy shock in the MMB and original
- model set up 
+GEAR simulation of a standard monetary policy shock in the MMB and original
+ model setup 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:GEARWithDiffSetups"
@@ -1166,7 +1132,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-FiMod results compared to all other MMB models 
+FiMod and GEAR results compared to all other MMB models 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:SWruleWithDiffModels"
@@ -1402,7 +1368,7 @@ arabic{equation}}
 \end_layout
 
 \begin_layout Section
-Standard Monetary Policy Rules within the MMB Framework
+Standard monetary policy rules within the MMB framework
 \end_layout
 
 \begin_layout Standard
@@ -1498,8 +1464,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Parametrisation of the FiMod specific monetary policy rule according to
- the MMB setup 
+MMB parametrisation of the FiMod and GEAR specific monetary policy rules
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:rulesParametersFiMod"
@@ -1603,8 +1569,8 @@ source{Own calculations based on the FiMod and GEAR parameters.}
 \end_layout
 
 \begin_layout Section
-FiMod Model Specific Rule vs.
- Standard Rules
+FiMod and GEAR model-specific rules vs.
+ standard rules
 \end_layout
 
 \begin_layout Standard
