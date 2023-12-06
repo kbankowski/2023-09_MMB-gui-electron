@@ -1110,12 +1110,12 @@ name "sec:comparison-vis-a-vis-other"
 \end_layout
 
 \begin_layout Standard
-To assess the plausibility of FiMod's results, they can be compared with
- those from around 150 other macroeconomic models, under a unified monetary
- policy rule.
- Such a comparison reveals that FiMod's responses to a standard temporary
- monetary policy shock are roughly median within the range implied by these
- models (see Figure 
+To assess the plausibility of FiMod's and GEAR's results, a comparison can
+ be made with those from approximately 150 other macroeconomic models, using
+ a unified monetary policy rule.
+ Such a comparison, under the arbitrarily selected SW rule, reveals that
+ the responses of FiMod and GEAR to a standard temporary monetary policy
+ shock fall within the median range implied by all models (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:SWruleWithDiffModels"
@@ -1126,11 +1126,8 @@ noprefix "false"
 \end_inset
 
 ).
- Specifically, the effects observed under the selected SW rule are neither
- overly subdued nor exceptionally pronounced compared to those in other
- models.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 The SW rule is one of the most commonly used rules in the MMB framework,
@@ -1149,7 +1146,15 @@ noprefix "false"
 
 \end_inset
 
+ Specifically, the effects observed under the selected SW rule are neither
+ overly subdued nor exceptionally pronounced compared to those in other
+ models.
+ Furthermore, one noticeable observation is that price dynamics in FiMod,
+ which are based on Calvo pricing, are considerably more sluggish compared
+ to GEAR, which incorporates Rotemberg adjustment costs.
+\end_layout
 
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -1580,7 +1585,7 @@ status open
 
 
 \backslash
-source{Own calculations based on the FiMod callibration.}
+source{Own calculations based on the FiMod and GEAR parameters.}
 \end_layout
 
 \end_inset
