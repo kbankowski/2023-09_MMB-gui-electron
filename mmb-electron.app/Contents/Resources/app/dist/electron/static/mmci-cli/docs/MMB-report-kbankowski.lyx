@@ -224,6 +224,10 @@ check i.e.
  and e.g.
 \end_layout
 
+\begin_layout Plain Layout
+check references
+\end_layout
+
 \end_inset
 
 
@@ -913,11 +917,11 @@ name "sec:variousMPrules"
 \end_layout
 
 \begin_layout Standard
-The FiMod model is compatible with all the standard monetary policy rules
- incorporated in the MMB.
- A comparison across various rules indicate that the specific rule used
- in FiMod produces relatively pronounced effects of a standard temporary
- monetary policy shock (see Figure 
+The FiMod and GEAR models are compatible with all the standard monetary
+ policy rules incorporated in the MMB.
+ Comparison across various rules indicates that the specific rules used
+ in both FiMod and GEAR produce relatively pronounced effects of a standard
+ temporary monetary policy shock (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:FiModWithDiffRules"
@@ -927,12 +931,10 @@ noprefix "false"
 
 \end_inset
 
-).
- Unsurprisingly, in terms of macroeconomic impact, the model rule is close
- to the CMR rule, reflecting their similar specification (see Section 
+ and 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:adaptation"
+reference "fig:GEARWithDiffRules"
 plural "false"
 caps "false"
 noprefix "false"
@@ -940,10 +942,42 @@ noprefix "false"
 \end_inset
 
 ).
+ In terms of macroeconomic impact, the model-specific rules of FiMod and
+ GEAR are relatively close to the CEE and CMR rules.
 \end_layout
 
-\begin_layout Subsection
-FiMod
+\begin_layout Standard
+The similarity of the results of the model-specific rules to the CEE and
+ CMR rules is not surprising given their similar specifications.
+ To start with, both monetary policy rules embedded in FiMod and GEAR are
+ similar, with the notable difference that the former operates on output
+ growth while the latter on the output gap, as shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:rulesParametersFiMod"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ In the appendix, Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:rulesParameters"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ compares the parameters of FiMod's and GEAR's monetary policy rules with
+ other standard rules used in the MMB.
+ The FiMod and GEAR rules exhibit similarities with the CEE and CMR rules,
+ both in terms of reference variables and coefficients.
+ A notable difference is that the CEE and CMR rules are based on the expected
+ inflation gap rather than the contemporaneous one.
 \end_layout
 
 \begin_layout Standard
@@ -1003,10 +1037,6 @@ source{Own calculations with the MMB.}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-GEAR
 \end_layout
 
 \begin_layout Standard
@@ -1570,27 +1600,6 @@ source{Own calculations based on the FiMod callibration.}
 \begin_layout Section
 FiMod Model Specific Rule vs.
  Standard Rules
-\end_layout
-
-\begin_layout Standard
-In the appendix, Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:rulesParameters"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- compares the parameters of FiMod's monetary policy rule with other standard
- rules used in the MMB.
- FiMod's rule shows similarities to the CMR rule, as both exhibit similar
- persistence and incorporate output growth.
- However, a notable difference is that the CMR rule is based on the expected
- inflation gap.
- Additionally, FiMod's rule is akin to the SW rule, which, unlike FiMod,
- uses the output gap difference instead of output growth.
 \end_layout
 
 \begin_layout Standard
