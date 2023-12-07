@@ -3,13 +3,13 @@
   "rules": [
   ],
   "models": [
-    "DEREA_GEAR16",
     "ESREA_FIMOD12",
     "NK_NS14"
   ],
   "msr": true,
   "usr": false,
   "options": {
+      "shocks": ["fiscal_", "interest_"],
     "gain": 0.01,
     "horizon": 20
   }
