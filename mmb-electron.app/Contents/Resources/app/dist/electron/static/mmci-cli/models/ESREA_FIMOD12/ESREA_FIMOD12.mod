@@ -146,7 +146,7 @@ for i=1:33
 end
 cd(thispath);
 // Definition of Discretionary Fiscal Policy Parameter                   //*
-coffispol = 0.01;                                                           //*
+coffispol = 0.01/(omega*omegaCg+(1-omega)*fomegaCg);                     //*
 //**************************************************************************
 
 // ######################################################################
