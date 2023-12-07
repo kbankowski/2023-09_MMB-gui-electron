@@ -312,7 +312,7 @@ for i=1:33
 end
 cd(thispath);
 // Definition of Discretionary Fiscal Policy Parameter                   //*
-coffispol = 0.01;                                                        //*
+coffispol = 0.01/(gc_a*pop_a/(pop_b+pop_a)+gc_b*pop_b/(pop_b+pop_a));                                                        //*
 //**************************************************************************
 
 //**************************************************************************
