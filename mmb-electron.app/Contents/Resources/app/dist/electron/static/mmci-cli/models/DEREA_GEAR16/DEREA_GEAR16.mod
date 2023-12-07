@@ -89,9 +89,10 @@ var
   shock_eCG_a_t    shock_eCG_b_t                                      // Public consumption shock
   shock_emg_a_t    shock_emg_b_t                                      // Public wage markup shock
   epsilon_enG_a_t  epsilon_enG_b_t                                    // Public Employment shock (AR(1) process assumed)
+  nuAGG_ecG
 //**************************************************************************
 // Modelbase Variables                                                   //*
-        interest inflation inflationq outputgap output;           //*
+        interest inflation inflationq outputgap output fispol;           //*
 //**************************************************************************
 
 varexo  
@@ -102,7 +103,7 @@ varexo
   nua_en      nub_en               // Labor supply shock
   nua_ein     nub_ein              // Investment shock
   nua_erp     nub_erp              // Risk premium shock               
-  nua_ecG     nub_ecG              // Public consumption spending
+  /*nua_ecG     nub_ecG*/              // Public consumption spending
   nua_etau    nub_etau             // Value-Added Tax shock
   nua_etauw   nub_etauw            // Labor Tax shock
   nua_etausc  nub_etausc           // Social contribution shock
@@ -119,7 +120,7 @@ varexo
   eps_z_g                          // Global technology shock
 //**************************************************************************
 // Modelbase Shocks                                                      //*
-       interest_;                                                //*
+       interest_ fiscal_;                                                //*
 //**************************************************************************        
 
 parameters  
@@ -136,7 +137,7 @@ parameters
         cofintoutf1 cofintoutf2 cofintoutf3 cofintoutf4                  //*
         cofintoutp cofintoutpb1 cofintoutpb2 cofintoutpb3 cofintoutpb4   //*
         cofintoutpf1 cofintoutpf2 cofintoutpf3 cofintoutpf4              //*
-        std_r_ std_r_quart                                     //*
+        std_r_ std_r_quart coffispol                                     //*
 //**************************************************************************  
   mu_a              mu_b                      // share of RoT-households
   mu_bar_a          mu_bar_b                  // Transfers distribution parameter
@@ -307,6 +308,8 @@ for i=1:33
     eval(['M_.params(i)  = ' deep_parameter_name ' ;'])
 end
 cd(thispath);
+// Definition of Discretionary Fiscal Policy Parameter                   //*
+coffispol = 0.01;                                                        //*
 //**************************************************************************
 
 set_params_31_08_aw1;
@@ -319,6 +322,7 @@ inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;
 inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));
 outputgap = 100*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)));
 output = 100*(pop_a/(pop_b+pop_a)*log(y_a_t)+(pop_b/(pop_b+pop_a)*log(y_b_t)));
+fispol = nuAGG_ecG;                                                                          //*
 //**************************************************************************
 
 
@@ -359,6 +363,10 @@ interest =   cofintintb1*interest(-1)                                    //*
            + cofintoutpf3*output(+3)                                     //*
            + cofintoutpf4*output(+4)                                     //*
            + std_r_ *interest_;                                          //*
+                                                                         //*
+// Discretionary Government Spending                                     //*
+                                                                         //*
+fispol = coffispol*fiscal_;                                              //*
 //**************************************************************************
 
 //*************************************************************************
@@ -429,7 +437,7 @@ yG_a_t = z_a*kG_a_t^eta_kG_a*nG_a_t^eta_nG_a;
 mg_a_t = mg_a;
 log(wrG_a_t/wrG_a_ts) = rho_emg_a*log(wrG_a_t(-1)/wrG_a_ts) - xi_b_emg_a*log(BG_a_t(-1)/BG_a_ts) + xi_y_emg_a*log(y_a_t(-1)/y_a_ts) + psi_mg_a*shock_emg_a_t + (1-psi_mg_a)*shock_emg_a_t(-1);
 
-shock_eCG_a_t   = nua_ecG;
+shock_eCG_a_t   = nuAGG_ecG;
 shock_einG_a_t  = nua_einG;
 shock_eTR_a_t   = nua_eTR;
 shock_eT_a_t    = nua_eT;
@@ -590,7 +598,7 @@ mg_b_t = mg_b;
 
 log(wrG_b_t/wrG_b_ts) = rho_emg_b*log(wrG_b_t(-1)/wrG_b_ts) - xi_b_emg_b*log(BG_b_t(-1)/BG_b_ts) + xi_y_emg_b*log(y_b_t(-1)/y_b_ts) + psi_mg_b*shock_emg_b_t + (1-psi_mg_b)*shock_emg_b_t(-1);
 
-shock_eCG_b_t   = nub_ecG;
+shock_eCG_b_t   = nuAGG_ecG;
 shock_einG_b_t  = nub_einG;
 shock_eTR_b_t   = nub_eTR;
 shock_eT_b_t    = nub_eT;
@@ -853,7 +861,7 @@ shocks;
   var	nua_etauw	=	0.00227315527636	^2	;
   var	nua_etauc	=	0.00162619256566	^2	;
   var	nua_etausc	=	0.00137848984641	^2	;
-  var	nua_ecG	=	0.01605128003136	^2	;
+//  var	nua_ecG	=	0.01605128003136	^2	;
   var	nua_einG	=	0.07503997122508	^2	;
   var	nua_enG	=	0.00018101663856	^2	;
   var	nua_emg	=	0.01084618528462	^2	;
@@ -870,7 +878,7 @@ shocks;
   var	nub_etauw	=	0.00193960315492	^2	;
   var	nub_etauc	=	0.00160944093838	^2	;
   var	nub_etausc	=	0.00153849138460	^2	;
-  var	nub_ecG	=	0.01095394183877	^2	;
+//  var	nub_ecG	=	0.01095394183877	^2	;
   var	nub_einG	=	0.03564545677108	^2	;
   var	nub_enG	=	0.00018091979448	^2	;
   var	nub_emg	=	0.01137572024947	^2	;
