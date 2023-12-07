@@ -5,7 +5,8 @@
   "models": [
     "ESREA_FIMOD12",
     "DEREA_GEAR16",  
-    "NK_NS14"
+    "NK_NS14",
+    "EA_SW03",
   ],
   "msr": true,
   "usr": false,

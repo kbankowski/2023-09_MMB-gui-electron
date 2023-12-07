@@ -6,7 +6,7 @@ clear all; close all; clc
 mmb('config_6.json','var');
 
 %% Read the simulation results into one structure
-modelListForLoop =  ["ESREA_FIMOD12", "DEREA_GEAR16", "NK_NS14"];
+modelListForLoop =  ["ESREA_FIMOD12", "DEREA_GEAR16", "NK_NS14", "EA_SW03"];
 mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output", "fispol"];
 
 % looping through all models
