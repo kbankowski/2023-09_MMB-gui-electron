@@ -300,6 +300,7 @@ coffispol = 0.01;                                                           //*
 
 
     // Country size
+    // TODO: check the calibration so that the model is for Spain
     omega = 0.275;                          // Size of home counrty
 
     pieAs = 1;                              // SS PPI gross inflation rate
