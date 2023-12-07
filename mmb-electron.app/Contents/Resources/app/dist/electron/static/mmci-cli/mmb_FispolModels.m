@@ -6,25 +6,25 @@ clear all; close all; clc
 mmb('config_6.json','var');
 
 %% Read the simulation results into one structure
-modelList = subroutines.createModelList(projectPath, subProjectPath);
-modelListExclude = ["NK_GK11", "US_AJ16"];
-modelListForLoop =  setdiff(string(modelList), modelListExclude);
+modelListForLoop =  ["ESREA_FIMOD12", "NK_NS14"];
 mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
 % looping through all models
 for aModel = modelListForLoop
-    fname = fullfile('out', sprintf('%s-SW.output.json', aModel)); 
+    fname = fullfile('out', sprintf('%s-Model.output.json', aModel)); 
     fid = fopen(fname); 
     raw = fread(fid,inf); 
     str = char(raw'); 
     fclose(fid); 
     val = jsondecode(str);
-    for mmbVar = mmbVarList
-        try
-            mmbDatabank.(aModel).(mmbVar) = Series(qq(0, 4), val.data.IRF.interest_.(mmbVar));
-        catch
-            mmbDatabank.(aModel).(mmbVar) = Series(qq(0, 4): qq(0, 4)+20, NaN);
-            fprintf('%s variable not found in the %s model results\n', mmbVar, aModel);
+    for aShock = ["interest_", "fiscal_"]
+        for mmbVar = mmbVarList
+            try
+                mmbDatabank.(aModel).(aShock).(mmbVar) = Series(qq(0, 4), val.data.IRF.(aShock).(mmbVar));
+            catch
+                mmbDatabank.(aModel).(aShock).(mmbVar) = Series(qq(0, 4): qq(0, 4)+20, NaN);
+                fprintf('%s variable not found in the %s model results for %s shock\n', mmbVar, aModel, aShock);
+            end
         end
     end
 end
