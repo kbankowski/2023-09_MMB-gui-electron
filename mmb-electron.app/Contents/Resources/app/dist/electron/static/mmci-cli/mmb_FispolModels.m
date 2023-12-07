@@ -7,7 +7,7 @@ mmb('config_6.json','var');
 
 %% Read the simulation results into one structure
 modelListForLoop =  ["ESREA_FIMOD12", "NK_NS14"];
-mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output"];
+mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output", "fispol"];
 
 % looping through all models
 for aModel = modelListForLoop
@@ -32,25 +32,14 @@ end
 %% Create a histogram out of rules
 % re-ordering the list to put FiMod last so that it is plotted on top of
 % everything
-selectedModels = ["DEREA_GEAR16", "ESREA_FIMOD12"];
-modelListForPlotting = [ ...
-    modelListForLoop(~ismember(modelListForLoop, selectedModels)) ...
-    , selectedModels ...
-];
-plotSWruleWithDiffModels(mmbDatabank, modelListForPlotting, mmbVarList, projectPath, subProjectPath);
+modelListForPlotting = modelListForLoop;
+plotFispolModels(mmbDatabank, modelListForPlotting, mmbVarList, projectPath, subProjectPath);
 
 %% local function to plot the histogram and save it
-function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPath, subProjectPath)
+function plotFispolModels(mmbDatabank, modelList, mmbVarList, projectPath, subProjectPath)
 
     % Please specify the date range of the series
     dateRange = qq(1,1): qq(5,4);
-    % model selector function
-    modelSelector = @(aModel) strcmp(aModel, "ESREA_FIMOD12") || strcmp(aModel, "DEREA_GEAR16");
-    % thicker Line for selected models
-    lineWidthSelector = @(aModel) 2 * modelSelector(aModel) + 1 * ~modelSelector(aModel);
-    % less transparency for selected models
-    lineTransparencySelector = @(aModel) 1 * modelSelector(aModel) + 0.5 * ~modelSelector(aModel);
-
     
     % Plotting
     figure
@@ -63,19 +52,7 @@ function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPat
     
     h = gcf;
     
-    % replication of light gray colour for all non-FiMod and non-GEAR models
-    cmap = repmat([0.702 0.702 0.702], numel(modelList)-2, 1);
-    % based on the following palette 
-    % https://www.simplifiedsciencepublishing.com/resources/best-color-palettes-for-scientific-figures-and-data-visualizations
-    % #c1272d - Dark Red
-    % #0000a7 - Indigo
-    % #eecc16 - Yellow
-    % #008176 - Teal
-    % #b3b3b3 - Light Gray
-    line1color = [0, 0, 0.6549];
-    line2color = [0.756, 0.153, 0.176];
-    
-    cmap = [cmap; line1color; line2color];
+    cmap = subroutines.linspecer(numel(modelList));
     
     set(h, 'Units','centimeters', 'Position',[0 0 21-2 8])
     set(h,'defaulttextinterpreter','latex');
@@ -92,9 +69,9 @@ function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPat
             
         for aModel = modelList
             pp.(aModel) = plot(...
-                mmbDatabank.(aModel).(mmbVar)(dateRange) ...
-                , 'Color', [cmap(aModel==modelList, :), lineTransparencySelector(aModel)] ...
-                , 'Linewidth', lineWidthSelector(aModel) ...
+                mmbDatabank.(aModel).fiscal_.(mmbVar)(dateRange) ...
+                , 'Color', cmap(aModel==modelList, :) ...
+                , 'Linewidth', 2 ...
             );
         end
                 
@@ -110,14 +87,10 @@ function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPat
     
     end 
     
-    % since we plot model at the end so that it overlays other lines we
-    % move it to the front of the legend
-    pickLastAndFirst = @(x) [x(end), x(end-1), x(1)];
-
     % Setting of the legend   
     leg = legend(...
-        pickLastAndFirst(struct2array(pp)) ...
-        , ["FiMod", "GEAR", "other models"] ...
+        struct2array(pp) ...
+        , modelList ...
         , 'Orientation', 'horizontal' ...
         , 'Color', [1 1 1] ...
         , 'Fontsize', 8 ...
@@ -126,7 +99,7 @@ function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPat
     leg.Layout.Tile = 'north';
         
     % Save graph
-    fileName = fullfile(projectPath, subProjectPath, "docs/figures", "SWruleWithDiffModels");
+    fileName = fullfile(projectPath, subProjectPath, "docs/figures", "FispolModels");
     exportgraphics(t, sprintf('%s.png',fileName),'BackgroundColor','none');
 
 end

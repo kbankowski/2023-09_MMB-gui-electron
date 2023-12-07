@@ -146,7 +146,7 @@ for i=1:33
 end
 cd(thispath);
 // Definition of Discretionary Fiscal Policy Parameter                   //*
-coffispol = 1;                                                           //*
+coffispol = 0.01;                                                           //*
 //**************************************************************************
 
 // ######################################################################
@@ -1720,7 +1720,7 @@ var fepsiIg = 0;
 var fepsiconsum = 0;
 var fepsib = 0;
 var fepsitw = 0;
-var fiscal_ = 1;
+var fiscal_ = 0.01^2;
 end;
 
 // stoch_simul(order = 1, irf=20, nograph);
