@@ -296,6 +296,9 @@ parameters
   nfa_a_ts      nfa_b_ts      nfa_c_ts  // Net Foreign Asset Position
 ;
 
+
+set_params_31_08_aw1;
+
 //**************************************************************************
 // Specification of Modelbase Parameters                                 //*
                                                                          //*
@@ -311,8 +314,6 @@ cd(thispath);
 // Definition of Discretionary Fiscal Policy Parameter                   //*
 coffispol = 0.01;                                                        //*
 //**************************************************************************
-
-set_params_31_08_aw1;
 
 //**************************************************************************
 // Definition of Modelbase Variables in Terms of Original Model Variables //*
