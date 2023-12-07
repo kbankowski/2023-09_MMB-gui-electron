@@ -133,22 +133,6 @@ parameters Rev_ts, Exp_ts, Rev_GDP_ts, Exp_GDP_ts;
 // Calibrated values (Baseline)
 // ######################################################################
 
-//**************************************************************************
-// Specification of Modelbase Parameters                                 //*
-                                                                         //*
-// Load Modelbase Monetary Policy Parameters                             //*
-thispath = pwd;
-cd('..');
-load policy_param.mat;
-for i=1:33
-    deep_parameter_name = M_.param_names(i,:);
-    eval(['M_.params(i)  = ' deep_parameter_name ' ;'])
-end
-cd(thispath);
-// Definition of Discretionary Fiscal Policy Parameter                   //*
-coffispol = 0.01/(omega*omegaCg+(1-omega)*fomegaCg);                     //*
-//**************************************************************************
-
 // ######################################################################
 // Parameter values
 // ######################################################################
@@ -694,7 +678,21 @@ coffispol = 0.01/(omega*omegaCg+(1-omega)*fomegaCg);                     //*
     Rev_GDP_ts = pBs^(1-omega-Psi)*Rev_ts/Ytots;
     Exp_GDP_ts = pBs^(1-omega-Psi)*Exp_ts/Ytots;
 
-
+//**************************************************************************
+// Specification of Modelbase Parameters                                 //*
+                                                                         //*
+// Load Modelbase Monetary Policy Parameters                             //*
+thispath = pwd;
+cd('..');
+load policy_param.mat;
+for i=1:33
+    deep_parameter_name = M_.param_names(i,:);
+    eval(['M_.params(i)  = ' deep_parameter_name ' ;'])
+end
+cd(thispath);
+// Definition of Discretionary Fiscal Policy Parameter                   //*
+coffispol = 0.01/(omega*omegaCg+(1-omega)*fomegaCg);                     //*
+//**************************************************************************
 
 
 
