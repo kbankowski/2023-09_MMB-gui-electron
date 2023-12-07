@@ -1,6 +1,7 @@
 {
   "dynare": "/Applications/Dynare/5.5-arm64",
   "rules": [
+      "SW"
   ],
   "models": [
     "ESREA_FIMOD12",
@@ -8,7 +9,7 @@
     "NK_NS14",
     "EA_SW03",
   ],
-  "msr": true,
+  "msr": false,
   "usr": false,
   "options": {
       "shocks": ["fiscal_", "interest_"],

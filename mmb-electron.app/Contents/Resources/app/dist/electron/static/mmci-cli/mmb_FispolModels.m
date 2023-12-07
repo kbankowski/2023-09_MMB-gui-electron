@@ -11,7 +11,7 @@ mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output", "fis
 
 % looping through all models
 for aModel = modelListForLoop
-    fname = fullfile('out', sprintf('%s-Model.output.json', aModel)); 
+    fname = fullfile('out', sprintf('%s-SW.output.json', aModel)); 
     fid = fopen(fname); 
     raw = fread(fid,inf); 
     str = char(raw'); 
