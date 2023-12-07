@@ -1,3 +1,6 @@
+// TODO: check why inflation falls, which is not the case in the paper
+// TODO: check NK_NS, g is additive and it makes no sense that the output response is so small
+// TODO: introduce common variables
 var              
   i_a_t            i_b_t            i_c_t                             // Interest Rate
   i_Ga_t           i_Gb_t                                             // Government bond rate
