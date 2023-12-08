@@ -77,7 +77,6 @@ for aSer = string(reshape(fieldnames(val.data.IRF.interest_), 1, []))
 end
 
 %% values coming from GEAR project
-% //TODO: change to GEAR from the FiMod placeholder
 matFilePath = fullfile(projectPathGEAR, "/estimation/GEAR_baseline_simulationMMB/Output/GEAR_baseline_simulationMMB_results.mat");
 aDataGEAR = load(matFilePath);
 
