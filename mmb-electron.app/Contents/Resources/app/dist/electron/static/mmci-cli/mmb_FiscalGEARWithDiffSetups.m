@@ -24,7 +24,7 @@ for aSer = string(reshape(fieldnames(val.data.IRF.fiscal_), 1, []))
     resMMB.(aSer) = Series(qq(0, 4), val.data.IRF.fiscal_.(aSer));
 end
 
-%% values coming from GEAR project
+%% values coming from GEAR project (version 1 for the MMB)
 matFilePath = fullfile(projectPathGEAR, "/estimation/GEAR_baseline_simulationMMB/Output/GEAR_baseline_simulationMMB_results.mat");
 aDataGEAR = load(matFilePath);
 
@@ -32,7 +32,21 @@ aDataGEAR = load(matFilePath);
 fieldList = fieldnames(aDataGEAR.oo_.irfs);
 aStructSelected = rmfield(aDataGEAR.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_ecG")));
 % just saving as a databank with renaming
-resGEAROrig = databank.fromArray( ...
+resGEAROrigVer1 = databank.fromArray( ...
+    cell2mat(struct2cell(aStructSelected))' ...
+    , extractBefore(databank.fieldNames(aStructSelected), "_nua_ecG") ...
+    , qq(1) ...
+);
+
+%% values coming from GEAR project (version 2 for the paper with FT)
+matFilePath = fullfile(projectPathGEAR, "/baseline/Buba_Fiskal_Erweiterung_baseline/Output/Buba_Fiskal_Erweiterung_baseline_results.mat");
+aDataGEAR = load(matFilePath);
+
+% reduce the structure to a relavant shock only
+fieldList = fieldnames(aDataGEAR.oo_.irfs);
+aStructSelected = rmfield(aDataGEAR.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_ecG")));
+% just saving as a databank with renaming
+resGEAROrigVer2 = databank.fromArray( ...
     cell2mat(struct2cell(aStructSelected))' ...
     , extractBefore(databank.fieldNames(aStructSelected), "_nua_ecG") ...
     , qq(1) ...
@@ -40,13 +54,16 @@ resGEAROrig = databank.fromArray( ...
 
 %% plotting results based on various GEAR setups
 allStruct.resMMB = resMMB;
-allStruct.resGEAROrig = resGEAROrig;
+allStruct.resGEAROrigVer1 = resGEAROrigVer1;
+allStruct.resGEAROrigVer2 = resGEAROrigVer2;
 
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
-varStruct.resGEAROrig = ["interest", "inflation", "inflationq", "outputgap", "output"];
+varStruct.resGEAROrigVer1 = ["interest", "inflation", "inflationq", "outputgap", "output"];
+% //TODO: adjust the variables below
+varStruct.resGEAROrigVer2 = ["i_EMU_obs", "in_a_obs", "in_a_obs", "dgdp_a_t", "dgdp_a_t"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
-plotFiscalGEARWithDiffSetups(allStruct, setupsToPlot,  ["MMB setup", "GEAR original setup"], varStruct, projectPath, subProjectPath);
+plotFiscalGEARWithDiffSetups(allStruct, setupsToPlot,  ["MMB setup", "GEAR with some MMB adj.", "GEAR orig. setup"], varStruct, projectPath, subProjectPath);
 
 %% function for plotting
 function plotFiscalGEARWithDiffSetups(allStruct, setupList, setupLegendList, varStruct, projectPath, subProjectPath)
@@ -66,7 +83,7 @@ function plotFiscalGEARWithDiffSetups(allStruct, setupList, setupLegendList, var
     h = gcf;
     
     % replication of light gray colour for all non-GEAR models
-    cmap = subroutines.linspecer(4);
+    cmap = subroutines.linspecer(numel(setupList));
     % based on the following palette 
     % https://www.simplifiedsciencepublishing.com/resources/best-color-palettes-for-scientific-figures-and-data-visualizations
     % #c1272d - Dark Red
