@@ -26,11 +26,11 @@ end
 
 %% values coming from GEAR project (version 1 for the MMB)
 matFilePath = fullfile(projectPathGEAR, "/estimation/GEAR_baseline_simulationMMB/Output/GEAR_baseline_simulationMMB_results.mat");
-aDataGEAR = load(matFilePath);
+aDataGEARver1 = load(matFilePath);
 
 % reduce the structure to a relavant shock only
-fieldList = fieldnames(aDataGEAR.oo_.irfs);
-aStructSelected = rmfield(aDataGEAR.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_ecG")));
+fieldList = fieldnames(aDataGEARver1.oo_.irfs);
+aStructSelected = rmfield(aDataGEARver1.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_ecG")));
 % just saving as a databank with renaming
 resGEAROrigVer1 = databank.fromArray( ...
     cell2mat(struct2cell(aStructSelected))' ...
@@ -40,11 +40,11 @@ resGEAROrigVer1 = databank.fromArray( ...
 
 %% values coming from GEAR project (version 2 for the paper with FT)
 matFilePath = fullfile(projectPathGEAR, "/baseline/Buba_Fiskal_Erweiterung_baseline/Output/Buba_Fiskal_Erweiterung_baseline_results.mat");
-aDataGEAR = load(matFilePath);
+aDataGEARver2 = load(matFilePath);
 
 % reduce the structure to a relavant shock only
-fieldList = fieldnames(aDataGEAR.oo_.irfs);
-aStructSelected = rmfield(aDataGEAR.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_ecG")));
+fieldList = fieldnames(aDataGEARver2.oo_.irfs);
+aStructSelected = rmfield(aDataGEARver2.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_ecG")));
 % just saving as a databank with renaming
 resGEAROrigVer2 = databank.fromArray( ...
     cell2mat(struct2cell(aStructSelected))' ...
@@ -58,7 +58,7 @@ allStruct.resGEAROrigVer1 = resGEAROrigVer1;
 allStruct.resGEAROrigVer2 = resGEAROrigVer2;
 
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
-varStruct.resGEAROrigVer1 = ["interest", "inflation", "inflationq", "outputgap", "output"];
+varStruct.resGEAROrigVer1 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
 % //TODO: adjust the variables below
 varStruct.resGEAROrigVer2 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
 
@@ -122,7 +122,7 @@ function plotFiscalGEARWithDiffSetups(allStruct, setupList, setupLegendList, var
             end
 
             % re-scaling original GEAR set-up, which does not have %
-            if strcmp(aSetup, "resGEAROrigVer2")
+            if ~strcmp(aSetup, "resMMB")
                 scaleFactor = 100;            
             else
                 scaleFactor = 1;            
