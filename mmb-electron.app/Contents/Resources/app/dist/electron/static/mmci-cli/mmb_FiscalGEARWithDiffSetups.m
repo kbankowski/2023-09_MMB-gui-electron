@@ -20,38 +20,36 @@ fclose(fid);
 val = jsondecode(str);
 
 % deviations as a databank
-for aSer = string(reshape(fieldnames(val.data.IRF.interest_), 1, []))
-    resMMB.(aSer) = Series(qq(0, 4), val.data.IRF.interest_.(aSer));
+for aSer = string(reshape(fieldnames(val.data.IRF.fiscal_), 1, []))
+    resMMB.(aSer) = Series(qq(0, 4), val.data.IRF.fiscal_.(aSer));
 end
 
 %% values coming from GEAR project
 matFilePath = fullfile(projectPathGEAR, "/estimation/GEAR_baseline_simulationMMB/Output/GEAR_baseline_simulationMMB_results.mat");
 aDataGEAR = load(matFilePath);
 
+% reduce the structure to a relavant shock only
+fieldList = fieldnames(aDataGEAR.oo_.irfs);
+aStructSelected = rmfield(aDataGEAR.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_ecG")));
+% just saving as a databank with renaming
 resGEAROrig = databank.fromArray( ...
-    cell2mat(struct2cell(aDataGEAR.oo_.irfs))' ...
-    , extractBefore(databank.fieldNames(aDataGEAR.oo_.irfs), "_nua_eM") ...
+    cell2mat(struct2cell(aStructSelected))' ...
+    , extractBefore(databank.fieldNames(aStructSelected), "_nua_ecG") ...
     , qq(1) ...
 );
 
 %% plotting results based on various GEAR setups
-allStruct.resDynareSimult_ = resDynareSimult_;
-allStruct.resDynareIrf_ = resDynareIrf_;
 allStruct.resMMB = resMMB;
 allStruct.resGEAROrig = resGEAROrig;
 
-varStruct.resDynareSimult_ = ["interest", "inflation", "inflationq", "outputgap", "output"];
-varStruct.resDynareIrf_ = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resGEAROrig = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
-plotGEARWithDiffSetups(allStruct, setupsToPlot(end-1: end),  ["MMB setup", "GEAR original setup"], varStruct, projectPath, subProjectPath, "short");
-plotGEARWithDiffSetups(allStruct, setupsToPlot, setupsToPlot, varStruct, projectPath, subProjectPath, "long");
-
+plotFiscalGEARWithDiffSetups(allStruct, setupsToPlot,  ["MMB setup", "GEAR original setup"], varStruct, projectPath, subProjectPath);
 
 %% function for plotting
-function plotGEARWithDiffSetups(allStruct, setupList, setupLegendList, varStruct, projectPath, subProjectPath, plotVersion)
+function plotFiscalGEARWithDiffSetups(allStruct, setupList, setupLegendList, varStruct, projectPath, subProjectPath)
 
     % Please specify the date range of the series
     dateRange = qq(1,1): qq(5,4);
@@ -132,7 +130,7 @@ function plotGEARWithDiffSetups(allStruct, setupList, setupLegendList, varStruct
     leg.Layout.Tile = 'north';
         
     % Save graph
-    fileName = fullfile(projectPath, subProjectPath, "docs/figures", sprintf('GEARWithDiffSetups_%s', plotVersion));
+    fileName = fullfile(projectPath, subProjectPath, "docs/figures", sprintf('FiscalGEARWithDiffSetups'));
     exportgraphics(t, sprintf('%s.png',fileName),'BackgroundColor','none');
 
 end
