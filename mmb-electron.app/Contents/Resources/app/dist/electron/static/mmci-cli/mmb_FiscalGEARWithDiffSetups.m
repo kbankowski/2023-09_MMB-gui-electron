@@ -60,7 +60,7 @@ allStruct.resGEAROrigVer2 = resGEAROrigVer2;
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resGEAROrigVer1 = ["interest", "inflation", "inflationq", "outputgap", "output"];
 % //TODO: adjust the variables below
-varStruct.resGEAROrigVer2 = ["i_EMU_obs", "in_a_obs", "in_a_obs", "dgdp_a_t", "dgdp_a_t"];
+varStruct.resGEAROrigVer2 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
 plotFiscalGEARWithDiffSetups(allStruct, setupsToPlot,  ["MMB setup", "GEAR with some MMB adj.", "GEAR orig. setup"], varStruct, projectPath, subProjectPath);
@@ -113,11 +113,26 @@ function plotFiscalGEARWithDiffSetups(allStruct, setupList, setupLegendList, var
             else
                 aMarkerStyle = "none";
             end
+
+            % re-scaling original GEAR set-up, which does not have %
+            if strcmp(aSetup, "resGEAROrigVer2")
+                aLineStyle = ':';            
+            else
+                aLineStyle = '-';            
+            end
+
+            % re-scaling original GEAR set-up, which does not have %
+            if strcmp(aSetup, "resGEAROrigVer2")
+                scaleFactor = 100;            
+            else
+                scaleFactor = 1;            
+            end
             
             pp.(aSetup) = plot(...
-                allStruct.(aSetup).(varStruct.(aSetup)(mmbVar == varStruct.("resMMB")))(dateRange) ...
+                scaleFactor*allStruct.(aSetup).(varStruct.(aSetup)(mmbVar == varStruct.("resMMB")))(dateRange) ...
                 , 'Color', [cmap(aSetup==setupList, :)] ...
                 , 'LineWidth', 2 ...
+                , 'LineStyle', aLineStyle ...
                 , 'Marker', aMarkerStyle ...
                 , 'MarkerSize', 5 ...
             );
