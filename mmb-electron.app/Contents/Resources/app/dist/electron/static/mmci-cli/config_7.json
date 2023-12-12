@@ -1,0 +1,15 @@
+{
+  "dynare": "/Applications/Dynare/5.5-arm64",
+  "rules": [
+  ],
+  "models": [
+    "DEREA_GEAR16"
+  ],
+  "msr": true,
+  "usr": false,
+  "options": {
+    "shocks": ["fiscal_"],    
+    "gain": 0.01,
+    "horizon": 20
+  }
+}
