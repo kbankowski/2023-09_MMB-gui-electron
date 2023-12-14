@@ -1,6 +1,9 @@
 % This driver is used to make sure that the results of the fiscal shock in
 % the GEAR project are identical to these produced in the MMB; the starting
 % point is that they look fine in the GEAR but not in the MMB
+% //TODO: NEXT STEP; GEAR has to be based on the baseline version; set up
+% MMB folder in the GEAR project and based on the baseline version create a
+% model
 
 %% Pre-amble
 clear all; close all; clc
@@ -52,18 +55,34 @@ resGEAROrigVer2 = databank.fromArray( ...
     , qq(1) ...
 );
 
+%% new GEAR version for MMB (version 3)
+matFilePath = fullfile(projectPathGEAR, "/mmb/GEAR/Output/GEAR_results.mat");
+aDataGEARver3 = load(matFilePath);
+
+% reduce the structure to a relavant shock only
+fieldList = fieldnames(aDataGEARver3.oo_.irfs);
+aStructSelected = rmfield(aDataGEARver3.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_ecG")));
+% just saving as a databank with renaming
+resGEAROrigVer3 = databank.fromArray( ...
+    cell2mat(struct2cell(aStructSelected))' ...
+    , extractBefore(databank.fieldNames(aStructSelected), "_nua_ecG") ...
+    , qq(1) ...
+);
+
 %% plotting results based on various GEAR setups
 allStruct.resMMB = resMMB;
 allStruct.resGEAROrigVer1 = resGEAROrigVer1;
 allStruct.resGEAROrigVer2 = resGEAROrigVer2;
+allStruct.resGEAROrigVer3 = resGEAROrigVer3;
 
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resGEAROrigVer1 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
 % //TODO: adjust the variables below
 varStruct.resGEAROrigVer2 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
+varStruct.resGEAROrigVer3 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
-plotFiscalGEARWithDiffSetups(allStruct, setupsToPlot,  ["MMB setup", "GEAR with some MMB adj.", "GEAR orig. setup"], varStruct, projectPath, subProjectPath);
+plotFiscalGEARWithDiffSetups(allStruct, setupsToPlot,  ["MMB setup", "GEAR with some MMB adj.", "GEAR orig. setup", "new GEAR mmb"], varStruct, projectPath, subProjectPath);
 
 %% function for plotting
 function plotFiscalGEARWithDiffSetups(allStruct, setupList, setupLegendList, varStruct, projectPath, subProjectPath)
@@ -117,6 +136,8 @@ function plotFiscalGEARWithDiffSetups(allStruct, setupList, setupLegendList, var
             % re-scaling original GEAR set-up, which does not have %
             if strcmp(aSetup, "resGEAROrigVer2")
                 aLineStyle = ':';            
+            elseif strcmp(aSetup, "resGEAROrigVer3")
+                aLineStyle = '--';            
             else
                 aLineStyle = '-';            
             end
