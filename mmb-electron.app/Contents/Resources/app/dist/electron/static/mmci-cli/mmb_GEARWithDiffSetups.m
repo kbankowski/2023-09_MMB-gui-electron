@@ -77,12 +77,16 @@ for aSer = string(reshape(fieldnames(val.data.IRF.interest_), 1, []))
 end
 
 %% values coming from GEAR project
-matFilePath = fullfile(projectPathGEAR, "/estimation/GEAR_baseline_simulationMMB/Output/GEAR_baseline_simulationMMB_results.mat");
+matFilePath = fullfile(projectPathGEAR, "/mmb/GEAR/Output/GEAR_results.mat");
 aDataGEAR = load(matFilePath);
 
+% reduce the structure to a relavant shock only
+fieldList = fieldnames(aDataGEAR.oo_.irfs);
+aStructSelected = rmfield(aDataGEAR.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_eM")));
+% just saving as a databank with renaming
 resGEAROrig = databank.fromArray( ...
-    cell2mat(struct2cell(aDataGEAR.oo_.irfs))' ...
-    , extractBefore(databank.fieldNames(aDataGEAR.oo_.irfs), "_nua_eM") ...
+    cell2mat(struct2cell(aStructSelected))' ...
+    , extractBefore(databank.fieldNames(aStructSelected), "_nua_eM") ...
     , qq(1) ...
 );
 
