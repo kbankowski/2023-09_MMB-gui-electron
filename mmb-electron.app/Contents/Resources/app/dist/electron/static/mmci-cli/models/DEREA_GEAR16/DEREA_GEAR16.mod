@@ -814,8 +814,8 @@ model;
     interest = 400*log((1+i_policy_t)/(1+i_policy_ts));
     inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;
     inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));
-    outputgap = 100*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)));
-    output = 100*(pop_a/(pop_b+pop_a)*log(y_a_t)+(pop_b/(pop_b+pop_a)*log(y_b_t)));
+    outputgap = 100*(pop_a/(pop_b+pop_a)*log(GDP_a_t/GDP_a_ts)+(pop_b/(pop_b+pop_a)*log(GDP_b_t/GDP_b_ts)));
+    output = 100*(pop_a/(pop_b+pop_a)*log(GDP_a_t)+(pop_b/(pop_b+pop_a)*log(GDP_b_t)));
     fispol = nuAGG_ecG;                                                                          //*
     //**************************************************************************
 
@@ -1045,10 +1045,8 @@ model;
     /*
     log((1+i_policy_t)/(1+i_policy_ts)) = rho_a_i*log((1+i_policy_t(-1))/(1+i_policy_ts))   
                                         + (1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)
-                                            +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)
-                                            +(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
-                                        + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
-                                            + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
+                                            +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(GDP_a_t/GDP_a_ts)
+                                            +(pop_b/(pop_b+pop_a)*log(GDP_b_t/GDP_b_ts)))
                                         + interest_/400; 
     */
     //TODO: Possible modification: Use GDP_i_t instead of y_i_t
@@ -1534,7 +1532,7 @@ interest = 0;
 inflationq = 0;
 inflation  = 0;
 outputgap = 0;
-output = 100*(pop_a/(pop_b+pop_a)*log(y_a_t)+(pop_b/(pop_b+pop_a)*log(y_b_t)));
+output = 100*(pop_a/(pop_b+pop_a)*log(GDP_a_t)+(pop_b/(pop_b+pop_a)*log(GDP_b_t)));
 
 
 end;
