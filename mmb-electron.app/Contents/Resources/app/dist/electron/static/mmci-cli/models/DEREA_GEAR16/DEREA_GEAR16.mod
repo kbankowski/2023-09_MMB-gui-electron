@@ -110,8 +110,11 @@ var
    def_a_obs $\hat{deficit}^{G,a}$ def_b_obs $\hat{deficit}^{G,b}$
 
    rer_ba_obs
-   interest inflationq inflation outputgap output                      // Standard MMB variables for comparison purposes
-   ;
+  nuAGG_ecG
+//**************************************************************************
+// Modelbase Variables                                                   //*
+        interest inflation inflationq outputgap output fispol;           //*
+//**************************************************************************
 
 //***************************************************************************************
 // Definition of exogenous variables (shocks)
@@ -124,7 +127,6 @@ varexo  nua_a $\nu^{A^a}$ nub_a $\nu^{A^b}$                                     
         nua_en $\nu^{N^a}$ nub_en $\nu^{N^b}$                                                 //Labor supply shock
         nua_ein $\nu^{I^a}$ nub_ein $\nu^{I^b}$                                               //Investment shock
         nua_erp $\nu^{RP,EA}$ nub_erp $\nu^{RP,RoW}$                                          //Risk premium shock               
-        nua_ecG $\nu^{c^{G,c}}$ nub_ecG $\nu^{c^{G,c}}$                                       //Public consumption spending
         nua_etau  $\nu^{\tau^a_v}$ nub_etau  $\nu^{\tau^b_v}$                                 //Value-Added Tax shock
         nua_etauw $\nu^{\tau^a_w}$ nub_etauw $\nu^{\tau^b_w}$                                 //Labor Tax shock
         nua_etausc $\nu^{\tau^a_{sc}}$ nub_etausc $\nu^{\tau^b_{sc}}$                         //Social contribution shock
@@ -138,14 +140,29 @@ varexo  nua_a $\nu^{A^a}$ nub_a $\nu^{A^b}$                                     
         nua_RoE $\nu^{RoE^a}$ nub_RoE $\nu^{RoE^b}$                                           //Country-specific demand shocks from RoE
         eps_y_c $\epsilon^{VAR,y^c}$  eps_i_c $\epsilon^{VAR,i^c}$   eps_pi_c $\epsilon^{VAR,\pi^c}$       //Shocks foreign VAR 
         eps_z_g $\epsilon^{z,g}$
-        interest_                                                              // Global technology shock
-;      
+//**************************************************************************
+// Modelbase Shocks                                                      //*
+       interest_ fiscal_;                                                //*
+//**************************************************************************        
 
 //***************************************************************************************
 // Defin_a_tstion of deep model parameters
 //***************************************************************************************
 
-parameters  mu_a $\mu^a$ mu_b $\mu^b$                                                   // share of RoT-households
+parameters  
+//**************************************************************************
+// Modelbase Parameters                                                  //*
+                                                                         //*
+        cofintintb1 cofintintb2 cofintintb3 cofintintb4                  //*
+        cofintinf0 cofintinfb1 cofintinfb2 cofintinfb3 cofintinfb4       //*
+        cofintinff1 cofintinff2 cofintinff3 cofintinff4                  //*
+        cofintout cofintoutb1 cofintoutb2 cofintoutb3 cofintoutb4        //*
+        cofintoutf1 cofintoutf2 cofintoutf3 cofintoutf4                  //*
+        cofintoutp cofintoutpb1 cofintoutpb2 cofintoutpb3 cofintoutpb4   //*
+        cofintoutpf1 cofintoutpf2 cofintoutpf3 cofintoutpf4              //*
+        std_r_ std_r_quart coffispol                                     //*
+//**************************************************************************  
+            mu_a $\mu^a$ mu_b $\mu^b$                                                   // share of RoT-households
             mu_bar_a $\overline{\mu}^a$ mu_bar_b $\overline{\mu}^b$                     // Transfers distribution parameter
             betta_a $\beta_a$ betta_b $\beta_b$                                         // discount factor
             delta_a $\delta_a$ delta_b $\delta_b$                                       // depreciation rate
@@ -771,12 +788,79 @@ TR_b_ts = gTR_b*y_b_ts - (l_b_ts-n_b_ts)*UB_b;
 TR_o_b_ts = (TR_b_ts - mu_b*TR_r_b_ts)/(1-mu_b);
 T_b_ts = ((cG_b_ts + inG_b_ts + (1+tausc_b)*wrG_b_ts*nG_b_ts + (l_b_ts-n_b_ts)*UB_b + TR_b_ts - (tauw_b+tausc_b)*(nP_b_ts*wr_b_ts+nG_b_ts*wrG_b_ts) - tauk_b*(rk_b_ts-delta_b)*k_b_ts - tau_b*y_b_ts - tauc_b*c_b_ts + (1+i_Gb_ts)*BG_b_ts/pi_ts - BG_b_ts)/(1-mu_b));
 
+//**************************************************************************
+// Specification of Modelbase Parameters                                 //*
+                                                                         //*
+// Load Modelbase Monetary Policy Parameters                             //*
+thispath = pwd;
+cd('..');
+load policy_param.mat;
+for i=1:33
+    deep_parameter_name = M_.param_names(i,:);
+    eval(['M_.params(i)  = ' deep_parameter_name ' ;'])
+end
+cd(thispath);
+// Definition of Discretionary Fiscal Policy Parameter                   //*
+coffispol = 0.01/(gc_a*pop_a/(pop_b+pop_a)+gc_b*pop_b/(pop_b+pop_a));                                                        //*
+//**************************************************************************
 
 //*************************************************************************
 // model equations
 //*************************************************************************
 
 model;
+
+    //**************************************************************************
+    interest = 400*log((1+i_policy_t)/(1+i_policy_ts));
+    inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;
+    inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));
+    outputgap = 100*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)));
+    output = 100*(pop_a/(pop_b+pop_a)*log(y_a_t)+(pop_b/(pop_b+pop_a)*log(y_b_t)));
+    fispol = nuAGG_ecG;                                                                          //*
+    //**************************************************************************
+
+    //**************************************************************************
+    // Policy Rule                                                           //*
+                                                                            //*
+    // Monetary Policy                                                       //*
+                                                                            //*
+    interest =   cofintintb1*interest(-1)                                    //*
+              + cofintintb2*interest(-2)                                    //*
+              + cofintintb3*interest(-3)                                    //*
+              + cofintintb4*interest(-4)                                    //*
+              + cofintinf0*inflationq                                       //*
+              + cofintinfb1*inflationq(-1)                                  //*
+              + cofintinfb2*inflationq(-2)                                  //*
+              + cofintinfb3*inflationq(-3)                                  //*
+              + cofintinfb4*inflationq(-4)                                  //*
+              + cofintinff1*inflationq(+1)                                  //*
+              + cofintinff2*inflationq(+2)                                  //*
+              + cofintinff3*inflationq(+3)                                  //*
+              + cofintinff4*inflationq(+4)                                  //*
+              + cofintout*outputgap 	                                     //*
+              + cofintoutb1*outputgap(-1)                                   //*
+              + cofintoutb2*outputgap(-2)                                   //*
+              + cofintoutb3*outputgap(-3)                                   //*
+              + cofintoutb4*outputgap(-4)                                   //*
+              + cofintoutf1*outputgap(+1)                                   //*
+              + cofintoutf2*outputgap(+2)                                   //*
+              + cofintoutf3*outputgap(+3)                                   //*
+              + cofintoutf4*outputgap(+4)                                   //*
+              + cofintoutp*output 	                                         //*
+              + cofintoutpb1*output(-1)                                     //*
+              + cofintoutpb2*output(-2)                                     //*
+              + cofintoutpb3*output(-3)                                     //*
+              + cofintoutpb4*output(-4)                                     //*
+              + cofintoutpf1*output(+1)                                     //*
+              + cofintoutpf2*output(+2)                                     //*
+              + cofintoutpf3*output(+3)                                     //*
+              + cofintoutpf4*output(+4)                                     //*
+              + std_r_ *interest_;                                          //*
+                                                                            //*
+    // Discretionary Government Spending                                     //*
+                                                                            //*
+    fispol = coffispol*fiscal_;                                              //*
+    //**************************************************************************
 
     //*************************************************************************
     // equations relevant for country A (monetary union member)
@@ -836,8 +920,8 @@ model;
 
     // government spending
 
-    log(cG_a_t/cG_a_ts) = rho_eg_a*log(cG_a_t(-1)/cG_a_ts) - xi_b_eg_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eg_a*log(y_a_t(-1)/y_a_ts) + psi_cG_a*nua_ecG + (1-psi_cG_a)*nua_ecG(-1);
-    log(cG_b_t/cG_b_ts) = rho_eg_b*log(cG_b_t(-1)/cG_b_ts) - xi_b_eg_b*log(BG_b_t(-1)/BG_b_ts) - xi_y_eg_b*log(y_b_t(-1)/y_b_ts) + psi_cG_b*nub_ecG + (1-psi_cG_b)*nub_ecG(-1);
+    log(cG_a_t/cG_a_ts) = rho_eg_a*log(cG_a_t(-1)/cG_a_ts) - xi_b_eg_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eg_a*log(y_a_t(-1)/y_a_ts) + psi_cG_a*nuAGG_ecG + (1-psi_cG_a)*nuAGG_ecG(-1);
+    log(cG_b_t/cG_b_ts) = rho_eg_b*log(cG_b_t(-1)/cG_b_ts) - xi_b_eg_b*log(BG_b_t(-1)/BG_b_ts) - xi_y_eg_b*log(y_b_t(-1)/y_b_ts) + psi_cG_b*nuAGG_ecG + (1-psi_cG_b)*nuAGG_ecG(-1);
 
     log(inG_a_t/inG_a_ts) = rho_einG_a*log(inG_a_t(-1)/inG_a_ts) - xi_b_ein_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_ein_a*log(y_a_t(-1)/y_a_ts) + psi_inG_a*nua_einG + (1-psi_inG_a)*nua_einG(-1);
     log(inG_b_t/inG_b_ts) = rho_einG_b*log(inG_b_t(-1)/inG_b_ts) - xi_b_ein_b*log(BG_b_t(-1)/BG_b_ts) - xi_y_ein_b*log(y_b_t(-1)/y_b_ts)  + psi_inG_b*nub_einG + (1-psi_inG_b)*nub_einG(-1);
@@ -958,6 +1042,7 @@ model;
     y_a_t = c_aa_t+in_aa_t+pop_b/pop_a*(c_ba_t+in_ba_t)+pop_c/pop_a*exp(e_RoW_a_t)*((n_ca*(pr_ca_t)^(-eta_c)*c_c*y_c_t)+(n_ca*(pr_ca_t)^(-eta_c)*in_c*y_c_t))+cG_a_t + inG_a_t;
     y_b_t = pop_a/pop_b*(c_ab_t+in_ab_t)+(c_bb_t+in_bb_t)+pop_c/pop_b*exp(e_RoW_b_t)*((n_cb*(pr_cb_t)^(-eta_c)*c_c*y_c_t)+(n_cb*(pr_cb_t)^(-eta_c)*in_c*y_c_t))+cG_b_t + inG_b_t;
 
+    /*
     log((1+i_policy_t)/(1+i_policy_ts)) = rho_a_i*log((1+i_policy_t(-1))/(1+i_policy_ts))   
                                         + (1-rho_a_i)*phi_a_pi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)
                                             +(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts))) + (1-rho_a_i)*phi_a_y*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)
@@ -965,16 +1050,9 @@ model;
                                         + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
                                             + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
                                         + interest_/400; 
+    */
     //TODO: Possible modification: Use GDP_i_t instead of y_i_t
     log((1+i_policy_t)/(1+i_policy_ts))  = pop_a/(pop_b+pop_a)*log((1+i_a_t)/(1+i_a_ts)) + pop_b/(pop_b+pop_a)*log((1+i_b_t)/(1+i_b_ts));
-
-    // Aggregate EA variable to for reporting in the MMB project
-    interest = 400*log((1+i_policy_t)/(1+i_policy_ts));
-    inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));
-    inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;
-    outputgap = 100*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_ts)+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)));
-    output = 100*(pop_a/(pop_b+pop_a)*log(y_a_t)+(pop_b/(pop_b+pop_a)*log(y_b_t)));
-
 
     //*************************************************************************
     // equations relevant for country C (outside monetary union)
@@ -1463,9 +1541,3 @@ end;
 
 resid(1);
 steady;
-
-shocks;
-    var	interest_	=	1^2	;
-end;
-
-stoch_simul(order = 1,nograph, IRF=40);
