@@ -27,20 +27,6 @@ for aSer = string(reshape(fieldnames(val.data.IRF.fiscal_), 1, []))
     resMMB.(aSer) = Series(qq(0, 4), val.data.IRF.fiscal_.(aSer));
 end
 
-%% values coming from GEAR project (version 1 for the MMB)
-matFilePath = fullfile(projectPathGEAR, "/estimation/GEAR_baseline_simulationMMB/Output/GEAR_baseline_simulationMMB_results.mat");
-aDataGEARver1 = load(matFilePath);
-
-% reduce the structure to a relavant shock only
-fieldList = fieldnames(aDataGEARver1.oo_.irfs);
-aStructSelected = rmfield(aDataGEARver1.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_ecG")));
-% just saving as a databank with renaming
-resGEAROrigVer1 = databank.fromArray( ...
-    cell2mat(struct2cell(aStructSelected))' ...
-    , extractBefore(databank.fieldNames(aStructSelected), "_nua_ecG") ...
-    , qq(1) ...
-);
-
 %% values coming from GEAR project (version 2 for the paper with FT)
 matFilePath = fullfile(projectPathGEAR, "/baseline/Buba_Fiskal_Erweiterung_baseline/Output/Buba_Fiskal_Erweiterung_baseline_results.mat");
 aDataGEARver2 = load(matFilePath);
@@ -71,18 +57,15 @@ resGEAROrigVer3 = databank.fromArray( ...
 
 %% plotting results based on various GEAR setups
 allStruct.resMMB = resMMB;
-allStruct.resGEAROrigVer1 = resGEAROrigVer1;
 allStruct.resGEAROrigVer2 = resGEAROrigVer2;
 allStruct.resGEAROrigVer3 = resGEAROrigVer3;
 
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
-varStruct.resGEAROrigVer1 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
-% //TODO: adjust the variables below
 varStruct.resGEAROrigVer2 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
 varStruct.resGEAROrigVer3 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
-plotFiscalGEARWithDiffSetups(allStruct, setupsToPlot,  ["MMB setup", "GEAR with some MMB adj.", "GEAR orig. setup", "new GEAR mmb"], varStruct, projectPath, subProjectPath);
+plotFiscalGEARWithDiffSetups(allStruct, setupsToPlot,  ["MMB setup", "GEAR baseline", "GEAR mmb"], varStruct, projectPath, subProjectPath);
 
 %% function for plotting
 function plotFiscalGEARWithDiffSetups(allStruct, setupList, setupLegendList, varStruct, projectPath, subProjectPath)
