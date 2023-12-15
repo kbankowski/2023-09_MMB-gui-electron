@@ -108,6 +108,8 @@ var
    ur_a_dif ur_b_dif
    BG_a_obs $\hat{B}^{G,a}$ BG_b_obs $\hat{B}^{G,b}$
    def_a_obs $\hat{deficit}^{G,a}$ def_b_obs $\hat{deficit}^{G,b}$
+
+   rer_ba_obs
    interest inflationq inflation outputgap output                      // Standard MMB variables for comparison purposes
    ;
 
@@ -1122,6 +1124,8 @@ model;
     pi_b_obs =pi_bb_t-pi_ts;
     pi_c_obs =pi_c_t-pi_ts;
 
+    rer_ba_obs = (rer_ba_t - 1);
+
     ca_a_obs =ca_a_t/pr_aa_t/y_a_t;
     ca_b_obs =ca_b_t/pr_bb_t/y_b_t;
     ca_c_obs =ca_c_t/1/y_c_t;
@@ -1445,6 +1449,8 @@ theta_b_t = theta_b;
 
 thetaw_a_t = thetaw_a;
 thetaw_b_t = thetaw_b;
+
+rer_ba_obs = 0;
 
 interest = 0;
 inflationq = 0;
