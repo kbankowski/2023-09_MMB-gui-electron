@@ -1457,3 +1457,9 @@ end;
 
 resid(1);
 steady;
+
+shocks;
+    var	interest_	=	1^2	;
+end;
+
+stoch_simul(order = 1,nograph, IRF=40);

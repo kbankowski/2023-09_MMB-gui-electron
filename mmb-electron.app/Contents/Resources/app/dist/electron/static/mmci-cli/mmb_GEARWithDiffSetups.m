@@ -5,6 +5,11 @@ clear all; close all; clc
 %%
 mmb('config_2g.json','var');
 
+%%
+cd(fullfile(projectPath, subProjectPath, 'models', 'DEREA_GEAR16')); 
+dynare DEREA_GEAR16.mod
+cd(fullfile(projectPath, subProjectPath)); 
+
 %% values simulated with simult_ Dynare function
 % the major advantage of this approach is that one can
 % explicitely see both ss values and shock-simulated values
@@ -77,16 +82,16 @@ for aSer = string(reshape(fieldnames(val.data.IRF.interest_), 1, []))
 end
 
 %% values coming from GEAR project
-matFilePath = fullfile(projectPathGEAR, "/mmb/GEAR/Output/GEAR_results.mat");
+matFilePath = fullfile(projectPath, subProjectPath, 'models/DEREA_GEAR16/DEREA_GEAR16/Output/DEREA_GEAR16_results.mat');
 aDataGEAR = load(matFilePath);
 
 % reduce the structure to a relavant shock only
 fieldList = fieldnames(aDataGEAR.oo_.irfs);
-aStructSelected = rmfield(aDataGEAR.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_eM")));
+aStructSelected = rmfield(aDataGEAR.oo_.irfs, fieldList(~endsWith(fieldList, "_interest_")));
 % just saving as a databank with renaming
 resGEAROrig = databank.fromArray( ...
     cell2mat(struct2cell(aStructSelected))' ...
-    , extractBefore(databank.fieldNames(aStructSelected), "_nua_eM") ...
+    , extractBefore(databank.fieldNames(aStructSelected), "_interest_") ...
     , qq(1) ...
 );
 
