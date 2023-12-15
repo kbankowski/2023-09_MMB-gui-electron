@@ -132,11 +132,11 @@ varexo  nua_a $\nu^{A^a}$ nub_a $\nu^{A^b}$                                     
         nua_eTR $\nu^{TR^{a}}$ nub_eTR $\nu^{TR^{b}}$                                         //Transfer shock (excluding unemployment benefits)
         nua_eT $\nu^{T^{a}}$ nub_eT $\nu^{T^{b}}$                                             //Lump-sum tax shock
         nua_emg $\nu^{mg^{a}}$ nub_emg $\nu^{mg^{b}}$                                         //Public wage shock
-        nua_eM $\nu^{M^EA}$                                                                   //Monetary Policy shock
         nua_RoW $\nu^{RoW^a}$ nub_RoW $\nu^{RoW^b}$                                           //Country-specific demand shocks from RoW
         nua_RoE $\nu^{RoE^a}$ nub_RoE $\nu^{RoE^b}$                                           //Country-specific demand shocks from RoE
         eps_y_c $\epsilon^{VAR,y^c}$  eps_i_c $\epsilon^{VAR,i^c}$   eps_pi_c $\epsilon^{VAR,\pi^c}$       //Shocks foreign VAR 
-        eps_z_g $\epsilon^{z,g}$                                                              // Global technology shock
+        eps_z_g $\epsilon^{z,g}$
+        interest_                                                              // Global technology shock
 ;      
 
 //***************************************************************************************
@@ -962,7 +962,7 @@ model;
                                             +(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_ts)))
                                         + phi_a_dpi*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_a_t(-1))+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_b_t(-1)))) 
                                             + phi_a_dy*(pop_a/(pop_b+pop_a)*log(y_a_t/y_a_t(-1))+(pop_b/(pop_b+pop_a)*log(y_b_t/y_b_t(-1))))
-                                        + nua_eM; 
+                                        + interest_/400; 
     //TODO: Possible modification: Use GDP_i_t instead of y_i_t
     log((1+i_policy_t)/(1+i_policy_ts))  = pop_a/(pop_b+pop_a)*log((1+i_a_t)/(1+i_a_ts)) + pop_b/(pop_b+pop_a)*log((1+i_b_t)/(1+i_b_ts));
 
@@ -1457,20 +1457,3 @@ end;
 
 resid(1);
 steady;
-
-//*************************************************************************
-// Set up of the Variance-Covariance Matrix of innovations
-// (assumption: all shocks are structural and uncorrelated)
-//*************************************************************************
-
-shocks;
-    var	nua_ecG	=	(0.01*(1/gc_a))^2	;
-    var nua_eM = 0.0025^2;// 0.00094078^2;
-end;
-
-//*************************************************************************
-// Starting stochastic simulation with choosen options for specific
-// variables
-// (for additional options see Dynare manual)
-//*************************************************************************
- stoch_simul(order = 1,nograph, IRF=40);
