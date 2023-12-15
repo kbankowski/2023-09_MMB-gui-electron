@@ -7,7 +7,7 @@ mmb('config_5.json','var');
 
 %% Read the simulation results into one structure
 modelList = subroutines.createModelList(projectPath, subProjectPath);
-modelListExclude = ["NK_GK11", "US_AJ16"];
+modelListExclude = ["NK_GK11", "US_AJ16", "NK_AFL15", "NK_ET14", "NK_FLMF18", "NK_GSSZ17"];
 modelListForLoop =  setdiff(string(modelList), modelListExclude);
 mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
