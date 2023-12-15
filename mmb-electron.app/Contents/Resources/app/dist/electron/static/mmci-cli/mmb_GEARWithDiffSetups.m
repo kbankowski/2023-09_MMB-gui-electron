@@ -81,7 +81,7 @@ for aSer = string(reshape(fieldnames(val.data.IRF.interest_), 1, []))
     resMMB.(aSer) = Series(qq(0, 4), val.data.IRF.interest_.(aSer));
 end
 
-%% values coming from GEAR project
+%% values simulated with Dynare
 matFilePath = fullfile(projectPath, subProjectPath, 'models/DEREA_GEAR16/DEREA_GEAR16/Output/DEREA_GEAR16_results.mat');
 aDataGEAR = load(matFilePath);
 
@@ -89,9 +89,23 @@ aDataGEAR = load(matFilePath);
 fieldList = fieldnames(aDataGEAR.oo_.irfs);
 aStructSelected = rmfield(aDataGEAR.oo_.irfs, fieldList(~endsWith(fieldList, "_interest_")));
 % just saving as a databank with renaming
-resGEAROrig = databank.fromArray( ...
+resGEARdynare = databank.fromArray( ...
     cell2mat(struct2cell(aStructSelected))' ...
     , extractBefore(databank.fieldNames(aStructSelected), "_interest_") ...
+    , qq(1) ...
+);
+
+%% values simulated with Dynare (but GEAR project)
+matFilePath = fullfile(projectPathGEAR, "/mmb/GEAR/Output/GEAR_results.mat");
+aDataGEAR = load(matFilePath);
+
+% reduce the structure to a relavant shock only
+fieldList = fieldnames(aDataGEAR.oo_.irfs);
+aStructSelected = rmfield(aDataGEAR.oo_.irfs, fieldList(~endsWith(fieldList, "_nua_eM")));
+% just saving as a databank with renaming
+resGEAROrig = databank.fromArray( ...
+    cell2mat(struct2cell(aStructSelected))' ...
+    , extractBefore(databank.fieldNames(aStructSelected), "_nua_eM") ...
     , qq(1) ...
 );
 
@@ -99,15 +113,17 @@ resGEAROrig = databank.fromArray( ...
 allStruct.resDynareSimult_ = resDynareSimult_;
 allStruct.resDynareIrf_ = resDynareIrf_;
 allStruct.resMMB = resMMB;
+allStruct.resGEARdynare = resGEARdynare;
 allStruct.resGEAROrig = resGEAROrig;
 
 varStruct.resDynareSimult_ = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resDynareIrf_ = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
+varStruct.resGEARdynare = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resGEAROrig = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
-plotGEARWithDiffSetups(allStruct, setupsToPlot(end-1: end),  ["MMB setup", "GEAR original setup"], varStruct, projectPath, subProjectPath, "short");
+plotGEARWithDiffSetups(allStruct, setupsToPlot(end-2: end),  ["MMB setup", "GEAR dynare", "GEAR original"], varStruct, projectPath, subProjectPath, "short");
 plotGEARWithDiffSetups(allStruct, setupsToPlot, setupsToPlot, varStruct, projectPath, subProjectPath, "long");
 
 
@@ -129,7 +145,7 @@ function plotGEARWithDiffSetups(allStruct, setupList, setupLegendList, varStruct
     h = gcf;
     
     % replication of light gray colour for all non-GEAR models
-    cmap = subroutines.linspecer(4);
+    cmap = subroutines.linspecer(numel(setupList));
     % based on the following palette 
     % https://www.simplifiedsciencepublishing.com/resources/best-color-palettes-for-scientific-figures-and-data-visualizations
     % #c1272d - Dark Red
