@@ -10,7 +10,7 @@ mmb('config_4g.json','var');
 %% Read the simulation results into one structure
 % List of common rules based on the invesitation in the following driver
 % mmb-electron.app/Contents/Resources/app/dist/electron/static/mmci-cli/mmb_checkCommonRules.m
-ruleList = {'CEE', 'CMR', 'Coenen', 'GR', 'LWW', 'OW08', 'OW13', 'SW', 'Taylor', 'Model'};
+ruleList = {'CEE', 'CMR', 'Coenen', 'GR', 'LWW', 'OW13', 'SW', 'Taylor', 'Model'};
 mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
 % looping through all rules
