@@ -921,7 +921,7 @@ model;
     // government spending
 
     log(cG_a_t/cG_a_ts) = rho_eg_a*log(cG_a_t(-1)/cG_a_ts) - xi_b_eg_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_eg_a*log(y_a_t(-1)/y_a_ts) + psi_cG_a*nuAGG_ecG + (1-psi_cG_a)*nuAGG_ecG(-1);
-    log(cG_b_t/cG_b_ts) = rho_eg_b*log(cG_b_t(-1)/cG_b_ts) - xi_b_eg_b*log(BG_b_t(-1)/BG_b_ts) - xi_y_eg_b*log(y_b_t(-1)/y_b_ts) + psi_cG_b*nuAGG_ecG + (1-psi_cG_b)*nuAGG_ecG(-1);
+    log(cG_b_t/cG_b_ts) = rho_eg_b*log(cG_b_t(-1)/cG_b_ts) - xi_b_eg_b*log(BG_b_t(-1)/BG_b_ts) - xi_y_eg_b*log(y_b_t(-1)/y_b_ts) + psi_cG_b*nuAGG_ecG*0 + (1-psi_cG_b)*nuAGG_ecG(-1)*0;
 
     log(inG_a_t/inG_a_ts) = rho_einG_a*log(inG_a_t(-1)/inG_a_ts) - xi_b_ein_a*log(BG_a_t(-1)/BG_a_ts) - xi_y_ein_a*log(y_a_t(-1)/y_a_ts) + psi_inG_a*nua_einG + (1-psi_inG_a)*nua_einG(-1);
     log(inG_b_t/inG_b_ts) = rho_einG_b*log(inG_b_t(-1)/inG_b_ts) - xi_b_ein_b*log(BG_b_t(-1)/BG_b_ts) - xi_y_ein_b*log(y_b_t(-1)/y_b_ts)  + psi_inG_b*nub_einG + (1-psi_inG_b)*nub_einG(-1);
