@@ -19,6 +19,9 @@ for aModel = modelListForLoop
     str = char(raw'); 
     fclose(fid); 
     val = jsondecode(str);
+    % there is an object in one of the models with the same name so
+    % removing to be able to use iris dates
+    clear qq
     for mmbVar = mmbVarList
         try
             mmbDatabank.(aModel).(mmbVar) = Series(qq(0, 4), val.data.IRF.interest_.(mmbVar));
