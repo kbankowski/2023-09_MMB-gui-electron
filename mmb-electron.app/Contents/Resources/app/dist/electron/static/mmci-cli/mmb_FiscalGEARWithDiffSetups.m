@@ -62,10 +62,10 @@ allStruct.resGEAROrigVer3 = resGEAROrigVer3;
 
 varStruct.resMMB = ["interest", "inflation", "inflationq", "outputgap", "output"];
 varStruct.resGEAROrigVer2 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
-varStruct.resGEAROrigVer3 = ["i_EMU_obs", "pi_a_obs", "pi_a_obs", "dgdp_a_t", "dgdp_a_t"];
+varStruct.resGEAROrigVer3 = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
 setupsToPlot = string(reshape(fieldnames(allStruct), 1, []));
-plotFiscalGEARWithDiffSetups(allStruct, setupsToPlot,  ["MMB setup", "GEAR baseline", "GEAR mmb"], varStruct, projectPath, subProjectPath);
+plotFiscalGEARWithDiffSetups(allStruct, setupsToPlot,  ["MMB setup", "GEAR baseline (one-ctry shock)", "GEAR mmb"], varStruct, projectPath, subProjectPath);
 
 %% function for plotting
 function plotFiscalGEARWithDiffSetups(allStruct, setupList, setupLegendList, varStruct, projectPath, subProjectPath)
@@ -126,7 +126,7 @@ function plotFiscalGEARWithDiffSetups(allStruct, setupList, setupLegendList, var
             end
 
             % re-scaling original GEAR set-up, which does not have %
-            if ~strcmp(aSetup, "resMMB")
+            if strcmp(aSetup, "resGEAROrigVer2")
                 scaleFactor = 100;            
             else
                 scaleFactor = 1;            
