@@ -37,13 +37,14 @@ var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt,
         dpiet, dRt, dRECBt, RealInt, dRealInt, dfpiet, dpieAt, 
         dPrimDef, fdCrt, fdCt, fdnptot, dtausct, fdRt, dpieBt, 
         fdTt, fdpBt, Cgobs, cpiinf, fcpiinf, dgdp, fdgdp,
-        Consumption, dmOutput, dmInflation, Investment, Wage,
-        Employment, Unemployment, Consumption_f, Output_f,
+        dmConsumption, dmOutput, dmInflation, dmInvestment, dmWage,
+        dmEmployment, Unemployment, Consumption_f, Output_f,
         Inflation_f, Investment_f, Wage_f, ToT, Employment_f, dev_xt, dev_fxt, Unemployment_f, epsiG_agg,
         
 //**************************************************************************
 // Modelbase Variables                                                   //*
-        interest inflation inflationq outputgap output fispol;           //*
+        interest inflation inflationq outputgap output fispol            //*
+        consumption investment employment wage;                          //*
 //**************************************************************************
 
 varexo  epsiA, /*epsiG, */ epsing, epsik, 
@@ -705,11 +706,15 @@ model;
 // Definition of Modelbase Variables in Terms of Original Model Variables //*
 
 interest   = 400*log(RECBt/RECBs);                                                           //*
-inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;             //*
-inflationq = 400*log((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega));                 //*
+inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;              //*
+inflationq = 400*log((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega));                   //*
 outputgap  = 100*log((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega)); //*
-output     = 100*log(Ytot^omega*fYtot^(1-omega));                                           //*
-fispol = epsiG_agg;                                                                            //*
+output     = 100*log(Ytot^omega*fYtot^(1-omega));                                            //*
+consumption    = 100*log(Ctot^omega*fCtot^(1-omega));                                        //*
+investment     = 100*log(It^omega*fIt^(1-omega));                                            //*
+employment     = 100*log(ntot^omega*fntot^(1-omega));                                        //*
+wage           = 100*log(wpt^omega*fwpt^(1-omega));                                          //*
+fispol = epsiG_agg;                                                                          //*
 //**************************************************************************
 
 //**************************************************************************
@@ -1341,12 +1346,12 @@ fqIgt = 100*(fIgt/fIgt(-1)-1);
 // Observables 2
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Consumption = (log(Ctot)-log(Ctots))*100;
+dmConsumption = (log(Ctot)-log(Ctots))*100;
 dmOutput = (log(Ytot)-log(Ytots))*100;
 dmInflation = (piet-pies)*400;
-Investment = (log(It)-log(Is))*100;
-Wage = (log(wpt)-log(wps))*100;
-Employment = (log(ntot)-log(ntots))*100;
+dmInvestment = (log(It)-log(Is))*100;
+dmWage = (log(wpt)-log(wps))*100;
+dmEmployment = (log(ntot)-log(ntots))*100;
 dev_xt = (log(xt)-log(xs))*100;
 Unemployment = (utot-utots)*100;
 
@@ -1675,6 +1680,10 @@ initval;
     inflationq = 0;
     outputgap = 0;
     output = 100*log(Ytots^omega*fYtots^(1-omega));
+    consumption = 100*log(Ctots^omega*fCtots^(1-omega));
+    investment = 100*log(Is^omega*fIs^(1-omega));
+    employment = 100*log(ntots^omega*fntots^(1-omega));
+    wage = 100*log(wps^omega*fwps^(1-omega));
     fispol = 0;
     epsiG_agg = 0;
 end;
