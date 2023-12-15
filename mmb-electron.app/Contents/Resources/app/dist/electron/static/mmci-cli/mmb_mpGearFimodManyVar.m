@@ -3,17 +3,15 @@ clear all; close all; clc
 [projectPath, subProjectPath, ~, ~] = init();
 
 %% Running the models with all rules specified in config_4
-mmb('config_5.json','var');
+mmb('config_8.json','var');
 
 %% Read the simulation results into one structure
-modelList = subroutines.createModelList(projectPath, subProjectPath);
-modelListExclude = ["NK_GK11", "US_AJ16", "NK_AFL15", "NK_ET14", "NK_FLMF18", "NK_GSSZ17", "US_IR15"];
-modelListForLoop =  setdiff(string(modelList), modelListExclude);
+modelListForLoop =  ["ESREA_FIMOD12", "DEREA_GEAR16"];
 mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output"];
 
 % looping through all models
 for aModel = modelListForLoop
-    fname = fullfile('out', sprintf('%s-SW.output.json', aModel)); 
+    fname = fullfile('out', sprintf('%s-Model.output.json', aModel)); 
     fid = fopen(fname); 
     raw = fread(fid,inf); 
     str = char(raw'); 
@@ -36,14 +34,10 @@ end
 % re-ordering the list to put FiMod last so that it is plotted on top of
 % everything
 selectedModels = ["DEREA_GEAR16", "ESREA_FIMOD12"];
-modelListForPlotting = [ ...
-    modelListForLoop(~ismember(modelListForLoop, selectedModels)) ...
-    , selectedModels ...
-];
-plotSWruleWithDiffModels(mmbDatabank, modelListForPlotting, mmbVarList, projectPath, subProjectPath);
+plotmpGearFimodManyVar(mmbDatabank, selectedModels, mmbVarList, projectPath, subProjectPath);
 
 %% local function to plot the histogram and save it
-function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPath, subProjectPath)
+function plotmpGearFimodManyVar(mmbDatabank, modelList, mmbVarList, projectPath, subProjectPath)
 
     % Please specify the date range of the series
     dateRange = qq(1,1): qq(5,4);
@@ -129,7 +123,7 @@ function plotSWruleWithDiffModels(mmbDatabank, modelList, mmbVarList, projectPat
     leg.Layout.Tile = 'north';
         
     % Save graph
-    fileName = fullfile(projectPath, subProjectPath, "docs/figures", "SWruleWithDiffModels");
+    fileName = fullfile(projectPath, subProjectPath, "docs/figures", "mpGearFimodManyVar");
     exportgraphics(t, sprintf('%s.png',fileName),'BackgroundColor','none');
 
 end
