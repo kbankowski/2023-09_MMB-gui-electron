@@ -53,19 +53,7 @@ function plotmpGearFimodManyVar(mmbDatabank, modelList, mmbVarList, projectPath,
     
     h = gcf;
     
-    % replication of light gray colour for all non-FiMod and non-GEAR models
-    cmap = repmat([0.702 0.702 0.702], numel(modelList)-2, 1);
-    % based on the following palette 
-    % https://www.simplifiedsciencepublishing.com/resources/best-color-palettes-for-scientific-figures-and-data-visualizations
-    % #c1272d - Dark Red
-    % #0000a7 - Indigo
-    % #eecc16 - Yellow
-    % #008176 - Teal
-    % #b3b3b3 - Light Gray
-    line1color = [0, 0, 0.6549];
-    line2color = [0.756, 0.153, 0.176];
-    
-    cmap = [cmap; line1color; line2color];
+    cmap = subroutines.linspecer(numel(modelList));
     
     set(h, 'Units','centimeters', 'Position',[0 0 21-2 12])
     set(h,'defaulttextinterpreter','latex');

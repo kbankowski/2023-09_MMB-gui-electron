@@ -1733,5 +1733,88 @@ source{Own calculations.}
 
 \end_layout
 
+\begin_layout Section
+Fiscal policy shock with more reporting variables
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Simulation of a fiscal policy shock in FiMod and GEAR with an extended set
+ of variables 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mpGearFimodManyVar-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/FispolModels.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+source{Own calculations.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+desc{The fiscal shock is based on a comparable increase in government purchases
+ in both regions representing an ex-ante 1
+\backslash
+% of GDP fiscal expansion at the union level.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
