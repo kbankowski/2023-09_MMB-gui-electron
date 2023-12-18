@@ -7,7 +7,7 @@ mmb('config_8.json','var');
 
 %% Read the simulation results into one structure
 modelListForLoop =  ["ESREA_FIMOD12", "DEREA_GEAR16"];
-mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output"];
+mmbVarList = ["interest", "inflation", "inflationq", "outputgap", "output", "consumption", "investment", "employment", "wage"];
 
 % looping through all models
 for aModel = modelListForLoop
@@ -47,7 +47,7 @@ function plotmpGearFimodManyVar(mmbDatabank, modelList, mmbVarList, projectPath,
     
     % Defining the shape of the figure
     tiledlayout_width = 3; %Specify the # of columns desired
-    tiledlayout_height = 2;
+    tiledlayout_height = 3;
     
     t = tiledlayout(tiledlayout_height, tiledlayout_width, 'TileSpacing', 'compact','Padding','compact');
     
@@ -67,7 +67,7 @@ function plotmpGearFimodManyVar(mmbDatabank, modelList, mmbVarList, projectPath,
     
     cmap = [cmap; line1color; line2color];
     
-    set(h, 'Units','centimeters', 'Position',[0 0 21-2 8])
+    set(h, 'Units','centimeters', 'Position',[0 0 21-2 12])
     set(h,'defaulttextinterpreter','latex');
     
     for mmbVar = mmbVarList %for each panel
