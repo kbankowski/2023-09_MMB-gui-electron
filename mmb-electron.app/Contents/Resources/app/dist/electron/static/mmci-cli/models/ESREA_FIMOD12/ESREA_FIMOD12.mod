@@ -1210,8 +1210,7 @@ fngt/fngs = (fngt(-1)/fngs)^frhon*(fnpt(-1)/fnps)^((1-frhon)*frhocyc)*exp(fepsin
 fwgt = fwgs*(fwgt(-1)/fwgs)^frhow*exp(fepsiwg);
 
 //government spending shock
-(fCgt/fCgs)-((fCgt(-1)/fCgs)^frhoG)*(fDebt(-1)*(1/pBt)^(omega-fPsi)/(fomegad*fYtot(-1)))^((1-frhoG)*fxi_bg)*exp(epsiG_agg);
-// (fGt/fomegag*fYt)-((fGt(-1)/fomegag*fYt(-1))^frhoG)*exp(fepsiG);
+log(fCgt/fCgs) = frhoG*log(fCgt(-1)/fCgs)  - fxi_bg*log(fDebt(-1)/fDebts)  - xi_ycg*log(Ytot(-1)/Ytots) + psi_cg*epsiG_agg  + (1-psi_cg)*epsiG_agg(-1);
 
 //government investment shock
 (fIgt/fIgs)-((fIgt(-1)/fIgs)^frhoIg)*exp(fepsiIg);
