@@ -113,7 +113,8 @@ var
   nuAGG_ecG
 //**************************************************************************
 // Modelbase Variables                                                   //*
-        interest inflation inflationq outputgap output fispol;           //*
+        interest inflation inflationq outputgap output fispol            //*
+        consumption investment employment wage;                          //*
 //**************************************************************************
 
 //***************************************************************************************
@@ -817,6 +818,10 @@ model;
     outputgap = 100*(pop_a/(pop_b+pop_a)*log(GDP_a_t/GDP_a_ts)+(pop_b/(pop_b+pop_a)*log(GDP_b_t/GDP_b_ts)));
     output = 100*(pop_a/(pop_b+pop_a)*log(GDP_a_t)+(pop_b/(pop_b+pop_a)*log(GDP_b_t)));
     fispol = nuAGG_ecG;                                                                          //*
+    consumption = 100*(pop_a/(pop_b+pop_a)*log(c_a_t)+(pop_b/(pop_b+pop_a)*log(c_b_t)));
+    investment = 100*(pop_a/(pop_b+pop_a)*log(in_a_t)+(pop_b/(pop_b+pop_a)*log(in_b_t)));
+    employment = 100*(pop_a/(pop_b+pop_a)*log(n_a_t)+(pop_b/(pop_b+pop_a)*log(n_b_t)));
+    wage = 100*(pop_a/(pop_b+pop_a)*log(wr_a_t)+(pop_b/(pop_b+pop_a)*log(wr_b_t)));
     //**************************************************************************
 
     //**************************************************************************
