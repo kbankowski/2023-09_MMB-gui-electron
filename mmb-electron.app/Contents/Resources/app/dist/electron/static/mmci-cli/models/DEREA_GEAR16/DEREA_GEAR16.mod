@@ -811,11 +811,14 @@ model;
 
     //**************************************************************************
     interest = 400*log((1+i_policy_t)/(1+i_policy_ts));
+    [name='inflation']
     inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;
     inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));
     outputgap = 100*(pop_a/(pop_b+pop_a)*log(GDP_a_t/GDP_a_ts)+(pop_b/(pop_b+pop_a)*log(GDP_b_t/GDP_b_ts)));
+    [name='output']
     output = 100*(pop_a/(pop_b+pop_a)*log(GDP_a_t)+(pop_b/(pop_b+pop_a)*log(GDP_b_t)));
-    fispol = nuAGG_ecG;                                                                          //*
+    fispol = nuAGG_ecG;
+    [name='consumption']
     consumption = 100*(pop_a/(pop_b+pop_a)*log(c_a_t)+(pop_b/(pop_b+pop_a)*log(c_b_t)));
     investment = 100*(pop_a/(pop_b+pop_a)*log(in_a_t)+(pop_b/(pop_b+pop_a)*log(in_b_t)));
     employment = 100*(pop_a/(pop_b+pop_a)*log(n_a_t)+(pop_b/(pop_b+pop_a)*log(n_b_t)));
