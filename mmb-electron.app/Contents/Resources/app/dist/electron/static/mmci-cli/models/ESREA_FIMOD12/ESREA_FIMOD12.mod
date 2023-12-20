@@ -1,9 +1,7 @@
 // Model: ESREA_FIMOD12
-
 // References:
 // Stähler, N. and C. Thomas (2012): “FiMod—A DSGE model for fiscal policy simulations,” Economic Modelling, 29, 239–261.
-
-// Last edited: 2023/11/20 by K. Bankowski
+// Last edited: 2023/12/15 by K. Bankowski
 
 var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt, 
         dDebttoGDP, dDeficit, dPrimDefRatio, dCgtoGDP, dtauct, dtaut, dwgt, dngt, dIgt,
@@ -189,7 +187,6 @@ parameters Rev_ts, Exp_ts, Rev_GDP_ts, Exp_GDP_ts;
     h = 0.494;                          //++ Habits
     mu = 0.283;                         //++ Fraction of RoTs
     cons = 1;                           // SS preference parameter on consupmtion
-//    Psi = 0.3*0.5629;                   // Home bias (depending on calibration strategy)
       
     // Production sector
     delta = 0.0150;                     //++ Priv capital depreciation rate
@@ -255,7 +252,6 @@ parameters Rev_ts, Exp_ts, Rev_GDP_ts, Exp_GDP_ts;
     fmu = 0.4;
     fcons = cons;
     frhocon = rhocon;
-//    fPsi = 3*0.0272;
       
     // Production sector
     fdelta = delta;
@@ -377,14 +373,6 @@ parameters Rev_ts, Exp_ts, Rev_GDP_ts, Exp_GDP_ts;
 
     Ys = Ytots - Gs + Igs + Cgs;            // SS per capita private output(home)
     fYs = fYtots - fGs + fIgs + fCgs;       // SS per capita private output(foreign)
-
-
-
-//    If targeting dds and pBs differently (note that, then, we NEED to set home bias in advance!!)
-//    AA_tot = (1-omega-Psi)*(Ys-Cgs-Igs);
-//    fAA_tot= (omega-fPsi)*(fYs-fCgs-fIgs);
-//    pBs = (omega/(1-omega))*(AA_tot/fAA_tot) + (omega/(1-omega))*(Psi+fPsi)*(1-1/betta)*dds/fAA_tot;
-//    dds = (((1-omega)/omega)*pBs*fAA_tot - AA_tot)/((Psi+fPsi)*(1-1/betta));
 
     ggs = Gs-Cgs-Igs;
     fggs = fGs-fCgs-fIgs;
@@ -776,9 +764,6 @@ fispol = coffispol*fiscal_;                                              //*
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Ct = ((1/pBt)^(1-omega-Psi)*CAt + pBt^(omega+Psi)*CBt);
-// alternative way of writting (should yield the same result)
-// = (CAt/(omega+Psi))^(omega+Psi)*(CBt/(1-omega-Psi))^(1-omega-Psi);
-
 CAt/CBt = (Psi+omega)/(1-omega-Psi)*pBt;
 
 Iot = ((1/pBt)^(1-omega-Psi)*IoAt + pBt^(omega+Psi)*IoBt);
@@ -1174,11 +1159,6 @@ taukt-tauks = rhok*(taukt(-1)-tauks) + (1-rhok)*xi_bk*(Debt(-1)/(Ytot(-1))*pBt(-
 taubt-taubs = rhob*(taubt(-1)-taubs) + (1-rhob)*xi_bb*(Debt(-1)/(Ytot(-1))*pBt(-1)^(1-omega-Psi) - omegad) +  epsib;
 Sub/Subs = (Sub(-1)/Subs)^rhos*(Debt(-1)/(omegad*Ytot(-1))*pBt(-1)^(1-omega-Psi))^((1-rhos)*xi_sub)*exp(epsisub);
 
-// wgt = wgs*(wgt(-1)/wgs)^rhow*(Debt(-1)/(omegad*Ytot(-1)))^((1-rhow)*xi_pubw)*exp(epsiwg);
-//(Cgt/Cgs)-((Cgt(-1)/Cgs)^rhoG)*(Debt(-1)*pBt(-1)^(1-omega-Psi)/(omegad*Ytot(-1)))^((1-rhoG)*xi_bg)*exp(epsiG);
-// (Cgt/omegag*Yt)-((Cgt(-1)/omegag*Yt(-1))^rhoG)*exp(epsiG);
-// (Igt/omegai*Yt)-((Igt(-1)/omegai*Yt(-1))^rhoIg)*exp(epsiIg);
-
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Public capital law of motion
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1214,7 +1194,6 @@ log(fCgt/fCgs) = frhoG*log(fCgt(-1)/fCgs)  - fxi_bg*log(fDebt(-1)/fDebts)  - xi_
 
 //government investment shock
 (fIgt/fIgs)-((fIgt(-1)/fIgs)^frhoIg)*exp(fepsiIg);
-// (fIgt/fomegai*fYt)-((fIgt(-1)/fomegai*fYt(-1))^frhoIg)*exp(fepsiIg);
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Public capital law of motion
@@ -1254,8 +1233,6 @@ cpiinf = piet; // *((1+tauct)/(1+tauct(-1)));
 fcpiinf = fpiet; // *((1+ftauct)/(1+ftauct(-1)));
 
 // Taylor rule (here: non-linear, but there are a million ways to define the rule...)
-// RECBt/RECBs = (RECBt(-1)/RECBs)^rhoi*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))^phipie*((Ytot/steady_state(Ytot))^omega*(fYtot/steady_state(fYtot))^(1-omega))^phiy)^((1-rhoi))*exp(epsii);
-// RECBt/RECBs = (RECBt(-1)/RECBs)^rhoi*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))^phipie*((Ytot/Ytot(-1))^omega*(fYtot/fYtot(-1))^(1-omega))^phiy)^((1-rhoi))*exp(epsii);
 // RECBt/RECBs = (RECBt(-1)/RECBs)^rhoi*(((cpiinf/cpiinfs)^omega*(fcpiinf/fcpiinfs)^(1-omega))^phipie*((Ytot/Ytots)^omega*(fYtot/fYtots)^(1-omega))^phiy)^((1-rhoi))*exp(epsii);
 
 // ##############################################################################################  
@@ -1274,8 +1251,6 @@ fcpiinf = fpiet; // *((1+ftauct)/(1+ftauct(-1)));
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 PrimDef = Debt-Rt(-1)/piet*Debt(-1);
-
-// omegadt = (1/pBt)^(1-omega-Psi)*Debt/Ytot;
 
 Export = (1-omega)/omega*(fCAtot + fIAtot);
 Import = (CBtot + IBtot);
@@ -1364,8 +1339,6 @@ Unemployment = (utot-utots)*100;
 
 fPrimDef = fDebt-fRt(-1)/fpiet*fDebt(-1);
 
-// fomegadt = fDebt/fYtot;
-
 fImport = (fCAtot + fIAtot);
 fExport = omega/(1-omega)*(CBtot + IBtot);
 fUnitLabCost = (1+ftausct)*fwpt*fnptot/fYt;
@@ -1437,7 +1410,6 @@ Unemployment_f = (futot-futots)*100;
 (cont/cons)-((cont(-1)/cons)^rhocon)*exp(epsiconsum);
 
     //technology shock; 40
-// (At/As)-((At(-1)/As)^rhoA)*exp(epsiA);
 At = rhoA*At(-1) + (1-rhoA)*As + epsiA;
 
 // ######################################################################
@@ -1692,11 +1664,7 @@ end;
 // ###################################################################### 
 
 resid(1);
-// steady(solve_algo=0);
 steady;
-//initialss = oo_.steady_state;
-// resid(1);
-
 
 
 // ######################################################################
@@ -1729,5 +1697,3 @@ var fepsib = 0;
 var fepsitw = 0;
 var fiscal_ = 0.01^2;
 end;
-
-// stoch_simul(order = 1, irf=20, nograph);

@@ -1,5 +1,10 @@
 // --+ options: json=compute +--
 
+// Model: DEREA_GEAR16
+// References:
+// Gadatsch, N., K. Hauzenberger, and N. Stähler (2016): “Fiscal policy during the crisis: A look on Germany and the Euro area with GEAR,” Economic Modelling, 52, 997–1016.
+// Last edited: 2023/12/15 by K. Bankowski
+
 var              
     i_a_t $i^a$ i_b_t $i^b$ i_c_t $i^c$                                                     //Interest Rate
     i_Ga_t $i^{G,a}$ i_Gb_t $i^{G,b}$                                                       //Government bond rate
@@ -1058,7 +1063,6 @@ model;
                                             +(pop_b/(pop_b+pop_a)*log(GDP_b_t/GDP_b_ts)))
                                         + interest_/400; 
     */
-    //TODO: Possible modification: Use GDP_i_t instead of y_i_t
     log((1+i_policy_t)/(1+i_policy_ts))  = pop_a/(pop_b+pop_a)*log((1+i_a_t)/(1+i_a_ts)) + pop_b/(pop_b+pop_a)*log((1+i_b_t)/(1+i_b_ts));
 
     //*************************************************************************
