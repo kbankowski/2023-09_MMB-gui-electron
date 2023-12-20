@@ -1,10 +1,6 @@
 % This driver is used to make sure that the results of the fiscal shock in
 % the GEAR project are identical to these produced in the MMB; the starting
 % point is that they look fine in the GEAR but not in the MMB
-% //TODO: NEXT STEP; GEAR has to be based on the baseline version; set up
-% MMB folder in the GEAR project and based on the baseline version create a
-% model
-
 %% Pre-amble
 clear all; close all; clc
 [projectPath, subProjectPath, projectPathFiMod, projectPathGEAR] = init();

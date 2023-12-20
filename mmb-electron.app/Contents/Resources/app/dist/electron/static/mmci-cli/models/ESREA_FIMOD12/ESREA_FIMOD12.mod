@@ -1,6 +1,7 @@
 // Model: ESREA_FIMOD12
 // References:
 // Stähler, N. and C. Thomas (2012): “FiMod—A DSGE model for fiscal policy simulations,” Economic Modelling, 29, 239–261.
+// The below model calibration differs slightly compared to the original paper.
 // Last edited: 2023/12/15 by K. Bankowski
 
 var     dYtot, dYt, dCtot, dIt, dEx, dIm, dutot, dwpt, dULC, dpBt, 
@@ -281,8 +282,7 @@ parameters Rev_ts, Exp_ts, Rev_GDP_ts, Exp_GDP_ts;
 
 
     // Country size
-    // TODO: check the calibration so that the model is for Spain
-    omega = 0.275;                          // Size of home counrty
+    omega = 0.1;                          // Size of home counrty
 
     pieAs = 1;                              // SS PPI gross inflation rate
 //  which then implies

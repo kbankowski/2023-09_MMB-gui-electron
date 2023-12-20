@@ -586,6 +586,8 @@ The parameter values (i.e.,
  values in similar Taylor rules.
  Their usage leads to a scenario where a standard monetary policy shock
  yields unusually pronounced and long-lasting effects.
+ In general, the calibration of the model differs slightly compared to the
+ original paper.
 \end_layout
 
 \end_inset
