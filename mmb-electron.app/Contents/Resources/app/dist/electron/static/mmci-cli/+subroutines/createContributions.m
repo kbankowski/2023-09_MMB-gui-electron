@@ -182,8 +182,8 @@ end
 
 cc = contribution(:,2:end);
 cc_selection = cc(:,1:length(vnames));
-contributionSeries = Series(utils.Dates_Dseries2Series(rhsval.dates), cc_selection, vnames);
-lineSeries = Series(utils.Dates_Dseries2Series(rhsval.dates), contribution(:,1), lhs);
+contributionSeries = Series(subroutines.Dates_Dseries2Series(rhsval.dates), cc_selection, vnames);
+lineSeries = Series(subroutines.Dates_Dseries2Series(rhsval.dates), contribution(:,1), lhs);
 
 % Create the contributions plot.
 figure('Name', lhs);
