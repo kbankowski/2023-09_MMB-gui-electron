@@ -305,6 +305,38 @@ noprefix "false"
  other models in the MMB database.
 \end_layout
 
+\begin_layout Standard
+Besides auxiliary material, the appendix of this report documents the effects
+ of a standard fiscal shock in two models, as shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FispolModels"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ This shock is based on a comparable increase in government purchases by
+ 1% of GDP, calculated ex-ante (i.e., before any effects on GDP).
+ Furthermore, Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fiscalContributions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides an explanation for the contemporaneous decline in inflation observed
+ in the GEAR model, a phenomenon that may initially seem perplexing.
+ Through a detailed analysis of contributions, it is demonstrated that this
+ drop in inflation can be attributed to adjustments in the exchange rate
+ – a dynamic present in GEAR due to its open-economy framework.
+\end_layout
+
 \begin_layout Section
 Adaptation of FiMod and GEAR to the MMB framework
 \begin_inset CommandInset label
@@ -1753,7 +1785,7 @@ Simulation of a fiscal policy shock in FiMod and GEAR with an extended set
  of variables 
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:mpGearFimodManyVar-1"
+name "fig:FispolModels"
 
 \end_inset
 
@@ -1804,6 +1836,99 @@ desc{The fiscal shock is based on a comparable increase in government purchases
  in both regions representing an ex-ante 1
 \backslash
 % of GDP fiscal expansion at the union level.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Inflation effects under the fiscal shock
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Analysis of inflation under the fiscal shock in GEAR 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fiscalContributions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/fiscalContributions.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+source{Own calculations.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+desc{The fiscal shock is based on a comparable increase in government purchases
+ in both regions representing an ex-ante 1
+\backslash
+% of GDP fiscal expansion at the union level.
+ The objective of the aforementioned panel is to explain the immediate decrease
+ in inflation following a fiscal shock.
+ This phenomenon, which is absent in the FiMod model, might be considered
+ perplexing.
+ A detailed decomposition of relevant variables reveals that the decline
+ in inflation across both regions is due to the price drops of goods imported
+ from the rest-of-the-world region.
+ This is a consequence of the sudden appreciation of EUR versus the RoW
+ currency and the subsequent decrease in the prices of imported goods.
+ It is important to note that FiMod, despite embedding two regions, is effective
+ly a closed-economy model; as such, it does not account for such phenomena.}
 \end_layout
 
 \end_inset

@@ -43,7 +43,7 @@ resDynareSimult_ = dbfun(@(x, y) x - y, aSeriesY_, aSeriesSS);
 %% calculating the contributions
 cd(fullfile(projectPath, subProjectPath, "work", "DEREA_GEAR16"));
 
-aItemList = ["output", "inflation", "consumption"];
+aItemList = ["inflationq", "pi_a_t", "pi_b_t", "pi_ac_t", "pi_bc_t"];
 
 allItemList = aItemList;
 for aItem = aItemList
@@ -92,14 +92,14 @@ function panelContributions(contributionSeries, projectPath, subProjectPath)
     figure
     
     % Defining the shape of the figure
-    tiledlayout_width = 1; %Specify the # of columns desired
-    tiledlayout_height = ceil(length(VarListToPlot)/tiledlayout_width);
+    tiledlayout_width = 3; %Specify the # of columns desired
+    tiledlayout_height = 2;
     
     t = tiledlayout(tiledlayout_height, tiledlayout_width, 'TileSpacing', 'compact','Padding','compact');
     
     h = gcf;
     FigureHeight = min(29.7, tiledlayout_height*6.5);
-    set(h, 'Units','centimeters', 'Position',[0 0 21-2*2.5 FigureHeight])
+    set(h, 'Units','centimeters', 'Position',[0 0 21-2*2.5 20-2*2.5])
     set(h,'defaulttextinterpreter','latex');
     
     for aItem = VarListToPlot %for each panel

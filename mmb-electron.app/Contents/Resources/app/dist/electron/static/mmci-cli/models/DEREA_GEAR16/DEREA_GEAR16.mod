@@ -813,6 +813,7 @@ model;
     interest = 400*log((1+i_policy_t)/(1+i_policy_ts));
     [name='inflation']
     inflation  = (inflationq + inflationq(-1) + inflationq(-2) + inflationq(-3))/4;
+    [name='inflationq']
     inflationq = 400*(pop_a/(pop_b+pop_a)*log(pi_a_t/pi_ts)+(pop_b/(pop_b+pop_a)*log(pi_b_t/pi_ts)));
     outputgap = 100*(pop_a/(pop_b+pop_a)*log(GDP_a_t/GDP_a_ts)+(pop_b/(pop_b+pop_a)*log(GDP_b_t/GDP_b_ts)));
     [name='output']
@@ -1012,7 +1013,9 @@ model;
     1=n_aa*(pr_aa_t)^(1-eta_a)+n_ab*(pr_ab_t)^(1-eta_a)+n_ac*(pr_ac_t)^(1-eta_a);
     1=n_bb*(pr_bb_t)^(1-eta_b)+n_ba*(pr_ba_t)^(1-eta_b)+n_bc*(pr_bc_t)^(1-eta_b);
 
+    [name='pi_a_t']
     pi_a_t=(n_aa*(pi_aa_t*pr_aa_t(-1))^(1-eta_a) + n_ab*(pi_ab_t*pr_ab_t(-1))^(1-eta_a)+ n_ac*(pi_ac_t*pr_ac_t(-1))^(1-eta_a))^(1/(1-eta_a));
+    [name='pi_b_t']
     pi_b_t=(n_bb*(pi_bb_t*pr_bb_t(-1))^(1-eta_b) + n_ba*(pi_ba_t*pr_ba_t(-1))^(1-eta_b)+ n_bc*(pi_bc_t*pr_bc_t(-1))^(1-eta_b))^(1/(1-eta_b));
 
     c_aa_t = mu_a*(n_aa*(pr_aa_t)^(-eta_a)*c_r_a_t) + (1-mu_a)*(n_aa*(pr_aa_t)^(-eta_a)*c_o_a_t);
@@ -1116,7 +1119,9 @@ model;
 
     pi_ab_t = (1/1)*pi_bb_t;
     pi_ba_t = 1*pi_aa_t;
+   [name='pi_ac_t']
     pi_ac_t = Del_S_ac_t*pi_c_t;
+   [name='pi_bc_t']
     pi_bc_t = Del_S_bc_t*pi_c_t;
 
 
