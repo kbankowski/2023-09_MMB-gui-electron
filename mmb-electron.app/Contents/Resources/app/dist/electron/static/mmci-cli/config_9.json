@@ -1,0 +1,15 @@
+{
+  "dynare": "/Applications/Dynare/5.5-arm64",
+  "rules": [
+      "SW"
+  ],
+  "models": [
+    "DEREA_GEAR16"
+  ],
+  "msr": false,
+  "usr": false,
+  "options": {
+    "gain": 0.01,
+    "horizon": 20
+  }
+}

@@ -3,7 +3,7 @@ clear all; close all; clc
 [projectPath, subProjectPath, projectPathFiMod, projectPathGEAR] = init();
 
 %% reading in models in Dynare
-mmb('config_2g.json','var');
+mmb('config_9.json','var');
 
 %% values simulated with simult_ Dynare function
 % the major advantage of this approach is that one can
@@ -15,7 +15,7 @@ ex_ = databank.fromArray( ...
     , M_.exo_names ...
     , qq(1, 1) ...
 );
-ex_.interest_(qq(1, 1)) = 1;
+ex_.fiscal_(qq(1, 1)) = 1;
 
 % stochastic simulation
 y_ = simult_( ...
