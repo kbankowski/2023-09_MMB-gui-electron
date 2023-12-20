@@ -1,19 +1,20 @@
-function DateSeries = Dates_Dseries2Series(dseriesDates)
+function DateSeries = Dates_Dseries2Series(DateDseries)
+    year = DateDseries.year;
+    period = DateDseries.subperiod;
+    freq = DateDseries.freq;
 
-    % a solution with creating a temporary Dseries object
-    ts = dseries(NaN, dseriesDates);
-    Year = ts.firstdate.year;
-    Month = int8(positiveMod(ts.firstdate.double,ts.firstdate.year) * 12 +1);
-    StartDate = DateWrapper.fromDatetime(frequency(ts), datetime(Year, Month, 1));
+    switch freq
+        case 1
+            DateSeries = reshape(yy(year, period), 1, []);
 
-    DateSeries = StartDate: StartDate+length(dseriesDates)-1;
-end
+        case 2
+            DateSeries = reshape(hh(year, period), 1, []);
 
-function positiveRemainder = positiveMod(dividend, divisor)
-    remainder = rem(dividend, divisor);
-    if remainder < 0
-        positiveRemainder = remainder + abs(divisor);
-    else
-        positiveRemainder = remainder;
+        case 4
+            DateSeries = reshape(qq(year, period), 1, []);
+
+        case 12
+            DateSeries = reshape(mm(year, period), 1, []);
     end
+
 end

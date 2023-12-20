@@ -83,7 +83,7 @@ function panelContributions(contributionSeries, projectPath, subProjectPath)
     VarListToPlot = string(reshape(fieldnames(contributionSeries.total), 1, []));
     
     % Please specify the date range of the series
-    DateRange = qq(0,1):qq(4,4);
+    DateRange = qq(1,1):qq(5,4);
     aShift = 0;
     DateRangeNorm = DateRange - aShift;
     DateRangeDateTime = dater.toMatlab(DateRangeNorm);
