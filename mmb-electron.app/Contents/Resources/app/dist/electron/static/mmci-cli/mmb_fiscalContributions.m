@@ -45,7 +45,7 @@ cd(fullfile(projectPath, subProjectPath, "work", "DEREA_GEAR16"));
 
 aItemList = ["output", "inflation", "consumption"];
 
-allItemList = aItemList(1);
+allItemList = aItemList;
 for aItem = aItemList
     [ ...
         contributionSeries.total.(aItem) ...
