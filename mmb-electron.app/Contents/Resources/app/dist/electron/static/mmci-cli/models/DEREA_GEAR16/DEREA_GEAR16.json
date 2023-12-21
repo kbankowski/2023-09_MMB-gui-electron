@@ -23,7 +23,7 @@
       "pub_date": "2016",
       "keywords": [],
       "description": "",
-      "category": "Other",
+      "category": "Estimated/Calibrated multi-country model",
       "authors": [
         "Gadatsch, Niklas",
         "Hauzenberger, Klemens",
@@ -67,13 +67,61 @@
     ],
     "variabledim": 1,
     "al": false,
-    "shocks": [
+"shocks": [
       {
         "name": "interest_",
         "text": "Monetary Policy Shock"
+      },
+      {
+        "name": "fiscal_",
+        "text": "Fiscal Policy Shock"
+      },
+      {
+        "name": "nua_a",
+        "text": "Technology Shock"
       }
     ],
     "al_info": null,
     "variables": [
+            {
+        "name": "interest",
+        "text": "Interest"
+      },
+            {
+        "name": "inflation",
+        "text": "Inflation"
+      },
+            {
+        "name": "inflationq",
+        "text": "inflationq"
+      },
+            {
+        "name": "outputgap",
+        "text": "Output Gap"
+      },
+            {
+        "name": "output",
+        "text": "Output"
+      },
+            {
+        "name": "consumption",
+        "text": "Consumption"
+      },
+            {
+        "name": "investment",
+        "text": "Investment"
+      },
+            {
+        "name": "wage",
+        "text": "Real wage"
+      },
+            {
+        "name": "employment",
+        "text": "Labour"
+      },
+            {
+        "name": "fispol",
+        "text": "fispol"
+      } 
     ]
   }
